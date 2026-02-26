@@ -6,7 +6,7 @@
 
 *Measure your battles. Master the time.*
 
-Horatum is an addon that automatically tracks the duration of boss encounters and keeps a history of your fastest kills.
+Horatum is an addon that tracks the duration of boss encounters and keeps a history of your fastest kills.
 
 ### Features
 
