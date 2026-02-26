@@ -11,8 +11,9 @@ Horatum is an addon that automatically tracks the duration of boss encounters an
 ### Features
 
 *   Automatic Boss Tracking: The timer automatically starts the moment you engage a dungeon or raid boss and stops the exact second the fight ends or your group wipes.
-*   Live Timer Display: Features a clean, semi-transparent frame that displays the ongoing combat time in a precise "MM:SS" format.
-*   Persistent Results: After an encounter concludes, the timer stops and remains on your screen, allowing you to easily review the exact duration of your attempt.
+*	Best Time Records: Automatically saves your fastest kill time, specifically categorized by each boss and encounter difficulty.
+*   Live Timer Display: Features a clean, semi-transparent frame that displays the ongoing combat time.
+*	Persistent Results: After an encounter concludes, the timer stops and remains on your screen, allowing you to easily review the exact duration of your attempt.
 *   Freely Movable: The timer frame can be dragged and placed anywhere on your screen to perfectly fit your UI.
 *   Supported Languages: English, German
 *   Supported Versions: 'Classic', 'Burning Crusade - Classic Anniversary Edition', 'Mists of Pandaria - Classic' and 'Retail'
