@@ -1,0 +1,3 @@
+[submodule ".release/script"]
+	path = .release/script
+	url = https://github.com/wow-addon-dev/release-script.git
