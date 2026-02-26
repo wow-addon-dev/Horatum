@@ -1,0 +1,25 @@
+## Interface: 11508
+## Title: Horatum
+## Author: diomsg (Diom-Antonidas EU)
+
+## Version: @project-version@
+## IconTexture: Interface\AddOns\Horatum\media\icon.blp
+## LoadOnDemand: 0
+## DefaultState: enabled
+## AllowLoadGameType: vanilla
+
+## Notes: This addon automatically tracks the duration of boss encounters and saves a history of the fastest kills.
+## Notes-deDE: Dieses Addon verfolgt automatisch die Dauer von Bosskämpfen und speichert eine Historie der schnellsten Kills.
+
+## LoadSavedVariablesFirst: 1
+## SavedVariables: HoratumSettings, HoratumKillTimes
+
+## X-Flavor: Classic
+## X-BuildDate: @build-date@
+## X-E-Mail: feedback@wow-addon.dev
+## X-Github: https://github.com/wow-addon-dev/Horatum
+## X-Curseforge: https://www.curseforge.com/wow/addons/horatum
+## X-Wago: https://addons.wago.io/addons/horatum
+
+Horatum.xml
+Horatum.lua
