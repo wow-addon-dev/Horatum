@@ -1,0 +1,137 @@
+name: Publish 'Expositum'
+run-name: Publish 'Expositum' (${{ github.event.inputs.release-type }})
+
+on:
+  workflow_dispatch:
+    inputs:
+      release-type:
+        description: 'Art des Releases'
+        required: true
+        default: 'release'
+        type: choice
+        options:
+          - Release
+          - Alpha
+      release-tag:
+        description: 'neuer Tag (manuell)'
+        required: false
+      build:
+        description: 'Release erstellen'
+        required: false
+        default: true
+        type: boolean
+      release-cf:
+        description: 'auf CurseForge veröffentlich'
+        required: false
+        default: true
+        type: boolean
+      release-wago:
+        description: 'auf Wago veröffentlichen'
+        required: false
+        default: true
+        type: boolean
+      full-changelog:
+        description: 'vollständiges Changelog erstellen'
+        required: false
+        default: true
+        type: boolean
+
+permissions:
+  contents: write
+
+env:
+  CF_PROJECT_ID: ${{ vars.CF_PROJECT_ID }}
+  WAGO_PROJECT_ID: ${{ vars.WAGO_PROJECT_ID }}
+  CF_API_KEY: ${{ secrets.CF_API_KEY }}
+  WAGO_API_TOKEN: ${{ secrets.WAGO_API_TOKEN }}
+  GITHUB_OAUTH: ${{ secrets.BOT_TOKEN }}
+
+jobs:
+  prework:
+    name: Prework
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_REPOSITORY: ${{ github.repository }}
+    outputs:
+      last-release-tag: ${{ steps.tag.outputs.last_release_tag }}
+      last-tag: ${{ steps.tag.outputs.last_tag }}
+      new-tag: ${{ steps.tag.outputs.new_tag }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          submodules: recursive
+          persist-credentials: true
+          token: ${{ secrets.BOT_TOKEN }}
+
+      - name: Import GPG key (Bot)
+        id: import-gpg
+        uses: crazy-max/ghaction-import-gpg@v6
+        with:
+          gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
+          passphrase: ${{ secrets.GPG_PASSPHRASE }}
+          git_user_signingkey: true
+          git_commit_gpgsign: true
+          git_tag_gpgsign: true
+          git_push_gpgsign: false
+
+      - name: Git configuration (Bot)
+        run: |
+          git config user.name "${{ steps.import-gpg.outputs.name }}"
+          git config user.email "${{ steps.import-gpg.outputs.email }}"
+
+      - name: Specify old Git tags and define a new Git tag
+        id: tag
+        run: |
+          eval "$(python3 .release/script/tag_define.py ${{ github.event.inputs.release-type }})"
+
+          if [[ -n "${{ github.event.inputs.release-tag }}" ]]; then
+            echo "ℹ️ Neuer Tag (manuell): ${{ github.event.inputs.release-tag }}"
+            NEW_TAG="${{ github.event.inputs.release-tag }}"
+          fi
+
+          echo "last_release_tag=$LAST_RELEASE_TAG" >> $GITHUB_OUTPUT
+          echo "last_tag=$LAST_TAG" >> $GITHUB_OUTPUT
+          echo "new_tag=$NEW_TAG" >> $GITHUB_OUTPUT
+
+      - name: Extend FULL-CHANGELOG.md with the current release notes
+        if: github.event.inputs.full-changelog == 'true'
+        run: python3 .release/script/changelog_builder.py --version ${{ steps.tag.outputs.new_tag }}
+
+      - name: Get the latest version of main from the repository
+        run: |
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+          git fetch origin main
+          git reset --hard origin/main
+
+      - name: Set and push Git tag
+        run: python3 .release/script/tag_push.py --tag ${{ steps.tag.outputs.new_tag }} --message "Tag ${{ steps.tag.outputs.new_tag }}"
+
+  release:
+    name: Release
+    if: github.event.inputs.build == 'true'
+    runs-on: ubuntu-latest
+    needs: prework
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          submodules: recursive
+          persist-credentials: true
+          token: ${{ secrets.BOT_TOKEN }}
+
+      - name: Get the latest version of main from the repository
+        run: |
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+          git fetch origin main
+          git reset --hard origin/main
+
+      - name: Package
+        run: >
+          bash .release/script/packager.sh
+          --version ${{ needs.prework.outputs.new-tag }}
+          --last-release-version ${{ needs.prework.outputs.last-release-tag }}
+          --release-cf ${{ github.event.inputs.release-cf }}
+          --release-wago ${{ github.event.inputs.release-wago }}
