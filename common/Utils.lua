@@ -28,13 +28,13 @@ function Utils:InitializeDatabase()
         HoratumSettings = { point = "CENTER", relativePoint = "CENTER", xOfs = 0, yOfs = 150, isVisible = true }
     end
 
-	if (not HoratumKillTimes) then
-        HoratumKillTimes = {}
+	if (not HoratumTimeTracker) then
+        HoratumTimeTracker = {}
     end
 
     HRT.data = {}
     HRT.data.settings = HoratumSettings
-	HRT.data.killTimes = HoratumKillTimes
+	HRT.data.timeTracker = HoratumTimeTracker
 end
 
 HRT.utils = Utils

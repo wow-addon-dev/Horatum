@@ -32,8 +32,8 @@ local function UpdateTimerFrame(self, elapsed)
     local milliseconds = math.floor((currentTime * 1000) % 1000)
     timerText:SetText(string.format("%02d:%02d.%03d", minutes, seconds, milliseconds))
 
-    if currentDBKey and HoratumKillTimes[currentDBKey] then
-        local bestTime = HoratumKillTimes[currentDBKey]
+    if currentDBKey and HRT.data.timeTracker[currentDBKey] then
+        local bestTime = HRT.data.timeTracker[currentDBKey]
         local remainingTime = bestTime - currentTime
 
         if remainingTime > 0 then
@@ -141,7 +141,7 @@ function InitializeFrames()
 			bestTimeBar:SetValue(1)
 			bestTimeBar:SetStatusBarColor(0.5, 0.5, 0.5)
 			bossNameText:SetText(L["tracker.wait-fight"])
-			difficultyText:SetText("")
+			difficultyText:SetText("-")
 		end
 	end)
 
@@ -172,29 +172,28 @@ function TimeTracker:EncounterStart(encounterKey, encounterName)
 
 	currentDBKey = encounterKey
 
-        timeTrackerFrame:Show()
-        if HoratumSettings then
-            HoratumSettings.isVisible = true
-        end
+    timeTrackerFrame:Show()
 
-        startTime = GetTime()
-        bossNameText:SetText(encounterName)
+    HoratumSettings.isVisible = true
 
-        local _, _, _, difficultyName = GetInstanceInfo()
-        difficultyText:SetText(difficultyName or "unknown")
+    startTime = GetTime()
+    bossNameText:SetText(encounterName)
 
-        if HoratumKillTimes[currentDBKey] then
-            local best = HoratumKillTimes[currentDBKey]
-            bestTimeBar:SetMinMaxValues(0, best)
-            bestTimeBar:SetValue(best)
-            bestTimeBar:SetStatusBarColor(0, 1, 0)
-        else
-            bestTimeBar:SetMinMaxValues(0, 1)
-            bestTimeBar:SetValue(1)
-            bestTimeBar:SetStatusBarColor(0, 0.5, 1)
-        end
+    local _, _, _, difficultyName = GetInstanceInfo()
+    difficultyText:SetText(difficultyName or L["tracker.unknown"])
 
-        timeTrackerFrame:SetScript("OnUpdate", UpdateTimerFrame)
+    if HRT.data.timeTracker[currentDBKey] then
+        local best = HRT.data.timeTracker[currentDBKey]
+        bestTimeBar:SetMinMaxValues(0, best)
+        bestTimeBar:SetValue(best)
+        bestTimeBar:SetStatusBarColor(0, 1, 0)
+    else
+        bestTimeBar:SetMinMaxValues(0, 1)
+        bestTimeBar:SetValue(1)
+        bestTimeBar:SetStatusBarColor(0, 0.5, 1)
+    end
+
+    timeTrackerFrame:SetScript("OnUpdate", UpdateTimerFrame)
 end
 
 function TimeTracker:EncounterEnd(encounterKey, encounterName, success)
@@ -212,12 +211,12 @@ function TimeTracker:EncounterEnd(encounterKey, encounterName, success)
     timerText:SetText(string.format("%02d:%02d.%03d", minutes, seconds, milliseconds))
 
     if success == 1 then
-        local oldBest = HoratumKillTimes[encounterKey]
+        local oldBest = HRT.data.timeTracker[encounterKey]
         if not oldBest or finalTime < oldBest then
-			HoratumKillTimes[encounterKey] = finalTime
+			HRT.data.timeTracker[encounterKey] = finalTime
 
 			local _, _, _, difficultyName = GetInstanceInfo()
-			local diffText = difficultyName or "unknonw"
+			local diffText = difficultyName or L["tracker.unknown"]
 
 			Utils:PrintMessage(L["chat.new-record"]:format(encounterName, diffText, string.format("%02d:%02d.%03d", minutes, seconds, milliseconds)))
         end

@@ -13,6 +13,7 @@ L["addon.version"] = "Version"
 
 -- Tracker
 
+L["tracker.unknown"] = "unknown"
 L["tracker.wait-fight"] = "Waiting for boss fight..."
 
 -- Chat
