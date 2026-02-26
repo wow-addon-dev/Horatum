@@ -1,26 +1,21 @@
-# Expositum
+# Horatum
 
-[![GitHub Release](https://img.shields.io/github/v/release/wow-addon-dev/Expositum?color=blue&logo=github&cacheSeconds=600)](https://github.com/wow-addon-dev/Expositum/releases)
-[![GitHub Release Date](https://img.shields.io/github/release-date/wow-addon-dev/Expositum?color=blue&logo=github&cacheSeconds=600)](https://github.com/wow-addon-dev/Expositum/releases)
+[![GitHub Release](https://img.shields.io/github/v/release/wow-addon-dev/Horatum?color=blue&logo=github&cacheSeconds=600)](https://github.com/wow-addon-dev/Horatum/releases)
+[![GitHub Release Date](https://img.shields.io/github/release-date/wow-addon-dev/Horatum?color=blue&logo=github&cacheSeconds=600)](https://github.com/wow-addon-dev/Horatum/releases)
 [![Static Badge](https://img.shields.io/badge/buy_me_a_coffe-donate-yellow?logo=buy-me-a-coffee&logoColor=white)](https://buymeacoffee.com/diomsg)
 
-*Reveal an item's origin and purpose.*
+*Measure your battles. Master the time.*
 
-Expositum is an addon that provides additional information about items in the tooltip.
+Horatum is an addon that automatically tracks the duration of boss encounters and keeps a history of your fastest kills.
 
 ### Features
 
-*   Displays the corresponding expansion of the item (optional)*
-*   Displays the item category (e.g. crafting materials, clothing, etc.) (optional)
-*   Displays the item level (optional)
-*   Supported languages: English, German, Russian
-*   Supported versions: 'Classic', 'Burning Crusade - Classic Anniversary Edition', 'Mists of Pandaria - Classic' and 'Retail'
-
-*\* The expansion can only be displayed in 'Retail'.*
-
-### Quick Start
-
-To open the addon option window, type `/ext` or `/Expositum` into your chat and hit enter.
+*   Automatic Boss Tracking: The timer automatically starts the moment you engage a dungeon or raid boss and stops the exact second the fight ends or your group wipes.
+*   Live Timer Display: Features a clean, semi-transparent frame that displays the ongoing combat time in a precise "MM:SS" format.
+*   Persistent Results: After an encounter concludes, the timer stops and remains on your screen, allowing you to easily review the exact duration of your attempt.
+*   Freely Movable: The timer frame can be dragged and placed anywhere on your screen to perfectly fit your UI.
+*   Supported Languages: English, German
+*   Supported Versions: 'Classic', 'Burning Crusade - Classic Anniversary Edition', 'Mists of Pandaria - Classic' and 'Retail'
 
 ### Translation Support
 
