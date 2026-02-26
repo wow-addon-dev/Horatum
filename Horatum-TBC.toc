@@ -8,8 +8,8 @@
 ## DefaultState: enabled
 ## AllowLoadGameType: tbc
 
-## Notes: This addon automatically tracks the duration of boss encounters and saves a history of the fastest kills.
-## Notes-deDE: Dieses Addon verfolgt automatisch die Dauer von Bosskämpfen und speichert eine Historie der schnellsten Kills.
+## Notes: This addon tracks the duration of boss encounters and saves a history of the fastest kills.
+## Notes-deDE: Dieses Addon verfolgt die Dauer von Bosskämpfen und speichert eine Historie der schnellsten Kills.
 
 ## LoadSavedVariablesFirst: 1
 ## SavedVariables: HoratumSettings, HoratumKillTimes
