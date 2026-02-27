@@ -34,7 +34,7 @@ function Utils:InitializeDatabase()
 
     HRT.data = {}
     HRT.data.settings = HoratumSettings
-	HRT.data.battleTimeTracker = HoratumCombatTimeTracker
+	HRT.data.combatTimeTracker = HoratumCombatTimeTracker
 end
 
 HRT.Utils = Utils

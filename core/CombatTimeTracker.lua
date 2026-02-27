@@ -182,8 +182,8 @@ function CombatTimeTracker:EncounterStart(encounterKey, encounterName)
     local _, _, _, difficultyName = GetInstanceInfo()
     difficultyText:SetText(difficultyName or L["tracker.unknown"])
 
-    if HRT.data.combatTimeTrackerFrame[currentDBKey] then
-        local best = HRT.data.combatTimeTrackerFrame[currentDBKey]
+    if HRT.data.combatTimeTracker[currentDBKey] then
+        local best = HRT.data.combatTimeTracker[currentDBKey]
         bestTimeBar:SetMinMaxValues(0, best)
         bestTimeBar:SetValue(best)
         bestTimeBar:SetStatusBarColor(0, 1, 0)
@@ -211,9 +211,9 @@ function CombatTimeTracker:EncounterEnd(encounterKey, encounterName, success)
     timerText:SetText(string.format("%02d:%02d.%03d", minutes, seconds, milliseconds))
 
     if success == 1 then
-        local oldBest = HRT.data.combatTimeTrackerFrame[encounterKey]
+        local oldBest = HRT.data.combatTimeTracker[encounterKey]
         if not oldBest or finalTime < oldBest then
-			HRT.data.combatTimeTrackerFrame[encounterKey] = finalTime
+			HRT.data.combatTimeTracker[encounterKey] = finalTime
 
 			local _, _, _, difficultyName = GetInstanceInfo()
 			local diffText = difficultyName or L["tracker.unknown"]
