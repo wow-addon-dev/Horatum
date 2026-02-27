@@ -8,11 +8,11 @@
 ## DefaultState: enabled
 ## AllowLoadGameType: mainline
 
-## Notes: This addon tracks the duration of boss encounters and saves a history of the fastest victories.
-## Notes-deDE: Dieses Addon verfolgt die Dauer von Bosskämpfen und speichert eine Historie der schnellsten Siege.
+## Notes: This addon records every boss combat encounter and saves the fastest victory.
+## Notes-deDE: Dieses Addon zeichnet jeden Bosskampf auf und speichert den schnellsten Sieg.
 
 ## LoadSavedVariablesFirst: 1
-## SavedVariables: HoratumSettings, HoratumBattleTimeTracker
+## SavedVariables: HoratumSettings, HoratumCombatTimeTracker
 
 ## X-Flavor: Retail
 ## X-BuildDate: @build-date@
