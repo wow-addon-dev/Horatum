@@ -32,8 +32,8 @@ local function UpdateTimerFrame(self, elapsed)
     local milliseconds = math.floor((currentTime * 1000) % 1000)
     timerText:SetText(string.format("%02d:%02d.%03d", minutes, seconds, milliseconds))
 
-    if currentDBKey and HRT.data.timeTracker[currentDBKey] then
-        local bestTime = HRT.data.timeTracker[currentDBKey]
+    if currentDBKey and HRT.data.battleTimeTracker[currentDBKey] then
+        local bestTime = HRT.data.battleTimeTracker[currentDBKey]
         local remainingTime = bestTime - currentTime
 
         if remainingTime > 0 then
@@ -182,8 +182,8 @@ function BattleTimeTracker:EncounterStart(encounterKey, encounterName)
     local _, _, _, difficultyName = GetInstanceInfo()
     difficultyText:SetText(difficultyName or L["tracker.unknown"])
 
-    if HRT.data.timeTracker[currentDBKey] then
-        local best = HRT.data.timeTracker[currentDBKey]
+    if HRT.data.battleTimeTracker[currentDBKey] then
+        local best = HRT.data.battleTimeTracker[currentDBKey]
         bestTimeBar:SetMinMaxValues(0, best)
         bestTimeBar:SetValue(best)
         bestTimeBar:SetStatusBarColor(0, 1, 0)
@@ -211,9 +211,9 @@ function BattleTimeTracker:EncounterEnd(encounterKey, encounterName, success)
     timerText:SetText(string.format("%02d:%02d.%03d", minutes, seconds, milliseconds))
 
     if success == 1 then
-        local oldBest = HRT.data.timeTracker[encounterKey]
+        local oldBest = HRT.data.battleTimeTracker[encounterKey]
         if not oldBest or finalTime < oldBest then
-			HRT.data.timeTracker[encounterKey] = finalTime
+			HRT.data.battleTimeTracker[encounterKey] = finalTime
 
 			local _, _, _, difficultyName = GetInstanceInfo()
 			local diffText = difficultyName or L["tracker.unknown"]
