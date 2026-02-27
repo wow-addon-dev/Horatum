@@ -1,3 +1,6 @@
+**v1.3 (2026-02-27)**
+- Minor code adjustments [all versions]
+
 **v1.2 (2026-02-27)**
 - Fixed: The battle times were not saved [all versions]
 
