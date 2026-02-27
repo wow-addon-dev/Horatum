@@ -12,7 +12,7 @@
 ## Notes-deDE: Dieses Addon verfolgt die Dauer von Bosskämpfen und speichert eine Historie der schnellsten Siege.
 
 ## LoadSavedVariablesFirst: 1
-## SavedVariables: HoratumSettings, HoratumTimeTracker
+## SavedVariables: HoratumSettings, HoratumBattleTimeTracker
 
 ## X-Flavor: Burning Crusade - Classic Anniversary Edition
 ## X-BuildDate: @build-date@

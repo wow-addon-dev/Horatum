@@ -1,11 +1,11 @@
 local _, HRT = ...
 
-HRT.localization = setmetatable({},{__index=function(self,key)
+HRT.Localization = setmetatable({},{__index=function(self,key)
         geterrorhandler()("Horatum (Debug): Missing entry for '" .. tostring(key) .. "'")
         return key
     end})
 
-local L = HRT.localization
+local L = HRT.Localization
 
 -- Generel
 

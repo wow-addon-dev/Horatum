@@ -1,9 +1,9 @@
 local addonName, HRT = ...
 
-local L = HRT.localization
-local Utils = HRT.utils
+local L = HRT.Localization
+local Utils = HRT.Utils
 
-local TimeTracker = {}
+local BattleTimeTracker = {}
 
 local startTime = 0
 local currentDBKey = nil
@@ -18,7 +18,7 @@ local timerText
 --- Frames ---
 --------------
 
-local timeTrackerFrame
+local battleTimeTrackerFrame
 
 ----------------------
 --- Local funtions ---
@@ -51,15 +51,15 @@ end
 ----------------------
 
 function InitializeFrames()
-	timeTrackerFrame = CreateFrame("Frame", "BossTimerFrame", UIParent)
-	timeTrackerFrame:SetSize(160, 85)
+	battleTimeTrackerFrame = CreateFrame("Frame", "BossTimerFrame", UIParent)
+	battleTimeTrackerFrame:SetSize(160, 85)
 
-	timeTrackerFrame:SetMovable(true)
-	timeTrackerFrame:EnableMouse(true)
-	timeTrackerFrame:RegisterForDrag("LeftButton")
-	timeTrackerFrame:SetScript("OnDragStart", timeTrackerFrame.StartMoving)
+	battleTimeTrackerFrame:SetMovable(true)
+	battleTimeTrackerFrame:EnableMouse(true)
+	battleTimeTrackerFrame:RegisterForDrag("LeftButton")
+	battleTimeTrackerFrame:SetScript("OnDragStart", battleTimeTrackerFrame.StartMoving)
 
-	timeTrackerFrame:SetScript("OnDragStop", function(self)
+	battleTimeTrackerFrame:SetScript("OnDragStop", function(self)
 		self:StopMovingOrSizing()
 		local point, relativeTo, relativePoint, xOfs, yOfs = self:GetPoint()
 		if HoratumSettings then
@@ -70,15 +70,15 @@ function InitializeFrames()
 		end
 	end)
 
-	local bg = timeTrackerFrame:CreateTexture(nil, "BACKGROUND")
-	bg:SetAllPoints(timeTrackerFrame,true)
+	local bg = battleTimeTrackerFrame:CreateTexture(nil, "BACKGROUND")
+	bg:SetAllPoints(battleTimeTrackerFrame,true)
 	bg:SetColorTexture(0, 0, 0, 0.6)
 
-	timerText = timeTrackerFrame:CreateFontString(nil, "OVERLAY", "GameFontHighlightHuge")
-	timerText:SetPoint("TOP", timeTrackerFrame, "TOP", 0, -10)
+	timerText = battleTimeTrackerFrame:CreateFontString(nil, "OVERLAY", "GameFontHighlightHuge")
+	timerText:SetPoint("TOP", battleTimeTrackerFrame, "TOP", 0, -10)
 	timerText:SetText("00:00.000")
 
-	bestTimeBar = CreateFrame("StatusBar", nil, timeTrackerFrame)
+	bestTimeBar = CreateFrame("StatusBar", nil, battleTimeTrackerFrame)
 	bestTimeBar:SetSize(140, 10)
 	bestTimeBar:SetPoint("TOP", timerText, "BOTTOM", 0, -5)
 	bestTimeBar:SetStatusBarTexture("Interface\\TargetingFrame\\UI-StatusBar")
@@ -87,17 +87,17 @@ function InitializeFrames()
 	--barBg:SetAllPoints(bg,true)
 	barBg:SetColorTexture(0.2, 0.2, 0.2, 0.8)
 
-	bossNameText = timeTrackerFrame:CreateFontString(nil, "OVERLAY", "GameFontNormalSmall")
+	bossNameText = battleTimeTrackerFrame:CreateFontString(nil, "OVERLAY", "GameFontNormalSmall")
 	bossNameText:SetPoint("TOP", bestTimeBar, "BOTTOM", 0, -5)
 	bossNameText:SetText(L["tracker.wait-fight"])
 
-	difficultyText = timeTrackerFrame:CreateFontString(nil, "OVERLAY", "GameFontDisableSmall")
+	difficultyText = battleTimeTrackerFrame:CreateFontString(nil, "OVERLAY", "GameFontDisableSmall")
 	difficultyText:SetPoint("TOP", bossNameText, "BOTTOM", 0, -2)
 	difficultyText:SetText("")
 
-	local closeButton = CreateFrame("Button", nil, timeTrackerFrame)
+	local closeButton = CreateFrame("Button", nil, battleTimeTrackerFrame)
 	closeButton:SetSize(20, 20)
-	closeButton:SetPoint("TOPRIGHT", timeTrackerFrame, "TOPRIGHT", -2, -2)
+	closeButton:SetPoint("TOPRIGHT", battleTimeTrackerFrame, "TOPRIGHT", -2, -2)
 
 	local closeText = closeButton:CreateFontString(nil, "OVERLAY", "GameFontNormal")
 	closeText:SetPoint("CENTER")
@@ -107,15 +107,15 @@ function InitializeFrames()
 	closeButton:SetScript("OnLeave", function() closeText:SetTextColor(1, 0.82, 0) end)
 
 	closeButton:SetScript("OnClick", function()
-		timeTrackerFrame:Hide()
+		battleTimeTrackerFrame:Hide()
 		if HoratumSettings then
 			HoratumSettings.isVisible = false
 		end
 	end)
 
-	resetButton = CreateFrame("Button", nil, timeTrackerFrame)
+	resetButton = CreateFrame("Button", nil, battleTimeTrackerFrame)
 	resetButton:SetSize(16, 16)
-	resetButton:SetPoint("BOTTOMRIGHT", timeTrackerFrame, "BOTTOMRIGHT", -4, 4)
+	resetButton:SetPoint("BOTTOMRIGHT", battleTimeTrackerFrame, "BOTTOMRIGHT", -4, 4)
 
 	resetButton:SetNormalTexture("Interface\\Buttons\\UI-RefreshButton")
 	resetButton:SetPushedTexture("Interface\\Buttons\\UI-RefreshButton")
@@ -145,13 +145,13 @@ function InitializeFrames()
 		end
 	end)
 
-	timeTrackerFrame:ClearAllPoints()
-    timeTrackerFrame:SetPoint(HoratumSettings.point, UIParent, HoratumSettings.relativePoint, HoratumSettings.xOfs, HoratumSettings.yOfs)
+	battleTimeTrackerFrame:ClearAllPoints()
+    battleTimeTrackerFrame:SetPoint(HoratumSettings.point, UIParent, HoratumSettings.relativePoint, HoratumSettings.xOfs, HoratumSettings.yOfs)
 
     if HoratumSettings.isVisible then
-        timeTrackerFrame:Show()
+        battleTimeTrackerFrame:Show()
     else
-        timeTrackerFrame:Hide()
+        battleTimeTrackerFrame:Hide()
     end
 
 	bestTimeBar:SetMinMaxValues(0, 1)
@@ -163,16 +163,16 @@ end
 --- Main funtions ---
 ---------------------
 
-function TimeTracker:Initialize()
+function BattleTimeTracker:Initialize()
     InitializeFrames()
 end
 
-function TimeTracker:EncounterStart(encounterKey, encounterName)
+function BattleTimeTracker:EncounterStart(encounterKey, encounterName)
     resetButton:Hide()
 
 	currentDBKey = encounterKey
 
-    timeTrackerFrame:Show()
+    battleTimeTrackerFrame:Show()
 
     HoratumSettings.isVisible = true
 
@@ -193,11 +193,11 @@ function TimeTracker:EncounterStart(encounterKey, encounterName)
         bestTimeBar:SetStatusBarColor(0, 0.5, 1)
     end
 
-    timeTrackerFrame:SetScript("OnUpdate", UpdateTimerFrame)
+    battleTimeTrackerFrame:SetScript("OnUpdate", UpdateTimerFrame)
 end
 
-function TimeTracker:EncounterEnd(encounterKey, encounterName, success)
-    timeTrackerFrame:SetScript("OnUpdate", nil)
+function BattleTimeTracker:EncounterEnd(encounterKey, encounterName, success)
+    battleTimeTrackerFrame:SetScript("OnUpdate", nil)
 
     currentDBKey = nil
 
@@ -223,4 +223,8 @@ function TimeTracker:EncounterEnd(encounterKey, encounterName, success)
     end
 end
 
-HRT.timeTracker = TimeTracker
+function BattleTimeTracker:Show()
+	battleTimeTrackerFrame:Show()
+end
+
+HRT.BattleTimeTracker = BattleTimeTracker

@@ -1,6 +1,6 @@
 local addonName, HRT = ...
 
-local L = HRT.localization
+local L = HRT.Localization
 
 local Utils = {}
 
@@ -28,13 +28,13 @@ function Utils:InitializeDatabase()
         HoratumSettings = { point = "CENTER", relativePoint = "CENTER", xOfs = 0, yOfs = 150, isVisible = true }
     end
 
-	if (not HoratumTimeTracker) then
-        HoratumTimeTracker = {}
+	if (not HoratumBattleTimeTracker) then
+        HoratumBattleTimeTracker = {}
     end
 
     HRT.data = {}
     HRT.data.settings = HoratumSettings
-	HRT.data.timeTracker = HoratumTimeTracker
+	HRT.data.battleTimeTracker = HoratumBattleTimeTracker
 end
 
-HRT.utils = Utils
+HRT.Utils = Utils

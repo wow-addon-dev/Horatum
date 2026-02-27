@@ -2,7 +2,7 @@ local _, HRT = ...
 
 if GetLocale() ~= "deDE" then return end
 
-local L = HRT.localization
+local L = HRT.Localization
 
 -- Generel
 

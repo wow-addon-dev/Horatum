@@ -18,6 +18,10 @@ Horatum is an addon that tracks the duration of boss encounters and keeps a hist
 *   Supported Languages: English, German
 *   Supported Versions: 'Classic', 'Burning Crusade - Classic Anniversary Edition', 'Mists of Pandaria - Classic' and 'Retail'
 
+### Quick Start
+
+To open the Time Tracker, type `/hrt` or `/horatum` into your chat and hit enter.
+
 ### Translation Support
 
 If you would like to help me with the translation, I would be very pleased.

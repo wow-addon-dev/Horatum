@@ -12,7 +12,7 @@
 ## Notes-deDE: Dieses Addon verfolgt die Dauer von Bosskämpfen und speichert eine Historie der schnellsten Siege.
 
 ## LoadSavedVariablesFirst: 1
-## SavedVariables: HoratumSettings, HoratumTimeTracker
+## SavedVariables: HoratumSettings, HoratumBattleTimeTracker
 
 ## X-Flavor: Mist of Pandaria - Classic
 ## X-BuildDate: @build-date@

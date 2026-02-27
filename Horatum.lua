@@ -1,9 +1,21 @@
 local addonName, HRT = ...
 
-local L = HRT.localization
+local L = HRT.Localization
 
-local Utils = HRT.utils
-local TimeTracker = HRT.timeTracker
+local Utils = HRT.Utils
+local BattleTimeTracker = HRT.BattleTimeTracker
+
+----------------------
+--- Local funtions ---
+----------------------
+
+local function SlashCommand(msg, editbox)
+    if not msg or msg:trim() == "" then
+        BattleTimeTracker:Show()
+	else
+        Utils:PrintDebug("No arguments will be accepted.")
+	end
+end
 
 --------------
 --- Frames ---
@@ -22,7 +34,7 @@ end
 function horatumFrame:ADDON_LOADED(_, addOnName)
     if addOnName == addonName then
         Utils:InitializeDatabase()
-		TimeTracker:Initialize()
+		BattleTimeTracker:Initialize()
 
         Utils:PrintDebug("Addon fully loaded.")
     end
@@ -31,16 +43,20 @@ end
 function horatumFrame:ENCOUNTER_START(_, encounterID, encounterName, difficultyID, groupSize)
     local encounterKey = encounterID .. "_" .. difficultyID
 
-	TimeTracker:EncounterStart(encounterKey, encounterName)
+	BattleTimeTracker:EncounterStart(encounterKey, encounterName)
 end
 
 function horatumFrame:ENCOUNTER_END(_, encounterID, encounterName, difficultyID, groupSize, success)
     local encounterKey = encounterID .. "_" .. difficultyID
 
-	TimeTracker:EncounterEnd(encounterKey, encounterName, success)
+	BattleTimeTracker:EncounterEnd(encounterKey, encounterName, success)
 end
 
 horatumFrame:RegisterEvent("ADDON_LOADED")
 horatumFrame:RegisterEvent("ENCOUNTER_START")
 horatumFrame:RegisterEvent("ENCOUNTER_END")
 horatumFrame:SetScript("OnEvent", horatumFrame.OnEvent)
+
+SLASH_Horatum1, SLASH_Horatum2 = '/hrt', '/horatum'
+
+SlashCmdList["Horatum"] = SlashCommand
