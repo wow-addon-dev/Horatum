@@ -20,7 +20,7 @@ Horatum is an addon that tracks the duration of boss encounters and keeps a hist
 
 ### Quick Start
 
-To open the Time Tracker, type `/hrt` or `/horatum` into your chat and hit enter.
+To open the 'Battle Time Tracker', type `/hrt` or `/horatum` into your chat and hit enter.
 
 ### Translation Support
 
