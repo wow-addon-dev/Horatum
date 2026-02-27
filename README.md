@@ -4,24 +4,28 @@
 [![GitHub Release Date](https://img.shields.io/github/release-date/wow-addon-dev/Horatum?color=blue&logo=github&cacheSeconds=600)](https://github.com/wow-addon-dev/Horatum/releases)
 [![Static Badge](https://img.shields.io/badge/buy_me_a_coffe-donate-yellow?logo=buy-me-a-coffee&logoColor=white)](https://buymeacoffee.com/diomsg)
 
-*Measure your battles. Master the time.*
+*Master the clock. Conquer the combat.*
 
-Horatum is an addon that tracks the duration of boss encounters and keeps a history of your fastest kills.
+Horatum is an addon that records every boss combat encounter and saves the fastest victory.
+
+The following key features are currently implemented:
+*   **Combat Time Tracker** - During a boss combat, a small window will appear displaying the current combat time and other information.
+*   (Planned) **Combat Time Overview** - All boss combat times can be displayed in an overview window.
 
 ### Features
 
-*   Automatic Boss Tracking: The timer automatically starts the moment you engage a dungeon or raid boss and stops the exact second the fight ends or your group wipes.
-*	Best Time Records: Automatically saves your fastest kill time, specifically categorized by each boss and encounter difficulty.
-*   Live Timer Display: Features a clean, semi-transparent frame that displays the ongoing combat time.
-*	Persistent Results: After an encounter concludes, the timer stops and remains on your screen, allowing you to easily review the exact duration of your attempt.
-*   Freely Movable: The timer frame can be dragged and placed anywhere on your screen to perfectly fit your UI.
-*   Supported Languages: English, German
-*   Supported Versions: 'Classic', 'Burning Crusade - Classic Anniversary Edition', 'Mists of Pandaria - Classic' and 'Retail'
+*   **Combat Tracking**: The timer triggers the moment you engage a dungeon or raid boss and stops the exact second the combat ends or your group wipes.
+*	**Best Time Records**: Saves your fastest victory times, organized by boss name and encounter difficulty.
+*   **Live Timer Display**: Features a clean, semi-transparent frame that displays the ongoing combat time.
+*	**Persistent Results**: After an combat concludes, the timer stops and remains on your screen, allowing you to easily review the exact duration of your attempt.
+*   **Freely Movable**: The timer frame can be dragged and placed anywhere on your screen to perfectly fit your UI.
+*   **Supported Languages**: English, German
+*   **Supported Versions**: 'Classic', 'Burning Crusade - Classic Anniversary Edition', 'Mists of Pandaria - Classic' and 'Retail'
 
 ### Quick Start
 
-To open the 'Battle Time Tracker', type `/hrt` or `/horatum` into your chat and hit enter.
+Open the **Combat Time Tracker** by typing `/hrt` or `/horatum` in your chat and hit Enter.
 
 ### Translation Support
 
-If you would like to help me with the translation, I would be very pleased.
+If you would like to help localize Horatum into other languages, your contribution would be very welcome.
