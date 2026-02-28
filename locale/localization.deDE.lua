@@ -8,10 +8,11 @@ local L = HRT.Localization
 
 L["addon.version"] = "Version"
 
--- Tracker
+-- Combat Time Tracker
 
 L["tracker.unknown"] = "unbekannt"
-L["tracker.wait-fight"] = "Warte auf Kampf..."
+L["tracker.button-reset"] = "Reset"
+L["tracker.wait-combat"] = "Warte auf Kampf..."
 
 -- Chat
 

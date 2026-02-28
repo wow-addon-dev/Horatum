@@ -14,7 +14,8 @@ L["addon.version"] = "Version"
 -- Tracker
 
 L["tracker.unknown"] = "unknown"
-L["tracker.wait-fight"] = "Waiting for combat..."
+L["tracker.button-reset"] = "Reset"
+L["tracker.wait-combat"] = "Waiting for combat..."
 
 -- Chat
 
