@@ -1,0 +1,23 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+..\FrameXML\UI.xsd">
+	<Script file="OptionsMixin.lua"/>
+
+	<Frame name="Horatum_OptionsText" mixin="Horatum_OptionsTextMixin" virtual="true">
+		<Size y="28" />
+		<Layers>
+			<Layer level="OVERLAY">
+				<FontString parentKey="LeftText" inherits="GameFontNormal" justifyH="LEFT" justifyV="TOP">
+					<Anchors>
+						<Anchor point="TOPLEFT" x="37" y="-8" />
+					</Anchors>
+				</FontString>
+				<FontString parentKey="RightText" inherits="GameFontHighlight" justifyH="LEFT" justifyV="TOP" wordwrap="true">
+					<Anchors>
+						<Anchor point="TOPLEFT" x="160" y="-8" />
+						<Anchor point="TOPRIGHT" x="-10" y="-8" />
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+	</Frame>
+</Ui>

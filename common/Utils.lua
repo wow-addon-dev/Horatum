@@ -4,16 +4,12 @@ local L = HRT.Localization
 
 local Utils = {}
 
------------------------
---- Helper Funtions ---
------------------------
-
 ---------------------
 --- Main Funtions ---
 ---------------------
 
 function Utils:PrintDebug(msg)
-    if false then
+    if HRT.data.options["debug-mode"] then
 		DEFAULT_CHAT_FRAME:AddMessage(ORANGE_FONT_COLOR:WrapTextInColorCode(addonName .. " (Debug): ")  .. msg)
 	end
 end
@@ -23,8 +19,14 @@ function Utils:PrintMessage(msg)
 end
 
 function Utils:InitializeDatabase()
-    if (not HoratumSettings) then
-        HoratumSettings = { point = "CENTER", relativePoint = "CENTER", xOfs = 0, yOfs = 150, isVisible = true }
+    if (not HoratumOptions) then
+        HoratumOptions = {
+			["tracker-point"] = "CENTER",
+			["tracker-relative-point"] = "CENTER",
+			["tracker-xOfs"] = 0,
+			["tracker-yOfs"] = 150,
+			["tracker-is-visible"] = true
+		}
     end
 
 	if (not HoratumCombatTimeTracker) then
@@ -32,7 +34,7 @@ function Utils:InitializeDatabase()
     end
 
     HRT.data = {}
-    HRT.data.settings = HoratumSettings
+    HRT.data.options = HoratumOptions
 	HRT.data.combatTimeTracker = HoratumCombatTimeTracker
 end
 
