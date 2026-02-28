@@ -23,7 +23,6 @@ function Utils:PrintMessage(msg)
 end
 
 function Utils:InitializeDatabase()
-    -- Settings
     if (not HoratumSettings) then
         HoratumSettings = { point = "CENTER", relativePoint = "CENTER", xOfs = 0, yOfs = 150, isVisible = true }
     end
