@@ -1,3 +1,9 @@
+**v1.5 (2026-02-28)**
+- Added: Options menu [all versions]
+- Added: The Combat Time Tracker size can be changed [all versions]
+- Added: The background transparency of the Combat Time Tracker can be changed [all versions]
+- Minor code adjustments [all versions]
+
 **v1.4 (2026-02-28)**
 - Minor code adjustments [all versions]
 
