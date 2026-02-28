@@ -19,8 +19,8 @@ The following key features are currently implemented:
 *   Features a clean, semi-transparent frame that displays the ongoing combat time.
 *	After an combat concludes, the timer stops and remains on your screen, allowing you to easily review the exact duration of your attempt.
 *	Customizable UI:
-*	Drag and place the timer frame anywhere on your screen.
-*	The size of the Combat Time Tracker can be easily adjusted to fit your interface needs.
+	*	Drag and place the **Combat Time Tracker** anywhere on your screen.
+	*	The size of the **Combat Time Tracker** can be easily adjusted to fit your interface needs.
 *   Supported Languages: English, German
 *   Supported Versions: 'Classic', 'Burning Crusade - Classic Anniversary Edition', 'Mists of Pandaria - Classic' and 'Retail'
 
