@@ -150,7 +150,7 @@ function InitializeFrames()
     combatTimeTrackerFrame:SetHeight(height)
 
 	combatTimeTrackerFrame:ClearAllPoints()
-    combatTimeTrackerFrame:SetPoint(HRT.data.options["point"], UIParent, HRT.data.options["relativePoint"], HRT.data.options["xOfs"], HRT.data.options["yOfs"])
+    combatTimeTrackerFrame:SetPoint(HRT.data.options["tracker-point"], UIParent, HRT.data.options["tracker-relative-point"], HRT.data.options["tracker-xOfs"], HRT.data.options["tracker-yOfs"])
 
 	if HRT.data.options["tracker-is-visible"] then
         combatTimeTrackerFrame:Show()

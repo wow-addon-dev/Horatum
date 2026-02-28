@@ -11,7 +11,7 @@
 ## Notes: This addon records every boss combat encounter and saves the fastest victory.
 ## Notes-deDE: Dieses Addon zeichnet jeden Bosskampf auf und speichert den schnellsten Sieg.
 
-## LoadSavedVariablesFirst: 1
+
 ## SavedVariables: HoratumOptions, HoratumCombatTimeTracker
 
 ## X-Flavor: Retail
