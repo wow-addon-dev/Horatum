@@ -14,17 +14,21 @@ The following key features are currently implemented:
 
 ### Features
 
-*   **Combat Tracking**: The timer triggers the moment you engage a dungeon or raid boss and stops the exact second the combat ends or your group wipes.
-*	**Best Time Records**: Saves your fastest victory times, organized by boss name and encounter difficulty.
-*   **Live Timer Display**: Features a clean, semi-transparent frame that displays the ongoing combat time.
-*	**Persistent Results**: After an combat concludes, the timer stops and remains on your screen, allowing you to easily review the exact duration of your attempt.
-*   **Freely Movable**: The timer frame can be dragged and placed anywhere on your screen to perfectly fit your UI.
-*   **Supported Languages**: English, German
-*   **Supported Versions**: 'Classic', 'Burning Crusade - Classic Anniversary Edition', 'Mists of Pandaria - Classic' and 'Retail'
+*   The timer triggers the moment you engage a dungeon or raid boss and stops the exact second the combat ends or your group wipes.
+*	Saves your fastest victory times, organized by boss name and encounter difficulty.
+*   Features a clean, semi-transparent frame that displays the ongoing combat time.
+*	After an combat concludes, the timer stops and remains on your screen, allowing you to easily review the exact duration of your attempt.
+*	Customizable UI:
+*	Drag and place the timer frame anywhere on your screen.
+*	The size of the Combat Time Tracker can be easily adjusted to fit your interface needs.
+*   Supported Languages: English, German
+*   Supported Versions: 'Classic', 'Burning Crusade - Classic Anniversary Edition', 'Mists of Pandaria - Classic' and 'Retail'
 
 ### Quick Start
 
-Open the **Combat Time Tracker** by typing `/hrt` or `/horatum` in your chat and hit Enter.
+To manage the addon, use the following commands in your chat and press Enter:
+*	Type `/hrt` or `/horatum` to access the options.
+*	Type `/hrt` show or `/horatum show` to manually display the **Combat Time Tracker**.
 
 ### Translation Support
 
