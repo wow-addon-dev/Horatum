@@ -1,3 +1,6 @@
+**v1.6 (2026-03-01)**
+- Minor code adjustments [all versions]
+
 **v1.5 (2026-02-28)**
 - Added: Options menu [all versions]
 - Added: The Combat Time Tracker size can be changed [all versions]
