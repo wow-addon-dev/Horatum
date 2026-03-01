@@ -17,15 +17,15 @@ function Horatum_CopyAdressDialogMixin:ShowDialog(address)
     self:Show()
 end
 
-Horatum_ResetOptionsDialogMixin = {}
+Horatum_DeleteDataDialogMixin = {}
 
-function Horatum_ResetOptionsDialogMixin:OnLoad()
+function Horatum_DeleteDataDialogMixin:OnLoad()
 	self.Text:SetText(L["dialog.delete-data.text"])
 	self:SetHeight(self:GetTop() - self.NoButton:GetBottom() + 20)
 
     tinsert(UISpecialFrames, self:GetName())
 end
 
-function Horatum_ResetOptionsDialogMixin:ShowDialog()
+function Horatum_DeleteDataDialogMixin:ShowDialog()
     self:Show()
 end
