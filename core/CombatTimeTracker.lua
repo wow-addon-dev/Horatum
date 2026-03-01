@@ -46,7 +46,7 @@ end
 ----------------------
 
 function InitializeFrames()
-	combatTimeTrackerFrame = CreateFrame("Frame", "CombatTimeTrackerFrame", UIParent)
+	combatTimeTrackerFrame = CreateFrame("Frame", "HRT_CombatTimeTrackerFrame", UIParent)
 	combatTimeTrackerFrame:SetWidth(160)
 	combatTimeTrackerFrame:SetScale(HRT.data.options["tracker-scale"] / 100)
 
