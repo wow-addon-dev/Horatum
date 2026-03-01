@@ -21,8 +21,11 @@ The following key features are currently implemented:
 *	Customizable UI:
 	*	Drag and place the Combat Time Tracker anywhere on your screen.
 	*	The size of the Combat Time Tracker can be easily adjusted to fit your interface needs.
-*   Supported Languages: English, German
-*   Supported Versions: 'Classic', 'Burning Crusade - Classic Anniversary Edition', 'Mists of Pandaria - Classic' and 'Retail'
+
+### Supported Languages & Game Versions
+
+*   Languages: English, German
+*   Game Versions: 'Classic', 'Burning Crusade - Classic Anniversary Edition', 'Mists of Pandaria - Classic' and 'Retail'
 
 ### Quick Start
 
