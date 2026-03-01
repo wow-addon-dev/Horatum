@@ -9,7 +9,7 @@ local Dialog = {}
 --------------
 
 local copyAddressDialog
-local resetOptionsDialog
+local deleteDataDialog
 
 ---------------------
 --- Main Funtions ---
@@ -17,18 +17,18 @@ local resetOptionsDialog
 
 function Dialog:Initialize()
     copyAddressDialog = CreateFrame("Frame", "Horatum_CopyAdressDialog", UIParent, "Horatum_CopyAdressDialogTemplate")
-	resetOptionsDialog = CreateFrame("Frame", "Horatum_ResetOptionsDialog", UIParent, "Horatum_ResetOptionsDialogTemplate")
+	deleteDataDialog = CreateFrame("Frame", "Horatum_DeleteDataDialog", UIParent, "Horatum_DeleteDataDialogTemplate")
 end
 
 function Dialog:ShowCopyAddressDialog(address)
-    if (not copyAddressDialog:IsShown()) and (not resetOptionsDialog:IsShown()) then
+    if (not copyAddressDialog:IsShown()) and (not deleteDataDialog:IsShown()) then
         copyAddressDialog:ShowDialog(address)
     end
 end
 
-function Dialog:ShowResetOptionsDialog()
-    if (not copyAddressDialog:IsShown()) and (not resetOptionsDialog:IsShown()) then
-        resetOptionsDialog:ShowDialog()
+function Dialog:ShowDeleteDataDialog()
+    if (not copyAddressDialog:IsShown()) and (not deleteDataDialog:IsShown()) then
+        deleteDataDialog:ShowDialog()
     end
 end
 

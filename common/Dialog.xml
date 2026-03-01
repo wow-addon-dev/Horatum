@@ -2,7 +2,7 @@
 ..\FrameXML\UI.xsd">
 	<Script file="DialogMixin.lua"/>
 
-	<Frame name="Horatum_ResetOptionsDialogTemplate" inherits="TranslucentFrameTemplate" mixin="Horatum_ResetOptionsDialogMixin" frameStrata="DIALOG" clampedToScreen="true" hidden="true" virtual="true">
+	<Frame name="Horatum_DeleteDataDialogTemplate" inherits="TranslucentFrameTemplate" mixin="Horatum_DeleteDataDialogMixin" frameStrata="DIALOG" clampedToScreen="true" hidden="true" virtual="true">
 		<Size x="350" y="100"/>
 		<Anchors>
 			<Anchor point="CENTER">
