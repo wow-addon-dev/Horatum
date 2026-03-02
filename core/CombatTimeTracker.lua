@@ -48,7 +48,7 @@ end
 function InitializeFrames()
 	combatTimeTrackerFrame = CreateFrame("Frame", "HRT_CombatTimeTrackerFrame", UIParent)
 	combatTimeTrackerFrame:SetWidth(160)
-	combatTimeTrackerFrame:SetScale(HRT.data.options["tracker-scale"] / 100)
+	combatTimeTrackerFrame:SetScale(HRT.options.combatTimeTracker["scale"] / 100)
 
 	combatTimeTrackerFrame:SetMovable(true)
 	combatTimeTrackerFrame:EnableMouse(true)
@@ -57,15 +57,15 @@ function InitializeFrames()
 	combatTimeTrackerFrame:SetScript("OnDragStop", function(self)
 		self:StopMovingOrSizing()
 		local point, _, relativePoint, xOfs, yOfs = self:GetPoint()
-		HRT.data.options["tracker-point"] = point
-		HRT.data.options["tracker-relative-point"] = relativePoint
-		HRT.data.options["tracker-xOfs"] = xOfs
-		HRT.data.options["tracker-yOfs"] = yOfs
+		HRT.options.combatTimeTracker["point"] = point
+		HRT.options.combatTimeTracker["relative-point"] = relativePoint
+		HRT.options.combatTimeTracker["offset-x"] = xOfs
+		HRT.options.combatTimeTracker["offset-y"] = yOfs
 	end)
 
 	combatTimeTrackerFrame.background = combatTimeTrackerFrame:CreateTexture(nil, "BACKGROUND")
 	combatTimeTrackerFrame.background:SetAllPoints(combatTimeTrackerFrame,true)
-	combatTimeTrackerFrame.background:SetColorTexture(0, 0, 0, HRT.data.options["tracker-background-transparency"] / 100)
+	combatTimeTrackerFrame.background:SetColorTexture(0, 0, 0, HRT.options.combatTimeTracker["background-transparency"] / 100)
 
 	combatTimeTrackerFrame.timer = combatTimeTrackerFrame:CreateFontString(nil, "OVERLAY", "GameFontHighlightHuge")
 	combatTimeTrackerFrame.timer:SetPoint("TOP", combatTimeTrackerFrame, "TOP", 0, -10)
@@ -106,7 +106,7 @@ function InitializeFrames()
 	combatTimeTrackerFrame.closeButton:SetPoint("TOPRIGHT", combatTimeTrackerFrame, "TOPRIGHT", 4, 4)
 	combatTimeTrackerFrame.closeButton:SetScript("OnClick", function()
 		combatTimeTrackerFrame:Hide()
-		HRT.data.options["tracker-is-visible"] = false
+		HRT.options.combatTimeTracker["is-visible"] = false
 	end)
 
 	combatTimeTrackerFrame.resetButton = CreateFrame("Button", nil, combatTimeTrackerFrame)
@@ -150,9 +150,9 @@ function InitializeFrames()
     combatTimeTrackerFrame:SetHeight(height)
 
 	combatTimeTrackerFrame:ClearAllPoints()
-    combatTimeTrackerFrame:SetPoint(HRT.data.options["tracker-point"], UIParent, HRT.data.options["tracker-relative-point"], HRT.data.options["tracker-xOfs"], HRT.data.options["tracker-yOfs"])
+    combatTimeTrackerFrame:SetPoint(HRT.options.combatTimeTracker["point"], UIParent, HRT.options.combatTimeTracker["relative-point"], HRT.options.combatTimeTracker["offset-x"], HRT.options.combatTimeTracker["offset-y"])
 
-	if HRT.data.options["tracker-is-visible"] then
+	if HRT.options.combatTimeTracker["is-visible"] then
         combatTimeTrackerFrame:Show()
     else
         combatTimeTrackerFrame:Hide()
@@ -174,7 +174,7 @@ function CombatTimeTracker:EncounterStart(encounterKey, encounterName)
 	startTime = GetTime()
 	isInCombat = true
 	currentEncounterKey = encounterKey
-    HRT.data.options["tracker-is-visible"] = true
+    HRT.options.combatTimeTracker["is-visible"] = true
 
     local _, _, _, difficultyName = GetInstanceInfo()
 	combatTimeTrackerFrame.name:SetText(encounterName)
@@ -222,15 +222,15 @@ end
 
 function CombatTimeTracker:Show()
 	combatTimeTrackerFrame:Show()
-	HRT.data.options["tracker-is-visible"] = true
+	HRT.options.combatTimeTracker["is-visible"] = true
 end
 
 function CombatTimeTracker:SetScale()
-	combatTimeTrackerFrame:SetScale(HRT.data.options["tracker-scale"] / 100)
+	combatTimeTrackerFrame:SetScale(HRT.options.combatTimeTracker["scale"] / 100)
 end
 
 function CombatTimeTracker:SetBackgroundTransparency()
-	combatTimeTrackerFrame.background:SetColorTexture(0, 0, 0, HRT.data.options["tracker-background-transparency"] / 100)
+	combatTimeTrackerFrame.background:SetColorTexture(0, 0, 0, HRT.options.combatTimeTracker["background-transparency"] / 100)
 end
 
 HRT.CombatTimeTracker = CombatTimeTracker

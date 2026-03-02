@@ -9,7 +9,7 @@ local Utils = {}
 ---------------------
 
 function Utils:PrintDebug(msg)
-    if HRT.data.options["debug-mode"] then
+    if HRT.options.other["debug-mode"] then
 		DEFAULT_CHAT_FRAME:AddMessage(ORANGE_FONT_COLOR:WrapTextInColorCode(addonName .. " (Debug): ")  .. msg)
 	end
 end
@@ -19,23 +19,29 @@ function Utils:PrintMessage(msg)
 end
 
 function Utils:InitializeDatabase()
-    if (not HoratumOptions) then
-        HoratumOptions = {
-			["tracker-point"] = "CENTER",
-			["tracker-relative-point"] = "CENTER",
-			["tracker-xOfs"] = 0,
-			["tracker-yOfs"] = 150,
-			["tracker-is-visible"] = true
+    if (not HoratumOptions_v2) then
+        HoratumOptions_v2 = {
+			["combat-time-tracker"] = {
+				["point"] = "CENTER",
+				["relative-point"] = "CENTER",
+				["offset-x"] = 0,
+				["offset-y"] = 150,
+				["is-visible"] = true
+			},
+			["other"] = {}
 		}
     end
 
-	if (not HoratumCombatTimeTracker) then
-        HoratumCombatTimeTracker = {}
+	if (not HoratumCombatTimeTrackerData) then
+        HoratumCombatTimeTrackerData = {}
     end
 
-    HRT.data = {}
-    HRT.data.options = HoratumOptions
-	HRT.data.combatTimeTracker = HoratumCombatTimeTracker
+    HRT.options = {}
+    HRT.options.combatTimeTracker = HoratumOptions_v2["combat-time-tracker"]
+	HRT.options.other = HoratumOptions_v2["other"]
+
+	HRT.data = {}
+	HRT.data.combatTimeTracker = HoratumCombatTimeTrackerData
 end
 
 HRT.Utils = Utils

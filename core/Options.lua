@@ -13,7 +13,8 @@ local Options = {}
 
 function Options:Initialize()
     local category, layout = Settings.RegisterVerticalLayoutCategory(addonName)
-	local variableTable = HRT.data.options
+	local variableTableCombatTimeTracker = HRT.options.combatTimeTracker
+	local variableTableOther = HRT.options.other
 
 	do
 		local data = {
@@ -68,14 +69,14 @@ function Options:Initialize()
     do
         local name = L["options.tracker.scale.name"]
         local tooltip = L["options.tracker.scale.tooltip"]
-        local variable = "tracker-scale"
+        local variable = "scale"
         local defaultValue = 100
 
         local minValue = 50
         local maxValue = 150
         local step = 1
 
-        local setting = Settings.RegisterAddOnSetting(category, addonName .. "_" .. variable, variable, variableTable, Settings.VarType.Number, name, defaultValue)
+        local setting = Settings.RegisterAddOnSetting(category, addonName .. "_" .. variable, variable, variableTableCombatTimeTracker, Settings.VarType.Number, name, defaultValue)
 		setting:SetValueChangedCallback(function(owner, settingObj, newValue)
 			CombatTimeTracker:Show()
             CombatTimeTracker:SetScale()
@@ -90,14 +91,14 @@ function Options:Initialize()
     do
         local name = L["options.tracker.background-transparency.name"]
         local tooltip = L["options.tracker.background-transparency.tooltip"]
-        local variable = "tracker-background-transparency"
+        local variable = "background-transparency"
         local defaultValue = 60
 
         local minValue = 0
         local maxValue = 100
         local step = 1
 
-        local setting = Settings.RegisterAddOnSetting(category, addonName .. "_" .. variable, variable, variableTable, Settings.VarType.Number, name, defaultValue)
+        local setting = Settings.RegisterAddOnSetting(category, addonName .. "_" .. variable, variable, variableTableCombatTimeTracker, Settings.VarType.Number, name, defaultValue)
 		setting:SetValueChangedCallback(function(owner, settingObj, newValue)
 			CombatTimeTracker:Show()
             CombatTimeTracker:SetBackgroundTransparency()
@@ -117,7 +118,7 @@ function Options:Initialize()
         local variable = "debug-mode"
         local defaultValue = false
 
-        local setting = Settings.RegisterAddOnSetting(category, addonName .. "_" .. variable, variable, variableTable, Settings.VarType.Boolean, name, defaultValue)
+        local setting = Settings.RegisterAddOnSetting(category, addonName .. "_" .. variable, variable, variableTableOther, Settings.VarType.Boolean, name, defaultValue)
         Settings.CreateCheckbox(category, setting, tooltip)
     end
 
