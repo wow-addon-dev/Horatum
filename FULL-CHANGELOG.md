@@ -1,3 +1,6 @@
+**v1.8 (2026-03-02)**
+- Minor code adjustments [all versions]
+
 **v1.7 (2026-03-01)**
 - Minor code adjustments [all versions]
 
