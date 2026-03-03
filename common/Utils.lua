@@ -32,8 +32,12 @@ function Utils:InitializeDatabase()
 		}
     end
 
-	if (not HoratumCombatTimeTrackerData) then
-        HoratumCombatTimeTrackerData = {}
+	if (not HoratumCombatTimeData) then
+        HoratumCombatTimeData = {}
+    end
+
+	if (not HoratumCombatEncounterData) then
+        HoratumCombatEncounterData = {}
     end
 
     HRT.options = {}
@@ -41,7 +45,8 @@ function Utils:InitializeDatabase()
 	HRT.options.other = HoratumOptions_v2["other"]
 
 	HRT.data = {}
-	HRT.data.combatTimeTracker = HoratumCombatTimeTrackerData
+	HRT.data.combatTime = HoratumCombatTimeData,
+	HRT.data.combatEncounter = HoratumCombatEncounterData
 end
 
 HRT.Utils = Utils
