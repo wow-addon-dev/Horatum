@@ -16,6 +16,66 @@ function Options:Initialize()
 	local variableTableCombatTimeTracker = HRT.options.combatTimeTracker
 	local variableTableOther = HRT.options.other
 
+    layout:AddInitializer(CreateSettingsListSectionHeaderInitializer(L["options.combat-time-tracker"]))
+
+    do
+        local name = L["options.combat-time-tracker.scale.name"]
+        local tooltip = L["options.combat-time-tracker.scale.tooltip"]
+        local variable = "scale"
+        local defaultValue = 100
+
+        local minValue = 50
+        local maxValue = 150
+        local step = 1
+
+        local setting = Settings.RegisterAddOnSetting(category, addonName .. "_" .. variable, variable, variableTableCombatTimeTracker, Settings.VarType.Number, name, defaultValue)
+		setting:SetValueChangedCallback(function(owner, settingObj, newValue)
+			CombatTimeTracker:Show()
+            CombatTimeTracker:SetScale()
+        end)
+
+		local options = Settings.CreateSliderOptions(minValue, maxValue, step)
+        options:SetLabelFormatter(MinimalSliderWithSteppersMixin.Label.Right, function(value) return value .. " %" end)
+
+        Settings.CreateSlider(category, setting, options, tooltip)
+    end
+
+    do
+        local name = L["options.combat-time-tracker.background-transparency.name"]
+        local tooltip = L["options.combat-time-tracker.background-transparency.tooltip"]
+        local variable = "background-transparency"
+        local defaultValue = 60
+
+        local minValue = 0
+        local maxValue = 100
+        local step = 1
+
+        local setting = Settings.RegisterAddOnSetting(category, addonName .. "_" .. variable, variable, variableTableCombatTimeTracker, Settings.VarType.Number, name, defaultValue)
+		setting:SetValueChangedCallback(function(owner, settingObj, newValue)
+			CombatTimeTracker:Show()
+            CombatTimeTracker:SetBackgroundTransparency()
+        end)
+
+		local options = Settings.CreateSliderOptions(minValue, maxValue, step)
+        options:SetLabelFormatter(MinimalSliderWithSteppersMixin.Label.Right, function(value) return value .. " %" end)
+
+        Settings.CreateSlider(category, setting, options, tooltip)
+    end
+
+    layout:AddInitializer(CreateSettingsListSectionHeaderInitializer(L["options.other"]))
+
+    do
+        local name = L["options.other.debug-mode.name"]
+        local tooltip = L["options.other.debug-mode.tooltip"]
+        local variable = "debug-mode"
+        local defaultValue = false
+
+        local setting = Settings.RegisterAddOnSetting(category, addonName .. "_" .. variable, variable, variableTableOther, Settings.VarType.Boolean, name, defaultValue)
+        Settings.CreateCheckbox(category, setting, tooltip)
+    end
+
+	layout:AddInitializer(CreateSettingsListSectionHeaderInitializer(L["options.about"]))
+
 	do
 		local data = {
 			leftText = L["options.about.game-version"],
@@ -63,65 +123,7 @@ function Options:Initialize()
         local buttonInitializer = CreateSettingsButtonInitializer(name, buttonText, OnButtonClick, tooltip, true)
         layout:AddInitializer(buttonInitializer)
     end
-
-    layout:AddInitializer(CreateSettingsListSectionHeaderInitializer(L["options.tracker"]))
-
-    do
-        local name = L["options.tracker.scale.name"]
-        local tooltip = L["options.tracker.scale.tooltip"]
-        local variable = "scale"
-        local defaultValue = 100
-
-        local minValue = 50
-        local maxValue = 150
-        local step = 1
-
-        local setting = Settings.RegisterAddOnSetting(category, addonName .. "_" .. variable, variable, variableTableCombatTimeTracker, Settings.VarType.Number, name, defaultValue)
-		setting:SetValueChangedCallback(function(owner, settingObj, newValue)
-			CombatTimeTracker:Show()
-            CombatTimeTracker:SetScale()
-        end)
-
-		local options = Settings.CreateSliderOptions(minValue, maxValue, step)
-        options:SetLabelFormatter(MinimalSliderWithSteppersMixin.Label.Right, function(value) return value .. " %" end)
-
-        Settings.CreateSlider(category, setting, options, tooltip)
-    end
-
-    do
-        local name = L["options.tracker.background-transparency.name"]
-        local tooltip = L["options.tracker.background-transparency.tooltip"]
-        local variable = "background-transparency"
-        local defaultValue = 60
-
-        local minValue = 0
-        local maxValue = 100
-        local step = 1
-
-        local setting = Settings.RegisterAddOnSetting(category, addonName .. "_" .. variable, variable, variableTableCombatTimeTracker, Settings.VarType.Number, name, defaultValue)
-		setting:SetValueChangedCallback(function(owner, settingObj, newValue)
-			CombatTimeTracker:Show()
-            CombatTimeTracker:SetBackgroundTransparency()
-        end)
-
-		local options = Settings.CreateSliderOptions(minValue, maxValue, step)
-        options:SetLabelFormatter(MinimalSliderWithSteppersMixin.Label.Right, function(value) return value .. " %" end)
-
-        Settings.CreateSlider(category, setting, options, tooltip)
-    end
-
-    layout:AddInitializer(CreateSettingsListSectionHeaderInitializer(L["options.other"]))
-
-    do
-        local name = L["options.other.debug-mode.name"]
-        local tooltip = L["options.other.debug-mode.tooltip"]
-        local variable = "debug-mode"
-        local defaultValue = false
-
-        local setting = Settings.RegisterAddOnSetting(category, addonName .. "_" .. variable, variable, variableTableOther, Settings.VarType.Boolean, name, defaultValue)
-        Settings.CreateCheckbox(category, setting, tooltip)
-    end
-
+	
     Settings.RegisterAddOnCategory(category)
 
 	HRT.MAIN_CATEGORY_ID = category:GetID()
