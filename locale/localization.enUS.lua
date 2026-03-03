@@ -9,6 +9,9 @@ local L = HRT.Localization
 
 -- Options
 
+
+
+
 L["options.combat-time-tracker"] = "Combat Time Tracker"
 L["options.combat-time-tracker.scale.name"] = "UI Scale"
 L["options.combat-time-tracker.scale.tooltip"] = "Defines the size scaling of the |cnGOLD_FONT_COLOR:Combat Time Tracker|r."
@@ -45,4 +48,17 @@ L["dialog.delete-data.text"] = "Do you really want to delete all combat data?\n|
 
 -- Chat
 
-L["chat.new-record"] = "New best time for |cnGOLD_FONT_COLOR:%s|r (%s). (%s)"
+L["chat.current-record"] = "Your current best time for |cnGOLD_FONT_COLOR:%s|r (%s) is %s."
+L["chat.new-record"] = "Your new best time for |cnGOLD_FONT_COLOR:%s|r (%s) is %s."
+
+L["chat.first-victory"] = "This was your first victory over |cnGOLD_FONT_COLOR:%s|r (%s). (Wipes: %s)"
+L["chat.another-victory"] = "You have already defeated |cnGOLD_FONT_COLOR:%s|r (%s) once. (Victories: %s / Wipes: %s)"
+L["chat.first-wipe"] = "This was your first defeat against |cnGOLD_FONT_COLOR:%s|r (%s). (Victories: %s)"
+L["chat.another-wipe"] = "You have already lost to |cnGOLD_FONT_COLOR:%s|r (%s) once. (Victories: %s / Wipes: %s)"
+
+Dies war dein erster Sieg über Harun. (Niederlagen: 3)
+Du hast Harun bereits einmal besiegt. (Siege: 12 / Niederlagen: 3)
+
+Dies war deine erste Niederlage gegen Harun. (Siege: 4)
+Du hast gegen Harun bereits einmal verloren. (Siege: 12 / Niederlagen: 3)
+
