@@ -27,7 +27,7 @@ L["options.about.button-delete-data.button"] = "Löschen"
 
 L["options.about.button-github.name"] = "Feedback & Hilfe"
 L["options.about.button-github.tooltip"] = "Öffnet ein Popup-Fenster mit einem Link nach GitHub."
-L["options.about.button-github.button"] = "GitHub"
+L["options.about.button-github.button"] = "GitHub |A:UI-Journeys-GreatVault-Tag-new:33:49|a"
 
 -- Combat Time Tracker
 

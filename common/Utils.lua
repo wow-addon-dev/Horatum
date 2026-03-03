@@ -45,7 +45,7 @@ function Utils:InitializeDatabase()
 	HRT.options.other = HoratumOptions_v2["other"]
 
 	HRT.data = {}
-	HRT.data.combatTime = HoratumCombatTimeData,
+	HRT.data.combatTime = HoratumCombatTimeData
 	HRT.data.combatEncounter = HoratumCombatEncounterData
 end
 
