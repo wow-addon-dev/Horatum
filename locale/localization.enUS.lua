@@ -9,8 +9,9 @@ local L = HRT.Localization
 
 -- Options
 
-
-
+L["options.general"] = "General options"
+L["options.general.notification.name"] = "Chat notification"
+L["options.general.notification.tooltip"] = "Activate or deactivate the notification in the chat after a combat."
 
 L["options.combat-time-tracker"] = "Combat Time Tracker"
 L["options.combat-time-tracker.scale.name"] = "UI Scale"
