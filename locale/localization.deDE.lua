@@ -6,11 +6,11 @@ local L = HRT.Localization
 
 -- Options
 
-L["options.tracker"] = "Kampfzeiten-Tracker"
-L["options.tracker.scale.name"] = "UI-Skalierung"
-L["options.tracker.scale.tooltip"] = "Legt die Größenskalierung des |cnGOLD_FONT_COLOR:Kampfzeiten-Tracker|r fest."
-L["options.tracker.background-transparency.name"] = "Hintergrundtransparenz"
-L["options.tracker.background-transparency.tooltip"] = "Legt die Hintergrundtransparenz des |cnGOLD_FONT_COLOR:Kampfzeiten-Tracker|r fest."
+L["options.combat-time-tracker"] = "Kampfzeiten-Tracker"
+L["options.combat-time-tracker.scale.name"] = "UI-Skalierung"
+L["options.combat-time-tracker.scale.tooltip"] = "Legt die Größenskalierung des |cnGOLD_FONT_COLOR:Kampfzeiten-Tracker|r fest."
+L["options.combat-time-tracker.background-transparency.name"] = "Hintergrundtransparenz"
+L["options.combat-time-tracker.background-transparency.tooltip"] = "Legt die Hintergrundtransparenz des |cnGOLD_FONT_COLOR:Kampfzeiten-Tracker|r fest."
 
 L["options.other"] = "sonstige Einstellungen"
 L["options.other.debug-mode.name"] = "Debugmodus"
@@ -27,9 +27,9 @@ L["options.about.button-github.button"] = "GitHub"
 
 -- Combat Time Tracker
 
-L["tracker.unknown"] = "unbekannt"
-L["tracker.button-reset"] = "Reset"
-L["tracker.wait-combat"] = "Warte auf Kampf..."
+L["combat-time-tracker.unknown"] = "unbekannt"
+L["combat-time-tracker.button-reset"] = "Reset"
+L["combat-time-tracker.wait-combat"] = "Warte auf Kampf..."
 
 -- Dialog
 
