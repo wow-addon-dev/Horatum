@@ -21,6 +21,10 @@ L["options.about.game-version"] = "Spielversion"
 L["options.about.addon-version"] = "Addonversion"
 L["options.about.author"] = "Autor"
 
+L["options.about.button-delete-data.name"] = "Kampdaten löschen"
+L["options.about.button-delete-data.tooltip"] = "Löscht alle Kampfdaten die bisher erfasst und gespeichert wurden. Dies beinhaltet die Bestzeiten und wie oft ein Boss besiegt wurde."
+L["options.about.button-delete-data.button"] = "Löschen"
+
 L["options.about.button-github.name"] = "Feedback & Hilfe"
 L["options.about.button-github.tooltip"] = "Öffnet ein Popup-Fenster mit einem Link nach GitHub."
 L["options.about.button-github.button"] = "GitHub"
@@ -34,6 +38,7 @@ L["combat-time-tracker.wait-combat"] = "Warte auf Kampf..."
 -- Dialog
 
 L["dialog.copy-address.text"] = "Um den Link zu kopieren drücke STRG + C."
+L["dialog.delete-data.text"] = "Sollen die kampfdaten wirklich gelöscht werden?\n|cnNORMAL_FONT_COLOR:Achtung:|r Es erfolgt ein automatischer Reload der Spieloberfläche!"
 
 -- Chat
 
