@@ -1,3 +1,7 @@
+**v1.9 (2026-03-04)**
+- Updated: deDE, enUS localization [all versions]
+- Minor code adjustments [all versions]
+
 **v1.8 (2026-03-02)**
 - Minor code adjustments [all versions]
 
