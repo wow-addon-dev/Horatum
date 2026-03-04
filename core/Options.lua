@@ -79,7 +79,7 @@ function Options:Initialize()
 	do
 		local data = {
 			leftText = L["options.about.game-version"],
-			rightText = HRT.GAME_VERSION .. " (" .. HRT.GAME_FLAVOR .. ")"
+			rightText = HRT.GAME_VERSION .. " (" .. HRT.GAME_FLAVOR .. ")",
 		}
 
 		local text = layout:AddInitializer(Settings.CreateElementInitializer("Horatum_OptionsText", data))
@@ -123,7 +123,7 @@ function Options:Initialize()
         local buttonInitializer = CreateSettingsButtonInitializer(name, buttonText, OnButtonClick, tooltip, true)
         layout:AddInitializer(buttonInitializer)
     end
-	
+
     Settings.RegisterAddOnCategory(category)
 
 	HRT.MAIN_CATEGORY_ID = category:GetID()

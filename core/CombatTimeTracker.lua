@@ -27,8 +27,8 @@ local function UpdateTimerFrame(self, elapsed)
     local milliseconds = math.floor((currentTime * 1000) % 1000)
     combatTimeTrackerFrame.timer:SetText(string.format("%02d:%02d.%03d", minutes, seconds, milliseconds))
 
-    if currentEncounterKey and HRT.data.combatTimeTracker[currentEncounterKey] then
-        local bestTime = HRT.data.combatTimeTracker[currentEncounterKey]
+    if currentEncounterKey and HRT.data.combatTime[currentEncounterKey] then
+        local bestTime = HRT.data.combatTime[currentEncounterKey]
         local remainingTime = bestTime - currentTime
 
         if remainingTime > 0 then
@@ -95,7 +95,7 @@ function InitializeFrames()
 	combatTimeTrackerFrame.name:SetPoint("TOP", combatTimeTrackerFrame.timeBar, "BOTTOM", 0, -8)
 	combatTimeTrackerFrame.name:SetWidth(140)
 	combatTimeTrackerFrame.name:SetWordWrap(false)
-	combatTimeTrackerFrame.name:SetText(L["tracker.wait-combat"])
+	combatTimeTrackerFrame.name:SetText(L["combat-time-tracker.wait-combat"])
 
 	combatTimeTrackerFrame.difficulty = combatTimeTrackerFrame:CreateFontString(nil, "OVERLAY", "GameFontDisableSmall")
 	combatTimeTrackerFrame.difficulty:SetPoint("TOP", combatTimeTrackerFrame.name, "BOTTOM", 0, -3)
@@ -123,7 +123,7 @@ function InitializeFrames()
 
 	combatTimeTrackerFrame.resetButton:SetScript("OnEnter", function(self)
 		GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
-		GameTooltip:SetText(L["tracker.button-reset"], 1, 1, 1)
+		GameTooltip:SetText(L["combat-time-tracker.button-reset"], 1, 1, 1)
 		GameTooltip:Show()
 	end)
 	combatTimeTrackerFrame.resetButton:SetScript("OnLeave", function()
@@ -135,7 +135,7 @@ function InitializeFrames()
 			combatTimeTrackerFrame.timeBar:SetMinMaxValues(0, 1)
 			combatTimeTrackerFrame.timeBar:SetValue(1)
 			combatTimeTrackerFrame.timeBar:SetStatusBarColor(0.5, 0.5, 0.5)
-			combatTimeTrackerFrame.name:SetText(L["tracker.wait-combat"])
+			combatTimeTrackerFrame.name:SetText(L["combat-time-tracker.wait-combat"])
 			combatTimeTrackerFrame.difficulty:SetText("-")
 		end
 	end)
@@ -178,10 +178,10 @@ function CombatTimeTracker:EncounterStart(encounterKey, encounterName)
 
     local _, _, _, difficultyName = GetInstanceInfo()
 	combatTimeTrackerFrame.name:SetText(encounterName)
-   	combatTimeTrackerFrame.difficulty:SetText(difficultyName or L["tracker.unknown"])
+   	combatTimeTrackerFrame.difficulty:SetText(difficultyName or L["combat-time-tracker.unknown"])
 
-    if HRT.data.combatTimeTracker[encounterKey] then
-        local best = HRT.data.combatTimeTracker[encounterKey]
+    if HRT.data.combatTime[encounterKey] then
+        local best = HRT.data.combatTime[encounterKey]
         combatTimeTrackerFrame.timeBar:SetMinMaxValues(0, best)
         combatTimeTrackerFrame.timeBar:SetValue(best)
         combatTimeTrackerFrame.timeBar:SetStatusBarColor(0, 1, 0)
@@ -208,12 +208,12 @@ function CombatTimeTracker:EncounterEnd(encounterKey, encounterName, success)
     combatTimeTrackerFrame.timer:SetText(string.format("%02d:%02d.%03d", minutes, seconds, milliseconds))
 
     if success == 1 then
-        local oldBest = HRT.data.combatTimeTracker[encounterKey]
+        local oldBest = HRT.data.combatTime[encounterKey]
         if not oldBest or finalTime < oldBest then
-			HRT.data.combatTimeTracker[encounterKey] = finalTime
+			HRT.data.combatTime[encounterKey] = finalTime
 
 			local _, _, _, difficultyName = GetInstanceInfo()
-			local difficultyText = difficultyName or L["tracker.unknown"]
+			local difficultyText = difficultyName or L["combat-time-tracker.unknown"]
 
 			Utils:PrintMessage(L["chat.new-record"]:format(encounterName, difficultyText, string.format("%02d:%02d.%03d", minutes, seconds, milliseconds)))
         end
