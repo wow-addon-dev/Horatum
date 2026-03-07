@@ -1,3 +1,6 @@
+**v1.10 (2026-03-07)**
+- Added: The option to turn chat notifications on and off [all versions]
+
 **v1.9 (2026-03-04)**
 - Updated: deDE, enUS localization [all versions]
 - Minor code adjustments [all versions]
