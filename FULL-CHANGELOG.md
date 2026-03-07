@@ -1,3 +1,6 @@
+**v1.11 (2026-03-07)**
+- Added: New chat notifications [all versions]
+
 **v1.10 (2026-03-07)**
 - Added: The option to turn chat notifications on and off [all versions]
 
