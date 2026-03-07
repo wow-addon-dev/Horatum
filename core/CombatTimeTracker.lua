@@ -215,8 +215,10 @@ function CombatTimeTracker:EncounterEnd(encounterKey, encounterName, success)
 			local _, _, _, difficultyName = GetInstanceInfo()
 			local difficultyText = difficultyName or L["combat-time-tracker.unknown"]
 
-			Utils:PrintMessage(L["chat.new-record"]:format(encounterName, difficultyText, string.format("%02d:%02d.%03d", minutes, seconds, milliseconds)))
-        end
+			if HRT.options.general["notification"] then
+				Utils:PrintMessage(L["chat.new-record"]:format(encounterName, difficultyText, string.format("%02d:%02d.%03d", minutes, seconds, milliseconds)))
+			end
+		end
     end
 end
 

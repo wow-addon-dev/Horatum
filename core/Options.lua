@@ -13,8 +13,22 @@ local Options = {}
 
 function Options:Initialize()
     local category, layout = Settings.RegisterVerticalLayoutCategory(addonName)
+
+	local variableTableGeneral = HRT.options.general
 	local variableTableCombatTimeTracker = HRT.options.combatTimeTracker
 	local variableTableOther = HRT.options.other
+
+	layout:AddInitializer(CreateSettingsListSectionHeaderInitializer(L["options.general"]))
+
+    do
+        local name = L["options.general.notification.name"]
+        local tooltip = L["options.general.notification.tooltip"]
+        local variable = "notification"
+        local defaultValue = true
+
+        local setting = Settings.RegisterAddOnSetting(category, addonName .. "_" .. variable, variable, variableTableGeneral, Settings.VarType.Boolean, name, defaultValue)
+        Settings.CreateCheckbox(category, setting, tooltip)
+    end
 
     layout:AddInitializer(CreateSettingsListSectionHeaderInitializer(L["options.combat-time-tracker"]))
 

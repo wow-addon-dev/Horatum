@@ -9,8 +9,8 @@
 Horatum is an addon that records every boss combat encounter and saves the fastest victory.
 
 The following key features are currently implemented:
-*   **Combat Time Tracker** - During a boss combat, a small window will appear displaying the current combat time and other information.
-*   (Planned) **Combat Time Overview** - All boss combat times can be displayed in an overview window.
+*   **Combat Time Tracker** - During a boss combat, a small window will appear displaying the current combat time.
+*   (Planned) **Combat Overview** - All boss combat times and other information can be displayed in an overview window.
 
 ### Features
 

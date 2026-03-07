@@ -21,6 +21,7 @@ end
 function Utils:InitializeDatabase()
     if (not HoratumOptions_v2) then
         HoratumOptions_v2 = {
+			["general"] = {},
 			["combat-time-tracker"] = {
 				["point"] = "CENTER",
 				["relative-point"] = "CENTER",
@@ -28,8 +29,14 @@ function Utils:InitializeDatabase()
 				["offset-y"] = 150,
 				["is-visible"] = true
 			},
+			["combat-overview"] = {},
 			["other"] = {}
 		}
+    end
+
+	if not HoratumOptions_v2["general"] then
+        HoratumOptions_v2["general"] = {}
+		HoratumOptions_v2["combat-overview"] = {}
     end
 
 	if (not HoratumCombatTimeData) then
@@ -41,6 +48,7 @@ function Utils:InitializeDatabase()
     end
 
     HRT.options = {}
+	HRT.options.general = HoratumOptions_v2["general"]
     HRT.options.combatTimeTracker = HoratumOptions_v2["combat-time-tracker"]
 	HRT.options.other = HoratumOptions_v2["other"]
 
