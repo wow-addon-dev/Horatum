@@ -207,16 +207,21 @@ function CombatTimeTracker:EncounterEnd(encounterKey, encounterName, success)
 
     combatTimeTrackerFrame.timer:SetText(string.format("%02d:%02d.%03d", minutes, seconds, milliseconds))
 
+	local _, _, _, difficultyName = GetInstanceInfo()
+	local difficultyText = difficultyName or L["combat-time-tracker.unknown"]
+
+	local oldBest = HRT.data.combatTime[encounterKey]
+
     if success == 1 then
-        local oldBest = HRT.data.combatTime[encounterKey]
         if not oldBest or finalTime < oldBest then
 			HRT.data.combatTime[encounterKey] = finalTime
 
-			local _, _, _, difficultyName = GetInstanceInfo()
-			local difficultyText = difficultyName or L["combat-time-tracker.unknown"]
-
 			if HRT.options.general["notification"] then
 				Utils:PrintMessage(L["chat.new-record"]:format(encounterName, difficultyText, string.format("%02d:%02d.%03d", minutes, seconds, milliseconds)))
+			end
+		else
+			if HRT.options.general["notification"] then
+				Utils:PrintMessage(L["chat.current-record"]:format(encounterName, difficultyText, string.format("%02d:%02d.%03d", minutes, seconds, milliseconds)))
 			end
 		end
     end
