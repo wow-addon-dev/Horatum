@@ -201,10 +201,9 @@ function CombatTimeTracker:EncounterEnd(encounterKey, encounterName, success)
     isInCombat = false
 
     local finalTime = GetTime() - startTime
-    local minutes = math.floor(finalTime / 60)
-    local seconds = math.floor(finalTime % 60)
-    local milliseconds = math.floor((finalTime * 1000) % 1000)
-
+	local minutes = math.floor(finalTime / 60)
+	local seconds = math.floor(finalTime % 60)
+	local milliseconds = math.floor((finalTime * 1000) % 1000)
     combatTimeTrackerFrame.timer:SetText(string.format("%02d:%02d.%03d", minutes, seconds, milliseconds))
 
 	local _, _, _, difficultyName = GetInstanceInfo()
@@ -220,6 +219,10 @@ function CombatTimeTracker:EncounterEnd(encounterKey, encounterName, success)
 				Utils:PrintMessage(L["chat.new-record"]:format(encounterName, difficultyText, string.format("%02d:%02d.%03d", minutes, seconds, milliseconds)))
 			end
 		else
+			minutes = math.floor(oldBest / 60)
+			seconds = math.floor(oldBest % 60)
+			milliseconds = math.floor((oldBest * 1000) % 1000)
+
 			if HRT.options.general["notification"] then
 				Utils:PrintMessage(L["chat.current-record"]:format(encounterName, difficultyText, string.format("%02d:%02d.%03d", minutes, seconds, milliseconds)))
 			end
