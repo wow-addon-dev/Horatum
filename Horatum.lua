@@ -25,7 +25,7 @@ end
 --- Frames ---
 --------------
 
-local horatumFrame = CreateFrame("Frame", "Expositum")
+local horatumFrame = CreateFrame("Frame", "Horatum")
 
 ---------------------
 --- Main funtions ---
