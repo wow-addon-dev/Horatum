@@ -1,4 +1,4 @@
-## Interface: 50503
+## Interface: 120001, 50503, 20505, 11508
 ## Title: Horatum
 ## Author: diomsg (Diom-Antonidas EU)
 
@@ -6,7 +6,6 @@
 ## IconTexture: Interface\AddOns\Horatum\media\icon.blp
 ## LoadOnDemand: 0
 ## DefaultState: enabled
-## AllowLoadGameType: mists
 
 ## Notes: This addon records every boss combat encounter and saves the fastest victory.
 ## Notes-deDE: Dieses Addon zeichnet jeden Bosskampf auf und speichert den schnellsten Sieg.
@@ -14,7 +13,6 @@
 ## LoadSavedVariablesFirst: 1
 ## SavedVariables: HoratumOptions_v2, HoratumCombatTimeData, HoratumCombatEncounterData
 
-## X-Flavor: Mist of Pandaria - Classic
 ## X-BuildDate: @build-date@
 ## X-E-Mail: feedback@wow-addon.dev
 ## X-Github: https://github.com/wow-addon-dev/Horatum
