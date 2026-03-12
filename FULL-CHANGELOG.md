@@ -1,3 +1,6 @@
+**v1.13 (2026-03-12)**
+- Fixed: Combat data was not tracked [classic] [burning crusade - classic anniversary edition] [mist of pandaria - classic]
+
 **v1.12 (2026-03-11)**
 - Fixed: Combat data was not tracked [classic] [burning crusade - classic anniversary edition] [mist of pandaria - classic]
 
