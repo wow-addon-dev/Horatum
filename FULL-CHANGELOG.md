@@ -1,3 +1,6 @@
+**v1.15 (2026-03-15)**
+- Minor code adjustments
+
 **v1.14 (2026-03-15)**
 - Added: TOC version for patch 12.0.5 [retail]
 - Added: The number of victories and wipes is saved and can be displayed in the chat after a combat
