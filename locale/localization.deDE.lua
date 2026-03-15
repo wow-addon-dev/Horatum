@@ -50,6 +50,6 @@ L["chat.current-record"] = "Deine aktuelle Bestzeit für |cnGOLD_FONT_COLOR:%s|r
 L["chat.new-record"] = "Deine neue Bestzeit für |cnGOLD_FONT_COLOR:%s|r (%s) ist %s."
 
 L["chat.first-victory"] = "Dies war dein erster Sieg über |cnGOLD_FONT_COLOR:%s|r (%s). (Niederlagen: %s)"
-L["chat.another-victory"] = "Du hast |cnGOLD_FONT_COLOR:%s|r (%s) bereits einmal besiegt. (Siege: %s / Niederlagen: %s)"
+L["chat.another-victory"] = "Du hast |cnGOLD_FONT_COLOR:%s|r (%s) bereits einmal besiegt. (Siege: %s - Niederlagen: %s)"
 L["chat.first-wipe"] = "Dies war deine erste Niederlage gegen |cnGOLD_FONT_COLOR:%s|r (%s). (Siege: %s)"
-L["chat.another-wipe"] = "Du hast gegen |cnGOLD_FONT_COLOR:%s|r (%s) bereits einmal verloren. (Siege: %s / Niederlagen: %s)"
+L["chat.another-wipe"] = "Du hast gegen |cnGOLD_FONT_COLOR:%s|r (%s) bereits einmal verloren. (Siege: %s - Niederlagen: %s)"

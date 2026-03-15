@@ -39,11 +39,11 @@ function Utils:InitializeDatabase()
 		HoratumOptions_v2["combat-overview"] = {}
     end
 
-	if (not HoratumCombatTimeData) then
+	if not HoratumCombatTimeData then
         HoratumCombatTimeData = {}
     end
 
-	if (not HoratumCombatEncounterData) then
+	if not HoratumCombatEncounterData then
         HoratumCombatEncounterData = {}
     end
 

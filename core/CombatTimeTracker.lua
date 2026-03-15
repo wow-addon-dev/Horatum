@@ -209,23 +209,60 @@ function CombatTimeTracker:EncounterEnd(encounterKey, encounterName, success)
 	local _, _, _, difficultyName = GetInstanceInfo()
 	local difficultyText = difficultyName or L["combat-time-tracker.unknown"]
 
-	local oldBest = HRT.data.combatTime[encounterKey]
+	local bestTime = HRT.data.combatTime[encounterKey]
+	local encounter = HRT.data.combatEncounter[encounterKey]
+
+	if not encounter then
+		encounter = {
+			victories = 0,
+			wipes = 0
+		}
+		HRT.data.combatEncounter[encounterKey] = encounter
+	end
 
     if success == 1 then
-        if not oldBest or finalTime < oldBest then
+		encounter.victories = encounter.victories + 1
+		HRT.data.combatEncounter[encounterKey] = encounter
+
+		if not bestTime or finalTime < bestTime then
 			HRT.data.combatTime[encounterKey] = finalTime
+		end
 
-			if HRT.options.general["notification"] then
-				Utils:PrintMessage(L["chat.new-record"]:format(encounterName, difficultyText, string.format("%02d:%02d.%03d", minutes, seconds, milliseconds)))
-			end
+		if not HRT.options.general["notification"] then return end
+
+        if not bestTime or finalTime < bestTime then
+			Utils:PrintMessage(L["chat.new-record"]:format(encounterName, difficultyText, string.format("%02d:%02d.%03d", minutes, seconds, milliseconds)))
 		else
-			minutes = math.floor(oldBest / 60)
-			seconds = math.floor(oldBest % 60)
-			milliseconds = math.floor((oldBest * 1000) % 1000)
+			local oldMinutes = math.floor(bestTime / 60)
+			local oldSsconds = math.floor(bestTime % 60)
+			local oldMilliseconds = math.floor((bestTime * 1000) % 1000)
 
-			if HRT.options.general["notification"] then
-				Utils:PrintMessage(L["chat.current-record"]:format(encounterName, difficultyText, string.format("%02d:%02d.%03d", minutes, seconds, milliseconds)))
-			end
+			Utils:PrintMessage(L["chat.current-record"]:format(encounterName, difficultyText, string.format("%02d:%02d.%03d", oldMinutes, oldSsconds, oldMilliseconds)))
+		end
+
+		if encounter.victories == 1 then
+			Utils:PrintMessage(L["chat.first-victory"]:format(encounterName, difficultyText, encounter.wipes))
+		else
+			Utils:PrintMessage(L["chat.another-victory"]:format(encounterName, difficultyText, encounter.victories, encounter.wipes))
+		end
+	else
+		encounter.wipes = encounter.wipes + 1
+		HRT.data.combatEncounter[encounterKey] = encounter
+
+		if not HRT.options.general["notification"] then return end
+
+		if bestTime then
+			local oldMinutes = math.floor(bestTime / 60)
+			local oldSsconds = math.floor(bestTime % 60)
+			local oldMilliseconds = math.floor((bestTime * 1000) % 1000)
+
+			Utils:PrintMessage(L["chat.current-record"]:format(encounterName, difficultyText, string.format("%02d:%02d.%03d", oldMinutes, oldSsconds, oldMilliseconds)))
+		end
+
+		if encounter.wipes == 1 then
+			Utils:PrintMessage(L["chat.first-wipe"]:format(encounterName, difficultyText, encounter.victories))
+		else
+			Utils:PrintMessage(L["chat.another-wipe"]:format(encounterName, difficultyText, encounter.victories, encounter.wipes))
 		end
     end
 end

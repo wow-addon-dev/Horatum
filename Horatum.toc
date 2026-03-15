@@ -1,4 +1,4 @@
-## Interface: 120001, 50503, 20505, 11508
+## Interface: 120005, 120001
 ## Title: Horatum
 ## Author: diomsg (Diom-Antonidas EU)
 
@@ -7,7 +7,7 @@
 ## LoadOnDemand: 0
 ## DefaultState: enabled
 
-## Notes: This addon records every boss combat encounter and saves the fastest victory.
+## Notes: This addon tracks every boss combat encounter and saves the fastest victory.
 ## Notes-deDE: Dieses Addon zeichnet jeden Bosskampf auf und speichert den schnellsten Sieg.
 
 ## LoadSavedVariablesFirst: 1

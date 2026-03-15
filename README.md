@@ -6,7 +6,7 @@
 
 *Master the clock. Conquer the combat.*
 
-Horatum is an addon that records every boss combat encounter and saves the fastest victory.
+Horatum is an addon that tracks every boss combat encounter and saves the fastest victory.
 
 The following key features are currently implemented:
 *   **Combat Time Tracker** - During a boss combat, a small window will appear displaying the current combat time.
@@ -14,18 +14,18 @@ The following key features are currently implemented:
 
 ### Features
 
-*   The timer triggers the moment you engage a dungeon or raid boss and stops the exact second the combat ends or your group wipes.
-*	Saves your fastest victory times, organized by boss name and encounter difficulty.
+*   The timer starts when a dungeon or raid boss is engaged and stops the exact moment the combat ends or the group is wiped.
+*	Saves the fastest victory time by boss name and encounter difficulty.
+*	The number of victories and wipes is saved and can be displayed in the chat after a combat.
 *   Features a clean, semi-transparent frame that displays the ongoing combat time.
-*	After an combat concludes, the timer stops and remains on your screen, allowing you to easily review the exact duration of your attempt.
 *	Customizable UI:
-	*	Drag and place the Combat Time Tracker anywhere on your screen.
-	*	The size of the Combat Time Tracker can be easily adjusted to fit your interface needs.
+	*	The Combat Time Tracker can be dragged and dropped to any location on the screen.
+	*	The size of the Combat Time Tracker can be easily adjusted to fit the user interface.
 
 ### Supported Languages & Game Versions
 
 *   Languages: English, German
-*   Game Versions: 'Classic', 'Burning Crusade - Classic Anniversary Edition', 'Mists of Pandaria - Classic' and 'Retail'
+*   Game Versions: 'Retail'
 
 ### Quick Start
 
