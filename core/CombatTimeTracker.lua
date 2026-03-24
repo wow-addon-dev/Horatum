@@ -267,9 +267,18 @@ function CombatTimeTracker:EncounterEnd(encounterKey, encounterName, success)
     end
 end
 
+function CombatTimeTracker:IsShown()
+	return combatTimeTrackerFrame:IsShown()
+end
+
 function CombatTimeTracker:Show()
 	combatTimeTrackerFrame:Show()
 	HRT.options.combatTimeTracker["is-visible"] = true
+end
+
+function CombatTimeTracker:Hide()
+	combatTimeTrackerFrame:Hide()
+	HRT.options.combatTimeTracker["is-visible"] = false
 end
 
 function CombatTimeTracker:SetScale()

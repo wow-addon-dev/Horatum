@@ -7,6 +7,25 @@ local CombatTimeTracker = HRT.CombatTimeTracker
 
 local Options = {}
 
+----------------------
+--- Local Funtions ---
+----------------------
+
+local minimapButtonProxy = setmetatable({}, {
+    __index = function(_, key)
+        return not HRT.options.general["minimap-button"]["hide"]
+    end,
+    __newindex = function(_, key, value)
+        HRT.options.general["minimap-button"]["hide"] = not value
+
+        if value then
+            Utils.minimapButton:Show("Horatum")
+        else
+            Utils.minimapButton:Hide("Horatum")
+        end
+    end,
+})
+
 ---------------------
 --- Main Funtions ---
 ---------------------
@@ -27,6 +46,17 @@ function Options:Initialize()
         local defaultValue = true
 
         local setting = Settings.RegisterAddOnSetting(category, addonName .. "_" .. variable, variable, variableTableGeneral, Settings.VarType.Boolean, name, defaultValue)
+        Settings.CreateCheckbox(category, setting, tooltip)
+    end
+
+	do
+        local name = L["options.general.minimap-button.name"]
+        local tooltip = L["options.general.minimap-button.tooltip"]
+        local variable = "hide"
+        local defaultValue = true
+
+        local setting = Settings.RegisterAddOnSetting(category, addonName .. "_" .. variable, variable, minimapButtonProxy, Settings.VarType.Boolean, name, not defaultValue)
+
         Settings.CreateCheckbox(category, setting, tooltip)
     end
 

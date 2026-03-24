@@ -1,35 +1,24 @@
-local _, HRT = ...
+local addonName, HRT = ...
 
-local L =  HRT.Localization
+local L = HRT.Localization
 
 local Dialog = {}
-
---------------
---- Frames ---
---------------
-
-local copyAddressDialog
-local deleteDataDialog
+local DialogLib = LibStub("WoWAddonDevelopment_SharedDialogs", true)
 
 ---------------------
 --- Main Funtions ---
 ---------------------
 
-function Dialog:Initialize()
-    copyAddressDialog = CreateFrame("Frame", "Horatum_CopyAdressDialog", UIParent, "Horatum_CopyAdressDialogTemplate")
-	deleteDataDialog = CreateFrame("Frame", "Horatum_DeleteDataDialog", UIParent, "Horatum_DeleteDataDialogTemplate")
-end
-
 function Dialog:ShowCopyAddressDialog(address)
-    if (not copyAddressDialog:IsShown()) and (not deleteDataDialog:IsShown()) then
-        copyAddressDialog:ShowDialog(address)
-    end
+	DialogLib:ShowCopyAddressDialog(address, L["dialog.copy-address.text"])
 end
 
 function Dialog:ShowDeleteDataDialog()
-    if (not copyAddressDialog:IsShown()) and (not deleteDataDialog:IsShown()) then
-        deleteDataDialog:ShowDialog()
+    local function ResetLogic()
+        ReloadUI()
     end
+
+    DialogLib:ShowDeleteDataDialog(L["dialog.delete-data.text"], ResetLogic)
 end
 
 HRT.Dialog = Dialog

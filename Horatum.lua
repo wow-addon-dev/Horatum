@@ -3,12 +3,11 @@ local addonName, HRT = ...
 local L = HRT.Localization
 
 local Utils = HRT.Utils
-local Dialog = HRT.Dialog
 local Options = HRT.Options
 local CombatTimeTracker = HRT.CombatTimeTracker
 
 ----------------------
---- Local funtions ---
+--- Local Funtions ---
 ----------------------
 
 local function SlashCommand(msg, editbox)
@@ -28,7 +27,7 @@ end
 local horatumFrame = CreateFrame("Frame", "Horatum")
 
 ---------------------
---- Main funtions ---
+--- Main Funtions ---
 ---------------------
 
 function horatumFrame:OnEvent(event, ...)
@@ -38,7 +37,7 @@ end
 function horatumFrame:ADDON_LOADED(_, addOnName)
     if addOnName == addonName then
         Utils:InitializeDatabase()
-		Dialog:Initialize()
+		Utils:InitializeMinimapButton()
 		Options:Initialize()
 		CombatTimeTracker:Initialize()
 

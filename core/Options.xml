@@ -13,7 +13,7 @@
 				</FontString>
 				<FontString parentKey="RightText" inherits="GameFontHighlight" justifyH="LEFT" justifyV="TOP" wordwrap="true">
 					<Anchors>
-						<Anchor point="TOPLEFT" x="160" y="-8" />
+						<Anchor point="TOPLEFT" x="240" y="-8" />
 						<Anchor point="TOPRIGHT" x="-10" y="-8" />
 					</Anchors>
 				</FontString>

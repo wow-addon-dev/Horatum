@@ -19,9 +19,13 @@ function Utils:PrintMessage(msg)
 end
 
 function Utils:InitializeDatabase()
-    if (not HoratumOptions_v2) then
-        HoratumOptions_v2 = {
-			["general"] = {},
+    if (not Horatum_Options) then
+        Horatum_Options = {
+			["general"] = {
+				["minimap-button"] = {
+					["hide"] = false
+				}
+			},
 			["combat-time-tracker"] = {
 				["point"] = "CENTER",
 				["relative-point"] = "CENTER",
@@ -34,27 +38,50 @@ function Utils:InitializeDatabase()
 		}
     end
 
-	if not HoratumOptions_v2["general"] then
-        HoratumOptions_v2["general"] = {}
-		HoratumOptions_v2["combat-overview"] = {}
+	if not Horatum_CombatTimeData then
+        Horatum_CombatTimeData = {}
     end
 
-	if not HoratumCombatTimeData then
-        HoratumCombatTimeData = {}
-    end
-
-	if not HoratumCombatEncounterData then
-        HoratumCombatEncounterData = {}
+	if not Horatum_CombatEncounterData then
+        Horatum_CombatEncounterData = {}
     end
 
     HRT.options = {}
-	HRT.options.general = HoratumOptions_v2["general"]
-    HRT.options.combatTimeTracker = HoratumOptions_v2["combat-time-tracker"]
-	HRT.options.other = HoratumOptions_v2["other"]
+	HRT.options.general = Horatum_Options["general"]
+    HRT.options.combatTimeTracker = Horatum_Options["combat-time-tracker"]
+	HRT.options.other = Horatum_Options["other"]
 
 	HRT.data = {}
-	HRT.data.combatTime = HoratumCombatTimeData
-	HRT.data.combatEncounter = HoratumCombatEncounterData
+	HRT.data.combatTime = Horatum_CombatTimeData
+	HRT.data.combatEncounter = Horatum_CombatEncounterData
+end
+
+function Utils:InitializeMinimapButton()
+    local LDB = LibStub("LibDataBroker-1.1"):NewDataObject("Horatum", {
+        type     = "launcher",
+        text     = "Horatum",
+        icon     = HRT.MEDIA_PATH .. "icon-round.blp",
+        OnClick  = function(self, button)
+			if button == "LeftButton" then
+				if HRT.CombatTimeTracker:IsShown() then
+					HRT.CombatTimeTracker:Hide()
+				else
+					HRT.CombatTimeTracker:Show()
+				end
+			elseif button == "RightButton" then
+                Settings.OpenToCategory(HRT.MAIN_CATEGORY_ID)
+            end
+        end,
+        OnTooltipShow = function(tooltip)
+			GameTooltip_SetTitle(tooltip, addonName)
+			GameTooltip_AddNormalLine(tooltip, HRT.ADDON_VERSION .. " (" .. HRT.ADDON_BUILD_DATE .. ")")
+			GameTooltip_AddBlankLineToTooltip(tooltip)
+			GameTooltip_AddHighlightLine(tooltip, L["minimap-button.tooltip"])
+        end,
+    })
+
+    self.minimapButton = LibStub("LibDBIcon-1.0")
+    self.minimapButton:Register("Horatum", LDB, HRT.options.general["minimap-button"])
 end
 
 HRT.Utils = Utils
