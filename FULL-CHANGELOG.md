@@ -1,3 +1,9 @@
+**v1.16 (2026-03-24)**
+- Added: Minimap Button
+- Changed: Consolidation of the options menu
+- Updated: deDE, enUS localization
+- Minor code adjustments
+
 **v1.15 (2026-03-15)**
 - Minor code adjustments
 
