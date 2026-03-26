@@ -53,7 +53,7 @@ function Options:Initialize()
         local name = L["options.general.minimap-button.name"]
         local tooltip = L["options.general.minimap-button.tooltip"]
         local variable = "hide"
-        local defaultValue = true
+        local defaultValue = false
 
         local setting = Settings.RegisterAddOnSetting(category, addonName .. "_" .. variable, variable, minimapButtonProxy, Settings.VarType.Boolean, name, not defaultValue)
 
