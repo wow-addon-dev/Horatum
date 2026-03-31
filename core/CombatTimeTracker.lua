@@ -6,8 +6,13 @@ local Utils = HRT.Utils
 local CombatTimeTracker = {}
 
 local startTime = 0
-local isInCombat = false
-local currentEncounterKey = nil
+local currentBestTime = 0
+local currentEncounterID = nil
+local currentDifficultyID = nil
+local currentDifficultyName = nil
+local currentOptionalID = nil
+local currentOptionalInfo = nil
+local currentEncounterName = nil
 
 --------------
 --- Frames ---
@@ -16,8 +21,58 @@ local currentEncounterKey = nil
 local combatTimeTrackerFrame
 
 ----------------------
---- Local funtions ---
+--- Local Funtions ---
 ----------------------
+
+local function CheckInstance()
+	local _, instanceType, difficultyID, difficultyName = GetInstanceInfo()
+
+	Utils:PrintDebug("Result from GetInstanceInfo(): instanceType=" .. instanceType .. ", difficultyID=" .. difficultyID .. ", difficultyName=" .. difficultyName)
+
+	if currentDifficultyID == tostring(difficultyID) then
+		if difficultyID == 1 and instanceType == "party" then				-- Dugenon Normal
+			return true, difficultyName, "0", nil
+		elseif difficultyID == 2 and instanceType == "party"  then			-- Dugenon Heroisch
+			return true, difficultyName, "0", nil
+		elseif difficultyID == 23 and instanceType == "party"  then			-- Dugenon Mythisch
+			return true, difficultyName, "0", nil
+		elseif difficultyID == 14 and instanceType == "raid"  then			-- Raid Normal
+			return true, difficultyName, "0", nil
+		elseif difficultyID == 15 and instanceType == "raid"  then			-- Raid Heroisch
+			return true, difficultyName, "0", nil
+		elseif difficultyID == 16 and instanceType == "raid"  then			-- Raid Mythisch
+			return true, difficultyName, "0", nil
+		elseif difficultyID == 17 and instanceType == "raid"  then			-- Raid Schlachtzugbrowser
+			return true, difficultyName, "0", nil
+		elseif difficultyID == 208 and instanceType == "scenario"  then		-- Tiefe
+			local delveData1, delveData2, delveData3 = C_UIWidgetManager.GetScenarioHeaderDelvesWidgetVisualizationInfo(6183), C_UIWidgetManager.GetScenarioHeaderDelvesWidgetVisualizationInfo(6184), C_UIWidgetManager.GetScenarioHeaderDelvesWidgetVisualizationInfo(6185)
+
+			if delveData1 then
+				if delveData1 and delveData1.tierText then
+					return true, difficultyName, delveData1.tierText, delveData1.tierText
+				end
+			elseif delveData2 and delveData2.shownState and delveData2.shownState == 1 then
+				return true, difficultyName, "8", "?"
+			elseif delveData3 and delveData3.shownState and delveData3.shownState == 1 then
+				return true, difficultyName, "11", "??"
+			end
+		end
+	end
+
+	return false, nil, nil, nil
+end
+
+local function GetDifficultyName(difficultyName)
+	if difficultyName then
+		if currentDifficultyID == "208" then
+			return difficultyName .. " " .. currentOptionalInfo
+		else
+			return difficultyName
+		end
+	end
+
+	return L["combat-time-tracker.unknown"]
+end
 
 local function UpdateTimerFrame(self, elapsed)
     local currentTime = GetTime() - startTime
@@ -27,15 +82,14 @@ local function UpdateTimerFrame(self, elapsed)
     local milliseconds = math.floor((currentTime * 1000) % 1000)
     combatTimeTrackerFrame.timer:SetText(string.format("%02d:%02d.%03d", minutes, seconds, milliseconds))
 
-    if currentEncounterKey and HRT.data.combatTime[currentEncounterKey] then
-        local bestTime = HRT.data.combatTime[currentEncounterKey]
-        local remainingTime = bestTime - currentTime
+    if currentBestTime ~= 0 then
+        local remainingTime = currentBestTime - currentTime
 
         if remainingTime > 0 then
             combatTimeTrackerFrame.timeBar:SetValue(remainingTime)
             combatTimeTrackerFrame.timeBar:SetStatusBarColor(0, 1, 0)
         else
-            combatTimeTrackerFrame.timeBar:SetValue(bestTime)
+            combatTimeTrackerFrame.timeBar:SetValue(currentBestTime)
             combatTimeTrackerFrame.timeBar:SetStatusBarColor(1, 0, 0)
         end
     end
@@ -130,14 +184,12 @@ function InitializeFrames()
 		GameTooltip:Hide()
 	end)
 	combatTimeTrackerFrame.resetButton:SetScript("OnClick", function()
-		if not isInCombat then
-			combatTimeTrackerFrame.timer:SetText("00:00.000")
-			combatTimeTrackerFrame.timeBar:SetMinMaxValues(0, 1)
-			combatTimeTrackerFrame.timeBar:SetValue(1)
-			combatTimeTrackerFrame.timeBar:SetStatusBarColor(0.5, 0.5, 0.5)
-			combatTimeTrackerFrame.name:SetText(L["combat-time-tracker.wait-combat"])
-			combatTimeTrackerFrame.difficulty:SetText("-")
-		end
+		combatTimeTrackerFrame.timer:SetText("00:00.000")
+		combatTimeTrackerFrame.timeBar:SetMinMaxValues(0, 1)
+		combatTimeTrackerFrame.timeBar:SetValue(1)
+		combatTimeTrackerFrame.timeBar:SetStatusBarColor(0.5, 0.5, 0.5)
+		combatTimeTrackerFrame.name:SetText(L["combat-time-tracker.wait-combat"])
+		combatTimeTrackerFrame.difficulty:SetText("-")
 	end)
 
 	local height = 10
@@ -167,23 +219,54 @@ function CombatTimeTracker:Initialize()
     InitializeFrames()
 end
 
-function CombatTimeTracker:EncounterStart(encounterKey, encounterName)
+function CombatTimeTracker:EncounterStart(encounterID, encounterName, difficultyID)
+	currentEncounterID = tostring(encounterID)
+	currentDifficultyID = tostring(difficultyID)
+	currentEncounterName = encounterName
+
+	local isValidEncounter, difficultyName, optionalID, optionalInfo  = CheckInstance()
+
+	Utils:PrintDebug("Result from CheckInstance(): isValidEncounter=".. tostring(isValidEncounter) .. ", difficultyName=" .. tostring(difficultyName) .. ", optionalID=" .. tostring(optionalID) .. ", optionalInfo=" .. tostring(optionalInfo))
+
+	if not isValidEncounter then return false end
+
+	startTime = GetTime()
+
+	currentOptionalID = optionalID
+	currentOptionalInfo = optionalInfo
+	currentDifficultyName = GetDifficultyName(difficultyName)
+
     combatTimeTrackerFrame.resetButton:Hide()
     combatTimeTrackerFrame:Show()
 
-	startTime = GetTime()
-	isInCombat = true
-	currentEncounterKey = encounterKey
     HRT.options.combatTimeTracker["is-visible"] = true
 
-    local _, _, _, difficultyName = GetInstanceInfo()
 	combatTimeTrackerFrame.name:SetText(encounterName)
-   	combatTimeTrackerFrame.difficulty:SetText(difficultyName or L["combat-time-tracker.unknown"])
+   	combatTimeTrackerFrame.difficulty:SetText(currentDifficultyName)
 
-    if HRT.data.combatTime[encounterKey] then
-        local best = HRT.data.combatTime[encounterKey]
-        combatTimeTrackerFrame.timeBar:SetMinMaxValues(0, best)
-        combatTimeTrackerFrame.timeBar:SetValue(best)
+	if not HRT.data.combatEncounter[currentEncounterID] then
+         HRT.data.combatEncounter[currentEncounterID] = {}
+    end
+
+    if not HRT.data.combatEncounter[currentEncounterID][currentDifficultyID] then
+        HRT.data.combatEncounter[currentEncounterID][currentDifficultyID] = {}
+    end
+
+    if not HRT.data.combatEncounter[currentEncounterID][currentDifficultyID][currentOptionalID] then
+		---@diagnostic disable-next-line: need-check-nil
+        HRT.data.combatEncounter[currentEncounterID][currentDifficultyID][currentOptionalID] = {
+			bestVictory = 0,
+            victories = 0,
+            wipes = 0
+        }
+    end
+
+	local currentDataSet = HRT.data.combatEncounter[currentEncounterID][currentDifficultyID][currentOptionalID]
+	currentBestTime = currentDataSet.bestVictory
+
+    if currentBestTime ~= 0 then
+        combatTimeTrackerFrame.timeBar:SetMinMaxValues(0, currentBestTime)
+        combatTimeTrackerFrame.timeBar:SetValue(currentBestTime)
         combatTimeTrackerFrame.timeBar:SetStatusBarColor(0, 1, 0)
     else
         combatTimeTrackerFrame.timeBar:SetMinMaxValues(0, 1)
@@ -192,13 +275,13 @@ function CombatTimeTracker:EncounterStart(encounterKey, encounterName)
     end
 
     combatTimeTrackerFrame:SetScript("OnUpdate", UpdateTimerFrame)
+
+	return true
 end
 
-function CombatTimeTracker:EncounterEnd(encounterKey, encounterName, success)
+function CombatTimeTracker:EncounterEnd(success)
     combatTimeTrackerFrame.resetButton:Show()
 	combatTimeTrackerFrame:SetScript("OnUpdate", nil)
-
-    isInCombat = false
 
     local finalTime = GetTime() - startTime
 	local minutes = math.floor(finalTime / 60)
@@ -206,65 +289,65 @@ function CombatTimeTracker:EncounterEnd(encounterKey, encounterName, success)
 	local milliseconds = math.floor((finalTime * 1000) % 1000)
     combatTimeTrackerFrame.timer:SetText(string.format("%02d:%02d.%03d", minutes, seconds, milliseconds))
 
-	local _, _, _, difficultyName = GetInstanceInfo()
-	local difficultyText = difficultyName or L["combat-time-tracker.unknown"]
-
-	local bestTime = HRT.data.combatTime[encounterKey]
-	local encounter = HRT.data.combatEncounter[encounterKey]
-
-	if not encounter then
-		encounter = {
-			victories = 0,
-			wipes = 0
-		}
-		HRT.data.combatEncounter[encounterKey] = encounter
-	end
+	local currentDataSet = HRT.data.combatEncounter[currentEncounterID][currentDifficultyID][currentOptionalID]
+	local bestTime = currentDataSet.bestVictory
+	local victories = currentDataSet.victories
+	local wipes = currentDataSet.wipes
 
     if success == 1 then
-		encounter.victories = encounter.victories + 1
-		HRT.data.combatEncounter[encounterKey] = encounter
+		victories = victories + 1
+		HRT.data.combatEncounter[currentEncounterID][currentDifficultyID][currentOptionalID].victories = victories
 
-		if not bestTime or finalTime < bestTime then
-			HRT.data.combatTime[encounterKey] = finalTime
+		if bestTime == 0 or finalTime < bestTime then
+			HRT.data.combatEncounter[currentEncounterID][currentDifficultyID][currentOptionalID].bestVictory = finalTime
 		end
 
-		if not HRT.options.general["notification"] then return end
+		if HRT.options.general["notification"] then
+			if bestTime == 0 or finalTime < bestTime then
+				Utils:PrintMessage(L["chat.new-record"]:format(currentEncounterName, currentDifficultyName, string.format("%02d:%02d.%03d", minutes, seconds, milliseconds)))
+			else
+				local oldMinutes = math.floor(bestTime / 60)
+				local oldSsconds = math.floor(bestTime % 60)
+				local oldMilliseconds = math.floor((bestTime * 1000) % 1000)
 
-        if not bestTime or finalTime < bestTime then
-			Utils:PrintMessage(L["chat.new-record"]:format(encounterName, difficultyText, string.format("%02d:%02d.%03d", minutes, seconds, milliseconds)))
-		else
-			local oldMinutes = math.floor(bestTime / 60)
-			local oldSsconds = math.floor(bestTime % 60)
-			local oldMilliseconds = math.floor((bestTime * 1000) % 1000)
+				Utils:PrintMessage(L["chat.current-record"]:format(currentEncounterName, currentDifficultyName, string.format("%02d:%02d.%03d", oldMinutes, oldSsconds, oldMilliseconds)))
+			end
 
-			Utils:PrintMessage(L["chat.current-record"]:format(encounterName, difficultyText, string.format("%02d:%02d.%03d", oldMinutes, oldSsconds, oldMilliseconds)))
-		end
-
-		if encounter.victories == 1 then
-			Utils:PrintMessage(L["chat.first-victory"]:format(encounterName, difficultyText, encounter.wipes))
-		else
-			Utils:PrintMessage(L["chat.another-victory"]:format(encounterName, difficultyText, encounter.victories, encounter.wipes))
+			if victories == 1 then
+				Utils:PrintMessage(L["chat.first-victory"]:format(currentEncounterName, currentDifficultyName, wipes))
+			else
+				Utils:PrintMessage(L["chat.another-victory"]:format(currentEncounterName, currentDifficultyName, victories, wipes))
+			end
 		end
 	else
-		encounter.wipes = encounter.wipes + 1
-		HRT.data.combatEncounter[encounterKey] = encounter
+		wipes = wipes + 1
+		HRT.data.combatEncounter[currentEncounterID][currentDifficultyID][currentOptionalID].wipes = wipes
 
-		if not HRT.options.general["notification"] then return end
+		if HRT.options.general["notification"] then
+			if bestTime ~= 0 then
+				local oldMinutes = math.floor(bestTime / 60)
+				local oldSsconds = math.floor(bestTime % 60)
+				local oldMilliseconds = math.floor((bestTime * 1000) % 1000)
 
-		if bestTime then
-			local oldMinutes = math.floor(bestTime / 60)
-			local oldSsconds = math.floor(bestTime % 60)
-			local oldMilliseconds = math.floor((bestTime * 1000) % 1000)
+				Utils:PrintMessage(L["chat.current-record"]:format(currentEncounterName, currentDifficultyName, string.format("%02d:%02d.%03d", oldMinutes, oldSsconds, oldMilliseconds)))
+			end
 
-			Utils:PrintMessage(L["chat.current-record"]:format(encounterName, difficultyText, string.format("%02d:%02d.%03d", oldMinutes, oldSsconds, oldMilliseconds)))
-		end
-
-		if encounter.wipes == 1 then
-			Utils:PrintMessage(L["chat.first-wipe"]:format(encounterName, difficultyText, encounter.victories))
-		else
-			Utils:PrintMessage(L["chat.another-wipe"]:format(encounterName, difficultyText, encounter.victories, encounter.wipes))
+			if wipes == 1 then
+				Utils:PrintMessage(L["chat.first-wipe"]:format(currentEncounterName, currentDifficultyName, victories))
+			else
+				Utils:PrintMessage(L["chat.another-wipe"]:format(currentEncounterName, currentDifficultyName, victories, wipes))
+			end
 		end
     end
+
+	startTime = 0
+	currentBestTime = 0
+	currentEncounterID = nil
+	currentDifficultyID = nil
+	currentDifficultyName = nil
+	currentOptionalID = nil
+	currentOptionalInfo = nil
+	currentEncounterName = nil
 end
 
 function CombatTimeTracker:IsShown()

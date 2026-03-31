@@ -2,9 +2,7 @@
 ### [@project-version@](https://github.com/wow-addon-dev/Horatum/tree/@project-version@) (@build-date@)
 [Full Changelog](@full-changelog@) - [Previous Releases](https://github.com/wow-addon-dev/Horatum/releases)
 
-**Important note: All settings have been reset to their default values!**
+**Important note: All combat data has been deleted!**
 
-- Added: Minimap Button
-- Changed: Consolidation of the options menu
-- Updated: deDE, enUS localization
-- Minor code adjustments
+- Changed: The delve tier is now detected, and combat data is saved for each tier
+- Refactoring of the addon structure and source code

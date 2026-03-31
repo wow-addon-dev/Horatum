@@ -11,7 +11,7 @@
 ## Notes-deDE: Dieses Addon zeichnet jeden Bosskampf auf und speichert den schnellsten Sieg.
 
 ## LoadSavedVariablesFirst: 1
-## SavedVariables: Horatum_Options, Horatum_CombatTimeData, Horatum_CombatEncounterData
+## SavedVariables: Horatum_Options, Horatum_CombatEncounterData_v2
 
 ## AddonCompartmentFuncOnEnter: Horatum_CompartmentOnEnter
 ## AddonCompartmentFuncOnLeave: Horatum_CompartmentOnLeave

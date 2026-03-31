@@ -38,12 +38,8 @@ function Utils:InitializeDatabase()
 		}
     end
 
-	if not Horatum_CombatTimeData then
-        Horatum_CombatTimeData = {}
-    end
-
-	if not Horatum_CombatEncounterData then
-        Horatum_CombatEncounterData = {}
+	if not Horatum_CombatEncounterData_v2 then
+        Horatum_CombatEncounterData_v2 = {}
     end
 
     HRT.options = {}
@@ -52,8 +48,7 @@ function Utils:InitializeDatabase()
 	HRT.options.other = Horatum_Options["other"]
 
 	HRT.data = {}
-	HRT.data.combatTime = Horatum_CombatTimeData
-	HRT.data.combatEncounter = Horatum_CombatEncounterData
+	HRT.data.combatEncounter = Horatum_CombatEncounterData_v2
 end
 
 function Utils:InitializeMinimapButton()

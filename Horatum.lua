@@ -6,6 +6,14 @@ local Utils = HRT.Utils
 local Options = HRT.Options
 local CombatTimeTracker = HRT.CombatTimeTracker
 
+local isInCombat = false
+
+--------------
+--- Frames ---
+--------------
+
+local horatumFrame = CreateFrame("Frame", "Horatum")
+
 ----------------------
 --- Local Funtions ---
 ----------------------
@@ -19,12 +27,6 @@ local function SlashCommand(msg, editbox)
         Utils:PrintDebug("These arguments are not accepted.")
 	end
 end
-
---------------
---- Frames ---
---------------
-
-local horatumFrame = CreateFrame("Frame", "Horatum")
 
 ---------------------
 --- Main Funtions ---
@@ -46,19 +48,23 @@ function horatumFrame:ADDON_LOADED(_, addOnName)
 end
 
 function horatumFrame:ENCOUNTER_START(_, encounterID, encounterName, difficultyID, groupSize)
-    local encounterKey = encounterID .. "_" .. difficultyID
+	Utils:PrintDebug("Event 'ENCOUNTER_START' fired. Payload: encounterID=" .. tostring(encounterID) .. ", encounterName=" .. tostring(encounterName) .. ", difficultyID=" .. tostring(difficultyID) .. ", groupSize=" .. tostring(groupSize))
 
-	CombatTimeTracker:EncounterStart(encounterKey, encounterName)
+	isInCombat = CombatTimeTracker:EncounterStart(encounterID, encounterName, difficultyID)
 
-	Utils:PrintDebug("The encounter has started.")
+	if isInCombat then
+		Utils:PrintDebug("The encounter has started.")
+	end
 end
 
 function horatumFrame:ENCOUNTER_END(_, encounterID, encounterName, difficultyID, groupSize, success)
-    local encounterKey = encounterID .. "_" .. difficultyID
+	Utils:PrintDebug("Event 'ENCOUNTER_END' fired. Payload: encounterID=" .. tostring(encounterID) .. ", encounterName=" .. tostring(encounterName) .. ", difficultyID=" .. tostring(difficultyID) .. ", groupSize=" .. tostring(groupSize) .. ", success=" .. tostring(success))
 
-	CombatTimeTracker:EncounterEnd(encounterKey, encounterName, success)
+	if isInCombat then
+		CombatTimeTracker:EncounterEnd(success)
 
-	Utils:PrintDebug("The encounter has ended.")
+		Utils:PrintDebug("The encounter has ended.")
+	end
 end
 
 horatumFrame:RegisterEvent("ADDON_LOADED")
