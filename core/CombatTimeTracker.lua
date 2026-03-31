@@ -30,19 +30,31 @@ local function CheckInstance()
 	Utils:PrintDebug("Result from GetInstanceInfo(): instanceType=" .. instanceType .. ", difficultyID=" .. difficultyID .. ", difficultyName=" .. difficultyName)
 
 	if currentDifficultyID == tostring(difficultyID) then
-		if difficultyID == 1 and instanceType == "party" then				-- Dugenon Normal
+		if difficultyID == 1 and instanceType == "party" then				-- Dungeon Normal
 			return true, difficultyName, "0", nil
-		elseif difficultyID == 2 and instanceType == "party"  then			-- Dugenon Heroisch
+		elseif difficultyID == 2 and instanceType == "party"  then			-- Dungeon Heroisch
 			return true, difficultyName, "0", nil
-		elseif difficultyID == 23 and instanceType == "party"  then			-- Dugenon Mythisch
+		elseif difficultyID == 23 and instanceType == "party"  then			-- Dungeon Mythisch
 			return true, difficultyName, "0", nil
-		elseif difficultyID == 14 and instanceType == "raid"  then			-- Raid Normal
+		elseif difficultyID == 24 and instanceType == "party"  then			-- Dungeon Zeitenwanderung
 			return true, difficultyName, "0", nil
-		elseif difficultyID == 15 and instanceType == "raid"  then			-- Raid Heroisch
+		elseif difficultyID == 3 and instanceType == "raid"  then			-- Raid 10er Normal (legacy)
+			return true, difficultyName, "0", nil
+		elseif difficultyID == 4 and instanceType == "raid"  then			-- Raid 25er Normal (legacy)
+			return true, difficultyName, "0", nil
+		elseif difficultyID == 5 and instanceType == "raid"  then			-- Raid 10er Heroisch (legacy)
+			return true, difficultyName, "0", nil
+		elseif difficultyID == 6 and instanceType == "raid"  then			-- Raid 25er Heroisch (legacy)
+			return true, difficultyName, "0", nil
+		elseif difficultyID == 14 and instanceType == "raid"  then			-- Raid Normal (flexibel)
+			return true, difficultyName, "0", nil
+		elseif difficultyID == 15 and instanceType == "raid"  then			-- Raid Heroisch (flexibel)
 			return true, difficultyName, "0", nil
 		elseif difficultyID == 16 and instanceType == "raid"  then			-- Raid Mythisch
 			return true, difficultyName, "0", nil
 		elseif difficultyID == 17 and instanceType == "raid"  then			-- Raid Schlachtzugbrowser
+			return true, difficultyName, "0", nil
+		elseif difficultyID == 33 and instanceType == "raid"  then			-- Raid Zeitenwanderung
 			return true, difficultyName, "0", nil
 		elseif difficultyID == 208 and instanceType == "scenario"  then		-- Tiefe
 			local delveData1, delveData2, delveData3 = C_UIWidgetManager.GetScenarioHeaderDelvesWidgetVisualizationInfo(6183), C_UIWidgetManager.GetScenarioHeaderDelvesWidgetVisualizationInfo(6184), C_UIWidgetManager.GetScenarioHeaderDelvesWidgetVisualizationInfo(6185)
