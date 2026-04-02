@@ -1,3 +1,6 @@
+**v1.18 (2026-04-01)**
+- Added: The boss combat encouters in old raids and timewalking dungeons / raids are now being tracked
+
 **v1.17 (2026-03-31)**
 - Changed: The delve tier is now detected, and combat data is saved for each tier
 - Refactoring of the addon structure and source code
