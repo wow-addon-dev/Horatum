@@ -5,12 +5,14 @@ local Utils = HRT.Utils
 
 local CombatTimeTracker = {}
 
+local THRESHOLD = 0.001
+
 local startTime = 0
-local currentBestTime = 0
-local currentEncounterID = nil
-local currentDifficultyID = nil
+local currentBestVictory = 0
+local currentEncounterID = 0
+local currentDifficultyID = 0
 local currentDifficultyName = nil
-local currentOptionalID = nil
+local currentOptionalID = 0
 local currentOptionalInfo = nil
 local currentEncounterName = nil
 
@@ -24,59 +26,62 @@ local combatTimeTrackerFrame
 --- Local Funtions ---
 ----------------------
 
-local function CheckInstance()
-	local _, instanceType, difficultyID, difficultyName = GetInstanceInfo()
+local function EncounterCheck(difficultyID)
+	local name, instanceType, isHeroic, isChallengeMode, displayHeroic, displayMythic, toggleDifficultyID, isLFR, minPlayers, maxPlayers, isUserSelectable = GetDifficultyInfo(difficultyID)
 
-	Utils:PrintDebug("Result from GetInstanceInfo(): instanceType=" .. instanceType .. ", difficultyID=" .. difficultyID .. ", difficultyName=" .. difficultyName)
+	Utils:PrintDebug(string.format(
+		"Result from GetDifficultyInfo(): name=%s, instanceType=%s, isHeroic=%s, isChallengeMode=%s, displayHeroic=%s, displayMythic=%s, toggleDifficultyID=%s, isLFR=%s, minPlayers=%s, maxPlayers=%s, isUserSelectable=%s",
+		tostring(name),	tostring(instanceType),	tostring(isHeroic),	tostring(isChallengeMode), tostring(displayHeroic), tostring(displayMythic), tostring(toggleDifficultyID), tostring(isLFR), tostring(minPlayers), tostring(maxPlayers), tostring(isUserSelectable)
+	))
 
-	if currentDifficultyID == tostring(difficultyID) then
-		if difficultyID == 1 and instanceType == "party" then				-- Dungeon Normal
-			return true, difficultyName, "0", nil
-		elseif difficultyID == 2 and instanceType == "party"  then			-- Dungeon Heroisch
-			return true, difficultyName, "0", nil
-		elseif difficultyID == 23 and instanceType == "party"  then			-- Dungeon Mythisch
-			return true, difficultyName, "0", nil
-		elseif difficultyID == 24 and instanceType == "party"  then			-- Dungeon Zeitenwanderung
-			return true, difficultyName, "0", nil
-		elseif difficultyID == 3 and instanceType == "raid"  then			-- Raid 10er Normal (legacy)
-			return true, difficultyName, "0", nil
-		elseif difficultyID == 4 and instanceType == "raid"  then			-- Raid 25er Normal (legacy)
-			return true, difficultyName, "0", nil
-		elseif difficultyID == 5 and instanceType == "raid"  then			-- Raid 10er Heroisch (legacy)
-			return true, difficultyName, "0", nil
-		elseif difficultyID == 6 and instanceType == "raid"  then			-- Raid 25er Heroisch (legacy)
-			return true, difficultyName, "0", nil
-		elseif difficultyID == 14 and instanceType == "raid"  then			-- Raid Normal (flexibel)
-			return true, difficultyName, "0", nil
-		elseif difficultyID == 15 and instanceType == "raid"  then			-- Raid Heroisch (flexibel)
-			return true, difficultyName, "0", nil
-		elseif difficultyID == 16 and instanceType == "raid"  then			-- Raid Mythisch
-			return true, difficultyName, "0", nil
-		elseif difficultyID == 17 and instanceType == "raid"  then			-- Raid Schlachtzugbrowser
-			return true, difficultyName, "0", nil
-		elseif difficultyID == 33 and instanceType == "raid"  then			-- Raid Zeitenwanderung
-			return true, difficultyName, "0", nil
-		elseif difficultyID == 208 and instanceType == "scenario"  then		-- Tiefe
-			local delveData1, delveData2, delveData3 = C_UIWidgetManager.GetScenarioHeaderDelvesWidgetVisualizationInfo(6183), C_UIWidgetManager.GetScenarioHeaderDelvesWidgetVisualizationInfo(6184), C_UIWidgetManager.GetScenarioHeaderDelvesWidgetVisualizationInfo(6185)
+	if difficultyID == 1 then				-- Dungeon Normal
+		return true, name, 0, nil
+	elseif difficultyID == 2 then			-- Dungeon Heroisch
+		return true, name, 0, nil
+	elseif difficultyID == 23 then			-- Dungeon Mythisch
+		return true, name, 0, nil
+	elseif difficultyID == 24 then			-- Dungeon Zeitenwanderung
+		return true, name, 0, nil
+	elseif difficultyID == 3 then			-- Raid 10er Normal (legacy)
+		return true, name, 0, nil
+	elseif difficultyID == 4 then			-- Raid 25er Normal (legacy)
+		return true, name, 0, nil
+	elseif difficultyID == 5 then			-- Raid 10er Heroisch (legacy)
+		return true, name, "0", nil
+	elseif difficultyID == 6 then			-- Raid 25er Heroisch (legacy)
+		return true, name, "0", nil
+	elseif difficultyID == 9 then			-- Raid 40er (legacy)
+		return true, name, "0", nil
+	elseif difficultyID == 14 then			-- Raid Normal (flexibel)
+		return true, name, "0", nil
+	elseif difficultyID == 15 then			-- Raid Heroisch (flexibel)
+		return true, name, "0", nil
+	elseif difficultyID == 16 then			-- Raid Mythisch
+		return true, name, "0", nil
+	elseif difficultyID == 17 then			-- Raid Schlachtzugbrowser
+		return true, name, "0", nil
+	elseif difficultyID == 33 then			-- Raid Zeitenwanderung
+		return true, name, "0", nil
+	elseif difficultyID == 208  then		-- Tiefe
+		local delveData1, delveData2, delveData3 = C_UIWidgetManager.GetScenarioHeaderDelvesWidgetVisualizationInfo(6183), C_UIWidgetManager.GetScenarioHeaderDelvesWidgetVisualizationInfo(6184), C_UIWidgetManager.GetScenarioHeaderDelvesWidgetVisualizationInfo(6185)
 
-			if delveData1 then
-				if delveData1 and delveData1.tierText then
-					return true, difficultyName, delveData1.tierText, delveData1.tierText
-				end
-			elseif delveData2 and delveData2.shownState and delveData2.shownState == 1 then
-				return true, difficultyName, "8", "?"
-			elseif delveData3 and delveData3.shownState and delveData3.shownState == 1 then
-				return true, difficultyName, "11", "??"
+		if delveData1 then
+			if delveData1 and delveData1.tierText then
+				return true, name, tonumber(delveData1.tierText), delveData1.tierText
 			end
+		elseif delveData2 and delveData2.shownState and delveData2.shownState == 1 then
+			return true, name, 8, "?"
+		elseif delveData3 and delveData3.shownState and delveData3.shownState == 1 then
+			return true, name, 11, "??"
 		end
 	end
 
-	return false, nil, nil, nil
+	return false, nil, 0, nil
 end
 
-local function GetDifficultyName(difficultyName)
-	if difficultyName then
-		if currentDifficultyID == "208" then
+local function GetDifficultyName(difficultyID, difficultyName)
+	if difficultyName and difficultyID ~= 0 then
+		if difficultyID == 208 then
 			return difficultyName .. " " .. currentOptionalInfo
 		else
 			return difficultyName
@@ -94,14 +99,14 @@ local function UpdateTimerFrame(self, elapsed)
     local milliseconds = math.floor((currentTime * 1000) % 1000)
     combatTimeTrackerFrame.timer:SetText(string.format("%02d:%02d.%03d", minutes, seconds, milliseconds))
 
-    if currentBestTime ~= 0 then
-        local remainingTime = currentBestTime - currentTime
+    if currentBestVictory >= THRESHOLD then
+        local remainingTime = currentBestVictory - currentTime
 
         if remainingTime > 0 then
             combatTimeTrackerFrame.timeBar:SetValue(remainingTime)
             combatTimeTrackerFrame.timeBar:SetStatusBarColor(0, 1, 0)
         else
-            combatTimeTrackerFrame.timeBar:SetValue(currentBestTime)
+            combatTimeTrackerFrame.timeBar:SetValue(currentBestVictory)
             combatTimeTrackerFrame.timeBar:SetStatusBarColor(1, 0, 0)
         end
     end
@@ -111,7 +116,7 @@ end
 --- Frame Funtions ---
 ----------------------
 
-function InitializeFrames()
+local function InitializeFrames()
 	combatTimeTrackerFrame = CreateFrame("Frame", "HRT_CombatTimeTrackerFrame", UIParent)
 	combatTimeTrackerFrame:SetWidth(160)
 	combatTimeTrackerFrame:SetScale(HRT.options.combatTimeTracker["scale"] / 100)
@@ -232,13 +237,16 @@ function CombatTimeTracker:Initialize()
 end
 
 function CombatTimeTracker:EncounterStart(encounterID, encounterName, difficultyID)
-	currentEncounterID = tostring(encounterID)
-	currentDifficultyID = tostring(difficultyID)
+	currentEncounterID = encounterID
+	currentDifficultyID = difficultyID
 	currentEncounterName = encounterName
 
-	local isValidEncounter, difficultyName, optionalID, optionalInfo  = CheckInstance()
+	local isValidEncounter, difficultyName, optionalID, optionalInfo = EncounterCheck(difficultyID)
 
-	Utils:PrintDebug("Result from CheckInstance(): isValidEncounter=".. tostring(isValidEncounter) .. ", difficultyName=" .. tostring(difficultyName) .. ", optionalID=" .. tostring(optionalID) .. ", optionalInfo=" .. tostring(optionalInfo))
+	Utils:PrintDebug(string.format(
+		"Result from EncounterCheck(): isValidEncounter=%s, difficultyName=%s, optionalID=%s, optionalInfo=%s",
+		tostring(isValidEncounter),	tostring(difficultyName), tostring(optionalID), tostring(optionalInfo)
+	))
 
 	if not isValidEncounter then return false end
 
@@ -246,7 +254,7 @@ function CombatTimeTracker:EncounterStart(encounterID, encounterName, difficulty
 
 	currentOptionalID = optionalID
 	currentOptionalInfo = optionalInfo
-	currentDifficultyName = GetDifficultyName(difficultyName)
+	currentDifficultyName = GetDifficultyName(difficultyID, difficultyName)
 
     combatTimeTrackerFrame.resetButton:Hide()
     combatTimeTrackerFrame:Show()
@@ -256,29 +264,28 @@ function CombatTimeTracker:EncounterStart(encounterID, encounterName, difficulty
 	combatTimeTrackerFrame.name:SetText(encounterName)
    	combatTimeTrackerFrame.difficulty:SetText(currentDifficultyName)
 
-	if not HRT.data.combatEncounter[currentEncounterID] then
-         HRT.data.combatEncounter[currentEncounterID] = {}
+	if not HRT.data.combatEncounter[tostring(currentEncounterID)] then
+         HRT.data.combatEncounter[tostring(currentEncounterID)] = {}
     end
 
-    if not HRT.data.combatEncounter[currentEncounterID][currentDifficultyID] then
-        HRT.data.combatEncounter[currentEncounterID][currentDifficultyID] = {}
+    if not HRT.data.combatEncounter[tostring(currentEncounterID)][tostring(currentDifficultyID)] then
+        HRT.data.combatEncounter[tostring(currentEncounterID)][tostring(currentDifficultyID)] = {}
     end
 
-    if not HRT.data.combatEncounter[currentEncounterID][currentDifficultyID][currentOptionalID] then
-		---@diagnostic disable-next-line: need-check-nil
-        HRT.data.combatEncounter[currentEncounterID][currentDifficultyID][currentOptionalID] = {
-			bestVictory = 0,
+    if not HRT.data.combatEncounter[tostring(currentEncounterID)][tostring(currentDifficultyID)][tostring(currentOptionalID)] then
+        HRT.data.combatEncounter[tostring(currentEncounterID)][tostring(currentDifficultyID)][tostring(currentOptionalID)] = {
+			bestVictory = -1,
             victories = 0,
             wipes = 0
         }
     end
 
-	local currentDataSet = HRT.data.combatEncounter[currentEncounterID][currentDifficultyID][currentOptionalID]
-	currentBestTime = currentDataSet.bestVictory
+	local currentDataSet = HRT.data.combatEncounter[tostring(currentEncounterID)][tostring(currentDifficultyID)][tostring(currentOptionalID)]
+	currentBestVictory = currentDataSet.bestVictory
 
-    if currentBestTime ~= 0 then
-        combatTimeTrackerFrame.timeBar:SetMinMaxValues(0, currentBestTime)
-        combatTimeTrackerFrame.timeBar:SetValue(currentBestTime)
+    if currentBestVictory >= THRESHOLD then
+        combatTimeTrackerFrame.timeBar:SetMinMaxValues(0, currentBestVictory)
+        combatTimeTrackerFrame.timeBar:SetValue(currentBestVictory)
         combatTimeTrackerFrame.timeBar:SetStatusBarColor(0, 1, 0)
     else
         combatTimeTrackerFrame.timeBar:SetMinMaxValues(0, 1)
@@ -296,33 +303,44 @@ function CombatTimeTracker:EncounterEnd(success)
 	combatTimeTrackerFrame:SetScript("OnUpdate", nil)
 
     local finalTime = GetTime() - startTime
+
+	Utils:PrintDebug("Unrounded time: " .. tostring(finalTime))
+
+	if finalTime < THRESHOLD then
+		finalTime = 0.001
+	else
+		finalTime = math.floor(finalTime * 1000 + 0.5) / 1000
+	end
+
+	Utils:PrintDebug("Rounded time: " .. tostring(finalTime))
+
 	local minutes = math.floor(finalTime / 60)
 	local seconds = math.floor(finalTime % 60)
 	local milliseconds = math.floor((finalTime * 1000) % 1000)
     combatTimeTrackerFrame.timer:SetText(string.format("%02d:%02d.%03d", minutes, seconds, milliseconds))
 
-	local currentDataSet = HRT.data.combatEncounter[currentEncounterID][currentDifficultyID][currentOptionalID]
-	local bestTime = currentDataSet.bestVictory
+	local currentDataSet = HRT.data.combatEncounter[tostring(currentEncounterID)][tostring(currentDifficultyID)][tostring(currentOptionalID)]
+	local bestVictory = currentDataSet.bestVictory
 	local victories = currentDataSet.victories
 	local wipes = currentDataSet.wipes
 
     if success == 1 then
 		victories = victories + 1
-		HRT.data.combatEncounter[currentEncounterID][currentDifficultyID][currentOptionalID].victories = victories
+		currentDataSet.victories = victories
 
-		if bestTime == 0 or finalTime < bestTime then
-			HRT.data.combatEncounter[currentEncounterID][currentDifficultyID][currentOptionalID].bestVictory = finalTime
+		if bestVictory < THRESHOLD or finalTime < bestVictory then
+			currentDataSet.bestVictory = finalTime
 		end
 
 		if HRT.options.general["notification"] then
-			if bestTime == 0 or finalTime < bestTime then
+			if bestVictory < THRESHOLD or finalTime < bestVictory then
 				Utils:PrintMessage(L["chat.new-record"]:format(currentEncounterName, currentDifficultyName, string.format("%02d:%02d.%03d", minutes, seconds, milliseconds)))
 			else
-				local oldMinutes = math.floor(bestTime / 60)
-				local oldSsconds = math.floor(bestTime % 60)
-				local oldMilliseconds = math.floor((bestTime * 1000) % 1000)
+				local bestVictoryMinutes = math.floor(bestVictory / 60)
+				local bestVictorySsconds = math.floor(bestVictory % 60)
+				local bestVictoryMilliseconds = math.floor((bestVictory * 1000) % 1000)
 
-				Utils:PrintMessage(L["chat.current-record"]:format(currentEncounterName, currentDifficultyName, string.format("%02d:%02d.%03d", oldMinutes, oldSsconds, oldMilliseconds)))
+				Utils:PrintMessage(L["chat.current-record"]:format(currentEncounterName, currentDifficultyName, string.format("%02d:%02d.%03d", bestVictoryMinutes, bestVictorySsconds, bestVictoryMilliseconds)))
 			end
 
 			if victories == 1 then
@@ -333,15 +351,15 @@ function CombatTimeTracker:EncounterEnd(success)
 		end
 	else
 		wipes = wipes + 1
-		HRT.data.combatEncounter[currentEncounterID][currentDifficultyID][currentOptionalID].wipes = wipes
+		currentDataSet.wipes = wipes
 
 		if HRT.options.general["notification"] then
-			if bestTime ~= 0 then
-				local oldMinutes = math.floor(bestTime / 60)
-				local oldSsconds = math.floor(bestTime % 60)
-				local oldMilliseconds = math.floor((bestTime * 1000) % 1000)
+			if bestVictory >= THRESHOLD then
+				local bestVictoryMinutes = math.floor(bestVictory / 60)
+				local bestVictorySsconds = math.floor(bestVictory % 60)
+				local bestVictoryMilliseconds = math.floor((bestVictory * 1000) % 1000)
 
-				Utils:PrintMessage(L["chat.current-record"]:format(currentEncounterName, currentDifficultyName, string.format("%02d:%02d.%03d", oldMinutes, oldSsconds, oldMilliseconds)))
+				Utils:PrintMessage(L["chat.current-record"]:format(currentEncounterName, currentDifficultyName, string.format("%02d:%02d.%03d", bestVictoryMinutes, bestVictorySsconds, bestVictoryMilliseconds)))
 			end
 
 			if wipes == 1 then
@@ -353,11 +371,11 @@ function CombatTimeTracker:EncounterEnd(success)
     end
 
 	startTime = 0
-	currentBestTime = 0
-	currentEncounterID = nil
-	currentDifficultyID = nil
+	currentBestVictory = -1
+	currentEncounterID = 0
+	currentDifficultyID = 0
 	currentDifficultyName = nil
-	currentOptionalID = nil
+	currentOptionalID = 0
 	currentOptionalInfo = nil
 	currentEncounterName = nil
 end
