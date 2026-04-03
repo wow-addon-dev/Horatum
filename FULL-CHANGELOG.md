@@ -1,3 +1,6 @@
+**v1.20 (2026-04-03)**
+- Added: The boss combat encouters in story mode raids are now being tracked
+
 **v1.19 (2026-04-02)**
 - Added: The boss combat encouters in 40 player raids are now being tracked
 - Fixed: Timewalking raids are now tracked correctly
