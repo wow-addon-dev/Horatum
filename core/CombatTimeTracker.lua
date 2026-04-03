@@ -47,21 +47,23 @@ local function EncounterCheck(difficultyID)
 	elseif difficultyID == 4 then			-- Raid 25er Normal (legacy)
 		return true, name, 0, nil
 	elseif difficultyID == 5 then			-- Raid 10er Heroisch (legacy)
-		return true, name, "0", nil
+		return true, name, 0, nil
 	elseif difficultyID == 6 then			-- Raid 25er Heroisch (legacy)
-		return true, name, "0", nil
+		return true, name, 0, nil
 	elseif difficultyID == 9 then			-- Raid 40er (legacy)
-		return true, name, "0", nil
+		return true, name, 0, nil
 	elseif difficultyID == 14 then			-- Raid Normal (flexibel)
-		return true, name, "0", nil
+		return true, name, 0, nil
 	elseif difficultyID == 15 then			-- Raid Heroisch (flexibel)
-		return true, name, "0", nil
+		return true, name, 0, nil
 	elseif difficultyID == 16 then			-- Raid Mythisch
-		return true, name, "0", nil
+		return true, name, 0, nil
 	elseif difficultyID == 17 then			-- Raid Schlachtzugbrowser
-		return true, name, "0", nil
+		return true, name, 0, nil
 	elseif difficultyID == 33 then			-- Raid Zeitenwanderung
-		return true, name, "0", nil
+		return true, name, 0, nil
+	elseif difficultyID == 220 then			-- Raid Geschichtenmodus
+		return true, name, 0, nil
 	elseif difficultyID == 208  then		-- Tiefe
 		local delveData1, delveData2, delveData3 = C_UIWidgetManager.GetScenarioHeaderDelvesWidgetVisualizationInfo(6183), C_UIWidgetManager.GetScenarioHeaderDelvesWidgetVisualizationInfo(6184), C_UIWidgetManager.GetScenarioHeaderDelvesWidgetVisualizationInfo(6185)
 
