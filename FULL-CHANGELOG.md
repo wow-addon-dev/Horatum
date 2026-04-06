@@ -1,3 +1,6 @@
+**v1.21 (2026-04-06)**
+- Added: Instance type is displayed in the Combat Time Tracker
+
 **v1.20 (2026-04-03)**
 - Added: The boss combat encouters in story mode raids are now being tracked
 
