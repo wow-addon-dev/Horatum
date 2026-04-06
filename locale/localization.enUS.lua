@@ -62,3 +62,6 @@ L["chat.another-wipe"] = "You have already lost to |cnGOLD_FONT_COLOR:%s|r (%s) 
 L["combat-time-tracker.unknown"] = "unknown"
 L["combat-time-tracker.button-reset"] = "Reset"
 L["combat-time-tracker.wait-combat"] = "Waiting for combat..."
+L["combat-time-tracker.dungeon"] = "Dungeon"
+L["combat-time-tracker.raid"] = "Raid"
+L["combat-time-tracker.delves-tier"] = "Tier"

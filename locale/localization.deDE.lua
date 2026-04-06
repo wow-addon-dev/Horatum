@@ -59,3 +59,6 @@ L["chat.another-wipe"] = "Du hast gegen |cnGOLD_FONT_COLOR:%s|r (%s) bereits ein
 L["combat-time-tracker.unknown"] = "unbekannt"
 L["combat-time-tracker.button-reset"] = "Zurücksetzten"
 L["combat-time-tracker.wait-combat"] = "Warte auf Kampf..."
+L["combat-time-tracker.dungeon"] = "Dungeon"
+L["combat-time-tracker.raid"] = "Schlachtzug"
+L["combat-time-tracker.delves-tier"] = "Stufe"
