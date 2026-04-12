@@ -1,3 +1,7 @@
+**v2.0-alpha.1 (2026-04-12)**
+- Added: Embedded library 'WoW-AD-LibShared' (r1)
+- Refactoring of the addon structure and source code
+
 **v1.21 (2026-04-06)**
 - Added: Instance type is displayed in the Combat Time Tracker
 
