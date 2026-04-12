@@ -3,7 +3,7 @@ local addonName, HRT = ...
 local L = HRT.Localization
 
 local Dialog = {}
-local DialogLib = LibStub("WoWAddonDevelopment_SharedDialogs", true)
+local DialogLib = LibStub("WAD-LibShared-Dialogs", true)
 
 ---------------------
 --- Main Funtions ---
