@@ -42,11 +42,6 @@ L["options.about.button-github.button"] = "GitHub"
 
 L["minimap-button.tooltip"] = "|cnLINK_FONT_COLOR:Left-click|r to show or hide the |cnGOLD_FONT_COLOR:Combat Time Tracker|r.\n|cnLINK_FONT_COLOR:Right-click|r to open the options."
 
--- Dialog
-
-L["dialog.copy-address.text"] = "To copy the link press CTRL + C."
-L["dialog.delete-data.text"] = "Do you really want to delete all addon data?\n|cnNORMAL_FONT_COLOR:Warning:|r The game interface will be automatically reloaded!"
-
 -- Chat
 
 L["chat.current-record"] = "Your current best time for |cnGOLD_FONT_COLOR:%s|r (%s) is %s."

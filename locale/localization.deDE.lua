@@ -39,11 +39,6 @@ L["options.about.button-github.button"] = "GitHub"
 
 L["minimap-button.tooltip"] = "|cnLINK_FONT_COLOR:Linksklick|r zum anzeigen oder ausblenden des |cnGOLD_FONT_COLOR:Kampfzeiten-Tracker|r.\n|cnLINK_FONT_COLOR:Rechtsklick|r zum Öffnen der Einstellungen."
 
--- Dialog
-
-L["dialog.copy-address.text"] = "Um den Link zu kopieren drücke STRG + C."
-L["dialog.delete-data.text"] = "Sollen alle Addon Daten wirklich gelöscht werden?\n|cnNORMAL_FONT_COLOR:Achtung:|r Es erfolgt ein automatischer Reload der Spieloberfläche!"
-
 -- Chat
 
 L["chat.current-record"] = "Deine aktuelle Bestzeit für |cnGOLD_FONT_COLOR:%s|r (%s) ist %s."

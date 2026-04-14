@@ -2,5 +2,4 @@
 ..\FrameXML\UI.xsd">
     <Script file="Utils.lua" />
 	<Script file="Global.lua" />
-    <Script file="Dialog.lua" />
 </Ui>

@@ -2,7 +2,6 @@
 ..\FrameXML\UI.xsd">
     <Include file="locale\locale.xml"/>
     <Include file="data\data.xml"/>
-	<Include file="lib\lib.xml"/>
     <Include file="common\common.xml"/>
 	<Include file="core\core.xml"/>
 </Ui>

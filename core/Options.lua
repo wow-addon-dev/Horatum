@@ -2,7 +2,6 @@ local addonName, HRT = ...
 
 local L = HRT.Localization
 local Utils = HRT.Utils
-local Dialog = HRT.Dialog
 local CombatTimeTracker = HRT.CombatTimeTracker
 
 local Options = {}
@@ -161,7 +160,7 @@ function Options:Initialize()
 		local buttonText = L["options.about.button-github.button"]
 
         local function OnButtonClick()
-            Dialog:ShowCopyAddressDialog(HRT.LINK_GITHUB)
+            WAD.Dialog:ShowCopyAddressDialog(HRT.LINK_GITHUB)
         end
 
         local buttonInitializer = CreateSettingsButtonInitializer(name, buttonText, OnButtonClick, tooltip, true)

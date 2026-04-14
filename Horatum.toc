@@ -7,6 +7,8 @@
 ## LoadOnDemand: 0
 ## DefaultState: enabled
 
+## Dependencies: WoWAddonDevelopmentLibraries
+
 ## Notes: This addon tracks every boss combat encounter and saves the fastest victory.
 ## Notes-deDE: Dieses Addon zeichnet jeden Bosskampf auf und speichert den schnellsten Sieg.
 
