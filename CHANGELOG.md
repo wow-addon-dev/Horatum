@@ -4,5 +4,5 @@
 
 **This is version 2.0 of Horatum. With this release, the software code for all addons is being harmonized so that development will be easier in the future.**
 
-- Added: Embedded library 'WoW-AD-LibShared' (r1)
+- Added: Required dependency 'Arcane Wizard: Library'
 - Refactoring of the addon structure and source code
