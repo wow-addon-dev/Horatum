@@ -7,8 +7,5 @@ manual-changelog:
   filename: CHANGELOG.md
   markup-type: markdown
 
-embedded-libraries:
-  - callbackhandler
-  - libdatabroker-1-1
-  - libdbicon-1-0
-  - libstub
+required-dependencies:
+    - arcane-wizard-library

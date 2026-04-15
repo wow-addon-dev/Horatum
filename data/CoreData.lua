@@ -10,7 +10,7 @@ HRT.LINK_GITHUB = C_AddOns.GetAddOnMetadata(addonName, "X-Github")
 HRT.LINK_CURSEFORGE = C_AddOns.GetAddOnMetadata(addonName, "X-Curseforge")
 HRT.LINK_WAGO = C_AddOns.GetAddOnMetadata(addonName, "X-Wago")
 
-HRT.MEDIA_PATH = "Interface\\AddOns\\" .. addonName .. "\\media\\"
+HRT.MEDIA_PATH = "Interface\\AddOns\\" .. addonName .. "\\assets\\"
 
 HRT.GAME_TYPE_VANILLA = (WOW_PROJECT_ID == WOW_PROJECT_CLASSIC)
 HRT.GAME_TYPE_TBC = (WOW_PROJECT_ID == WOW_PROJECT_BURNING_CRUSADE_CLASSIC)

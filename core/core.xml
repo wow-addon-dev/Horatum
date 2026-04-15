@@ -3,5 +3,4 @@
 	<Script file="CombatTimeTracker.lua" />
 
 	<Script file="Options.lua" />
-	<Include file="Options.xml" />
 </Ui>

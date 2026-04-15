@@ -4,6 +4,8 @@ local L = HRT.Localization
 local Utils = HRT.Utils
 local CombatTimeTracker = HRT.CombatTimeTracker
 
+local AWL = ArcaneWizardLibrary
+
 local Options = {}
 
 ----------------------
@@ -125,7 +127,7 @@ function Options:Initialize()
 			rightText = HRT.GAME_VERSION .. " (" .. HRT.GAME_FLAVOR .. ")",
 		}
 
-		local text = layout:AddInitializer(Settings.CreateElementInitializer("Horatum_OptionsText", data))
+		local text = layout:AddInitializer(Settings.CreateElementInitializer("ArcaneWizardLibrary_OptionsText", data))
 
 		function text:GetExtent()
 			return 14
@@ -138,7 +140,7 @@ function Options:Initialize()
 			rightText = HRT.ADDON_VERSION .. " (" .. HRT.ADDON_BUILD_DATE .. ")"
 		}
 
-		local text = layout:AddInitializer(Settings.CreateElementInitializer("Horatum_OptionsText", data))
+		local text = layout:AddInitializer(Settings.CreateElementInitializer("ArcaneWizardLibrary_OptionsText", data))
 
 		function text:GetExtent()
 			return 14
@@ -151,7 +153,7 @@ function Options:Initialize()
 			rightText = HRT.ADDON_AUTHOR
 		}
 
-		local text = layout:AddInitializer(Settings.CreateElementInitializer("Horatum_OptionsText", data))
+		local text = layout:AddInitializer(Settings.CreateElementInitializer("ArcaneWizardLibrary_OptionsText", data))
 	end
 
 	do
@@ -160,7 +162,7 @@ function Options:Initialize()
 		local buttonText = L["options.about.button-github.button"]
 
         local function OnButtonClick()
-            WAD.Dialog:ShowCopyAddressDialog(HRT.LINK_GITHUB)
+            AWL.Dialog:ShowCopyAddressDialog(HRT.LINK_GITHUB)
         end
 
         local buttonInitializer = CreateSettingsButtonInitializer(name, buttonText, OnButtonClick, tooltip, true)

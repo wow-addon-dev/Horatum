@@ -3,11 +3,11 @@
 ## Author: diomsg (Diom-Antonidas EU)
 
 ## Version: @project-version@
-## IconTexture: Interface\AddOns\Horatum\media\icon.blp
+## IconTexture: Interface\AddOns\Horatum\assets\icon.blp
 ## LoadOnDemand: 0
 ## DefaultState: enabled
 
-## Dependencies: WoWAddonDevelopmentLibraries
+## Dependencies: ArcaneWizardLibrary
 
 ## Notes: This addon tracks every boss combat encounter and saves the fastest victory.
 ## Notes-deDE: Dieses Addon zeichnet jeden Bosskampf auf und speichert den schnellsten Sieg.
@@ -23,7 +23,6 @@
 ## X-E-Mail: feedback@wow-addon.dev
 ## X-Github: https://github.com/wow-addon-dev/Horatum
 ## X-Curseforge: https://www.curseforge.com/wow/addons/horatum
-## X-Wago: https://addons.wago.io/addons/horatum
 
 Horatum.xml
 Horatum.lua
