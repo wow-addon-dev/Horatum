@@ -20,16 +20,6 @@ on:
         required: false
         default: true
         type: boolean
-      release-cf:
-        description: 'auf CurseForge veröffentlich'
-        required: false
-        default: true
-        type: boolean
-      release-wago:
-        description: 'auf Wago veröffentlichen'
-        required: false
-        default: true
-        type: boolean
       full-changelog:
         description: 'vollständiges Changelog erstellen'
         required: false
@@ -41,9 +31,7 @@ permissions:
 
 env:
   CF_PROJECT_ID: ${{ vars.CF_PROJECT_ID }}
-  WAGO_PROJECT_ID: ${{ vars.WAGO_PROJECT_ID }}
   CF_API_KEY: ${{ secrets.CF_API_KEY }}
-  WAGO_API_TOKEN: ${{ secrets.WAGO_API_TOKEN }}
   GITHUB_OAUTH: ${{ secrets.BOT_TOKEN }}
 
 jobs:
@@ -133,5 +121,3 @@ jobs:
           bash .release/script/packager.sh
           --version ${{ needs.prework.outputs.new-tag }}
           --last-release-version ${{ needs.prework.outputs.last-release-tag }}
-          --release-cf ${{ github.event.inputs.release-cf }}
-          --release-wago ${{ github.event.inputs.release-wago }}
