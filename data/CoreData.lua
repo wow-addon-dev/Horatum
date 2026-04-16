@@ -8,7 +8,6 @@ HRT.GAME_VERSION = GetBuildInfo()
 
 HRT.LINK_GITHUB = C_AddOns.GetAddOnMetadata(addonName, "X-Github")
 HRT.LINK_CURSEFORGE = C_AddOns.GetAddOnMetadata(addonName, "X-Curseforge")
-HRT.LINK_WAGO = C_AddOns.GetAddOnMetadata(addonName, "X-Wago")
 
 HRT.MEDIA_PATH = "Interface\\AddOns\\" .. addonName .. "\\assets\\"
 
