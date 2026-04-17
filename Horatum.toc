@@ -1,6 +1,6 @@
 ## Interface: 120005, 120001
 ## Title: Horatum
-## Author: diomsg (Diom-Antonidas EU)
+## Author: Arcane Wizard | created by diomsg
 
 ## Version: @project-version@
 ## IconTexture: Interface\AddOns\Horatum\assets\icon.blp

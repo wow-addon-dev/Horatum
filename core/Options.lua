@@ -122,38 +122,31 @@ function Options:Initialize()
 	layout:AddInitializer(CreateSettingsListSectionHeaderInitializer(L["options.about"]))
 
 	do
-		local data = {
+		layout:AddInitializer(Settings.CreateElementInitializer("ArcaneWizardLibrary_SettingsPanelTextNormal", {
 			leftText = L["options.about.game-version"],
 			rightText = HRT.GAME_VERSION .. " (" .. HRT.GAME_FLAVOR .. ")",
-		}
-
-		local text = layout:AddInitializer(Settings.CreateElementInitializer("ArcaneWizardLibrary_OptionsMenuText", data))
-
-		function text:GetExtent()
-			return 14
-		end
+		}))
 	end
 
 	do
-		local data = {
+		layout:AddInitializer(Settings.CreateElementInitializer("ArcaneWizardLibrary_SettingsPanelTextNormal", {
 			leftText = L["options.about.addon-version"],
 			rightText = HRT.ADDON_VERSION .. " (" .. HRT.ADDON_BUILD_DATE .. ")"
-		}
-
-		local text = layout:AddInitializer(Settings.CreateElementInitializer("ArcaneWizardLibrary_OptionsMenuText", data))
-
-		function text:GetExtent()
-			return 14
-		end
+		}))
 	end
 
 	do
-		local data = {
+		layout:AddInitializer(Settings.CreateElementInitializer("ArcaneWizardLibrary_SettingsPanelTextNormal", {
+			leftText = L["options.about.lib-version"],
+			rightText = AWL.ADDON_VERSION .. " (" .. AWL.ADDON_BUILD_DATE .. ")"
+		}))
+	end
+
+	do
+		layout:AddInitializer(Settings.CreateElementInitializer("ArcaneWizardLibrary_SettingsPanelTextLarge", {
 			leftText = L["options.about.author"],
 			rightText = HRT.ADDON_AUTHOR
-		}
-
-		local text = layout:AddInitializer(Settings.CreateElementInitializer("ArcaneWizardLibrary_OptionsMenuText", data))
+		}))
 	end
 
 	do
@@ -162,7 +155,7 @@ function Options:Initialize()
 		local buttonText = L["options.about.button-github.button"]
 
         local function OnButtonClick()
-            AWL.Dialog:ShowLinkDialog(HRT.LINK_GITHUB)
+            AWL.Dialogs:ShowLinkDialog(HRT.LINK_GITHUB)
         end
 
         local buttonInitializer = CreateSettingsButtonInitializer(name, buttonText, OnButtonClick, tooltip, true)

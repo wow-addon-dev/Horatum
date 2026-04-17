@@ -25,11 +25,8 @@ L["options.other.debug-mode.tooltip"] = "Die Aktivierung des Debugmodus zeigt zu
 L["options.about"] = "Über"
 L["options.about.game-version"] = "Spielversion"
 L["options.about.addon-version"] = "Addonversion"
+L["options.about.lib-version"] = "Bibliotheksversion"
 L["options.about.author"] = "Autor"
-
-L["options.about.button-delete-data.name"] = "???"
-L["options.about.button-delete-data.tooltip"] = "???"
-L["options.about.button-delete-data.button"] = "???"
 
 L["options.about.button-github.name"] = "Feedback & Hilfe"
 L["options.about.button-github.tooltip"] = "Öffnet ein Popup-Fenster mit einem Link nach GitHub."
