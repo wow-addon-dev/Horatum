@@ -22,7 +22,7 @@ This is a World of Warcraft addon that tracks every boss encounter and saves you
 
 ## Supported Languages & Flavors
 
-* Languages: English and German
+* Languages: English, German
 * Flavors: Retail
 
 ## Installation & Quick Start
