@@ -4,7 +4,7 @@
 
 _Master the clock. Conquer the combat._
 
-This is a World of Warcraft addon that tracks every boss encounter and saves your fastest victories. It provides real-time feedback during combat and keeps a record of your performance across different difficulties.
+Horatum is a World of Warcraft addon that tracks every boss encounter and saves your fastest victories. It provides real-time feedback during combat and keeps a record of your performance across different difficulties.
 
 **Key Features**
 
