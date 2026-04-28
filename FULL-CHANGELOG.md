@@ -1,3 +1,9 @@
+**v2.1-alpha.1 (2026-04-28)**
+- Added: Required dependency 'Arcane Wizard: Library'
+- Changed: License
+- Updated: Addon description
+- Refactoring of the addon structure and source code
+
 **v2.0 (2026-04-18)**
 - Added: Required dependency 'Arcane Wizard: Library'
 - Changed: License
