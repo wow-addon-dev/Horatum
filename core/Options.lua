@@ -34,137 +34,113 @@ local minimapButtonProxy = setmetatable({}, {
 function Options:Initialize()
     local category, layout = Settings.RegisterVerticalLayoutCategory(addonName)
 
-	local variableTableGeneral = HRT.options.general
-	local variableTableCombatTimeTracker = HRT.options.combatTimeTracker
-	local variableTableOther = HRT.options.other
+    layout:AddInitializer(CreateSettingsListSectionHeaderInitializer(L["options.general"]))
 
-	layout:AddInitializer(CreateSettingsListSectionHeaderInitializer(L["options.general"]))
+    -- Notification
+    AWL.Settings:AddCheckbox(category, {
+        variableTable = HRT.options.general,
+        settingKey    = addonName .. "_notification",
+        variableName  = "notification",
+        name          = L["options.general.notification.name"],
+        tooltip       = L["options.general.notification.tooltip"],
+        default       = true
+    })
 
-    do
-        local name = L["options.general.notification.name"]
-        local tooltip = L["options.general.notification.tooltip"]
-        local variable = "notification"
-        local defaultValue = true
+    -- Minimap Button
+    AWL.Settings:AddCheckbox(category, {
+        variableTable = minimapButtonProxy,
+        settingKey    = addonName .. "_hide",
+        variableName  = "hide",
+        name          = L["options.general.minimap-button.name"],
+        tooltip       = L["options.general.minimap-button.tooltip"],
+        default       = true
+    })
 
-        local setting = Settings.RegisterAddOnSetting(category, addonName .. "_" .. variable, variable, variableTableGeneral, Settings.VarType.Boolean, name, defaultValue)
-        Settings.CreateCheckbox(category, setting, tooltip)
-    end
-
-	do
-        local name = L["options.general.minimap-button.name"]
-        local tooltip = L["options.general.minimap-button.tooltip"]
-        local variable = "hide"
-        local defaultValue = false
-
-        local setting = Settings.RegisterAddOnSetting(category, addonName .. "_" .. variable, variable, minimapButtonProxy, Settings.VarType.Boolean, name, not defaultValue)
-
-        Settings.CreateCheckbox(category, setting, tooltip)
-    end
 
     layout:AddInitializer(CreateSettingsListSectionHeaderInitializer(L["options.combat-time-tracker"]))
 
-    do
-        local name = L["options.combat-time-tracker.scale.name"]
-        local tooltip = L["options.combat-time-tracker.scale.tooltip"]
-        local variable = "scale"
-        local defaultValue = 100
-
-        local minValue = 50
-        local maxValue = 150
-        local step = 1
-
-        local setting = Settings.RegisterAddOnSetting(category, addonName .. "_" .. variable, variable, variableTableCombatTimeTracker, Settings.VarType.Number, name, defaultValue)
-		setting:SetValueChangedCallback(function(owner, settingObj, newValue)
-			CombatTimeTracker:Show()
+    -- Scale
+    AWL.Settings:AddSlider(category, {
+        variableTable = HRT.options.combatTimeTracker,
+        settingKey    = addonName .. "_scale",
+        variableName  = "scale",
+        name          = L["options.combat-time-tracker.scale.name"],
+        tooltip       = L["options.combat-time-tracker.scale.tooltip"],
+        default       = 100, minValue = 50, maxValue = 150, step = 1,
+        formatter     = function(value) return value .. " %" end,
+        onClick       = function()
+            CombatTimeTracker:Show()
             CombatTimeTracker:SetScale()
-        end)
+        end
+    })
 
-		local options = Settings.CreateSliderOptions(minValue, maxValue, step)
-        options:SetLabelFormatter(MinimalSliderWithSteppersMixin.Label.Right, function(value) return value .. " %" end)
-
-        Settings.CreateSlider(category, setting, options, tooltip)
-    end
-
-    do
-        local name = L["options.combat-time-tracker.background-transparency.name"]
-        local tooltip = L["options.combat-time-tracker.background-transparency.tooltip"]
-        local variable = "background-transparency"
-        local defaultValue = 60
-
-        local minValue = 0
-        local maxValue = 100
-        local step = 1
-
-        local setting = Settings.RegisterAddOnSetting(category, addonName .. "_" .. variable, variable, variableTableCombatTimeTracker, Settings.VarType.Number, name, defaultValue)
-		setting:SetValueChangedCallback(function(owner, settingObj, newValue)
-			CombatTimeTracker:Show()
+    -- Background Transparency
+    AWL.Settings:AddSlider(category, {
+        variableTable = HRT.options.combatTimeTracker,
+        settingKey    = addonName .. "_background-transparency",
+        variableName  = "background-transparency",
+        name          = L["options.combat-time-tracker.background-transparency.name"],
+        tooltip       = L["options.combat-time-tracker.background-transparency.tooltip"],
+        default       = 60, minValue = 0, maxValue = 100, step = 1,
+        formatter     = function(value) return value .. " %" end,
+        onClick       = function()
+            CombatTimeTracker:Show()
             CombatTimeTracker:SetBackgroundTransparency()
-        end)
-
-		local options = Settings.CreateSliderOptions(minValue, maxValue, step)
-        options:SetLabelFormatter(MinimalSliderWithSteppersMixin.Label.Right, function(value) return value .. " %" end)
-
-        Settings.CreateSlider(category, setting, options, tooltip)
-    end
+        end
+    })
 
     layout:AddInitializer(CreateSettingsListSectionHeaderInitializer(L["options.other"]))
 
-    do
-        local name = L["options.other.debug-mode.name"]
-        local tooltip = L["options.other.debug-mode.tooltip"]
-        local variable = "debug-mode"
-        local defaultValue = false
+    -- Debug Mode
+    AWL.Settings:AddCheckbox(category, {
+        variableTable = HRT.options.other,
+        settingKey    = addonName .. "_debug-mode",
+        variableName  = "debug-mode",
+        name          = L["options.other.debug-mode.name"],
+        tooltip       = L["options.other.debug-mode.tooltip"],
+        default       = false
+    })
 
-        local setting = Settings.RegisterAddOnSetting(category, addonName .. "_" .. variable, variable, variableTableOther, Settings.VarType.Boolean, name, defaultValue)
-        Settings.CreateCheckbox(category, setting, tooltip)
-    end
+    layout:AddInitializer(CreateSettingsListSectionHeaderInitializer(L["options.about"]))
 
-	layout:AddInitializer(CreateSettingsListSectionHeaderInitializer(L["options.about"]))
+    -- Game Version
+    AWL.Settings:AddInfoText(layout, {
+        leftText  = L["options.about.game-version"],
+        rightText = HRT.GAME_VERSION .. " (" .. HRT.GAME_FLAVOR .. ")"
+    })
 
-	do
-		layout:AddInitializer(Settings.CreateElementInitializer("ArcaneWizardLibrary_SettingsPanelTextNormal", {
-			leftText = L["options.about.game-version"],
-			rightText = HRT.GAME_VERSION .. " (" .. HRT.GAME_FLAVOR .. ")",
-		}))
-	end
+    -- Addon Version
+    AWL.Settings:AddInfoText(layout, {
+        leftText  = L["options.about.addon-version"],
+        rightText = HRT.ADDON_VERSION .. " (" .. HRT.ADDON_BUILD_DATE .. ")"
+    })
 
-	do
-		layout:AddInitializer(Settings.CreateElementInitializer("ArcaneWizardLibrary_SettingsPanelTextNormal", {
-			leftText = L["options.about.addon-version"],
-			rightText = HRT.ADDON_VERSION .. " (" .. HRT.ADDON_BUILD_DATE .. ")"
-		}))
-	end
+    -- Library Version
+    AWL.Settings:AddInfoText(layout, {
+        leftText  = L["options.about.lib-version"],
+        rightText = AWL.ADDON_VERSION .. " (" .. AWL.ADDON_BUILD_DATE .. ")"
+    })
 
-	do
-		layout:AddInitializer(Settings.CreateElementInitializer("ArcaneWizardLibrary_SettingsPanelTextNormal", {
-			leftText = L["options.about.lib-version"],
-			rightText = AWL.ADDON_VERSION .. " (" .. AWL.ADDON_BUILD_DATE .. ")"
-		}))
-	end
+    -- Author
+    AWL.Settings:AddInfoText(layout, {
+        leftText  = L["options.about.author"],
+        rightText = HRT.ADDON_AUTHOR,
+        height    = 30
+    })
 
-	do
-		layout:AddInitializer(Settings.CreateElementInitializer("ArcaneWizardLibrary_SettingsPanelTextLarge", {
-			leftText = L["options.about.author"],
-			rightText = HRT.ADDON_AUTHOR
-		}))
-	end
-
-	do
-        local name = L["options.about.button-github.name"]
-        local tooltip = L["options.about.button-github.tooltip"]
-		local buttonText = L["options.about.button-github.button"]
-
-        local function OnButtonClick()
-            AWL.Dialogs:ShowLinkDialog(HRT.LINK_GITHUB)
-        end
-
-        local buttonInitializer = CreateSettingsButtonInitializer(name, buttonText, OnButtonClick, tooltip, true)
-        layout:AddInitializer(buttonInitializer)
-    end
+    -- GitHub Link
+    AWL.Settings:AddButton(layout, {
+        name       = L["options.about.button-github.name"],
+        buttonText = L["options.about.button-github.button"],
+        tooltip    = L["options.about.button-github.tooltip"],
+        onClick    = function()
+			AWL.Dialogs:ShowLinkDialog(HRT.LINK_GITHUB)
+		end
+    })
 
     Settings.RegisterAddOnCategory(category)
 
-	HRT.MAIN_CATEGORY_ID = category:GetID()
+    HRT.MAIN_CATEGORY_ID = category:GetID()
 end
 
 HRT.Options = Options
