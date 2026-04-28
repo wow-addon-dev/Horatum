@@ -1,5 +1,5 @@
-name: Publish 'Horatum'
-run-name: Publish 'Horatum' (${{ inputs.release-type }})
+name: Publish a 'Horatum'
+run-name: Publish a 'Horatum' (${{ inputs.release-type }})
 
 on:
   workflow_dispatch:
