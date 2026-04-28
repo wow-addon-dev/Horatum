@@ -1,5 +1,5 @@
 name: Publish 'Horatum'
-run-name: Publish 'Horatum' (${{ github.event.inputs.release-type }})
+run-name: Publish 'Horatum' (${{ inputs.release-type }})
 
 on:
   workflow_dispatch:
@@ -28,11 +28,10 @@ on:
 
 jobs:
   call-blueprint:
-    uses: wow-addon-dev/.github/.github/workflows/release_blueprint.yml@main
+    uses: wow-addon-dev/release-script/.github/workflows/release_blueprint.yml@main
     with:
       release-type: ${{ inputs.release-type }}
       release-tag: ${{ inputs.release-tag }}
-
-      build: ${{ inputs.build == 'true' }}
-      full-changelog: ${{ inputs.full-changelog == 'true' }}
+      build: ${{ inputs.build }}
+      full-changelog: ${{ inputs.full-changelog }}
     secrets: inherit
