@@ -28,7 +28,7 @@ on:
 
 jobs:
   call-blueprint:
-    uses: wow-addon-dev/release-script/.github/workflows/release_blueprint.yml@main
+    uses: wow-addon-dev/.github/.github/workflows/release_blueprint.yml@main
     with:
       release-type: ${{ inputs.release-type }}
       release-tag: ${{ inputs.release-tag }}
