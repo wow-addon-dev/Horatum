@@ -34,4 +34,5 @@ jobs:
       release-tag: ${{ inputs.release-tag }}
       build: ${{ inputs.build }}
       full-changelog: ${{ inputs.full-changelog }}
+      cf-project-id: ${{ vars.CF_PROJECT_ID }}
     secrets: inherit
