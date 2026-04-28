@@ -1,3 +1,6 @@
+**v2.1 (2026-04-28)**
+- Adapted to the latest version of Arcane Wizard: Library to ensure full compatibility
+
 **v2.0 (2026-04-18)**
 - Added: Required dependency 'Arcane Wizard: Library'
 - Changed: License
