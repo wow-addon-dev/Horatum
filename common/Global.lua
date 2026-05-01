@@ -2,6 +2,8 @@ local addonName, HRT = ...
 
 local L = HRT.Localization
 
+local Utils = HRT.Utils
+
 ---------------------
 --- Main Funtions ---
 ---------------------
@@ -30,6 +32,10 @@ function Horatum_CompartmentOnClick(_, button)
 			HRT.CombatTimeTracker:Show()
 		end
     elseif button == "RightButton" then
-        Settings.OpenToCategory(HRT.MAIN_CATEGORY_ID)
+		if not InCombatLockdown() then
+			Settings.OpenToCategory(HRT.MAIN_CATEGORY_ID)
+		else
+			Utils:PrintDebug("In combat. The options menu cannot be opened.")
+		end
     end
 end

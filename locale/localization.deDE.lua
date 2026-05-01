@@ -14,9 +14,9 @@ L["options.general.minimap-button.tooltip"] = "Bei Aktivierung wird der Minimap 
 
 L["options.combat-time-tracker"] = "Kampfzeiten-Tracker"
 L["options.combat-time-tracker.scale.name"] = "UI-Skalierung"
-L["options.combat-time-tracker.scale.tooltip"] = "Legt die Größenskalierung des |cnGOLD_FONT_COLOR:Kampfzeiten-Tracker|r fest."
+L["options.combat-time-tracker.scale.tooltip"] = "Legt die Größenskalierung des Kampfzeiten-Tracker fest."
 L["options.combat-time-tracker.background-transparency.name"] = "Hintergrundtransparenz"
-L["options.combat-time-tracker.background-transparency.tooltip"] = "Legt die Hintergrundtransparenz des |cnGOLD_FONT_COLOR:Kampfzeiten-Tracker|r fest."
+L["options.combat-time-tracker.background-transparency.tooltip"] = "Legt die Hintergrundtransparenz des Kampfzeiten-Tracker fest."
 
 L["options.other"] = "Sonstige Einstellungen"
 L["options.other.debug-mode.name"] = "Debugmodus"
@@ -34,7 +34,7 @@ L["options.about.button-github.button"] = "GitHub"
 
 -- General
 
-L["minimap-button.tooltip"] = "|cnLINK_FONT_COLOR:Linksklick|r zum anzeigen oder ausblenden des |cnGOLD_FONT_COLOR:Kampfzeiten-Tracker|r.\n|cnLINK_FONT_COLOR:Rechtsklick|r zum Öffnen der Einstellungen."
+L["minimap-button.tooltip"] = "|cnLINK_FONT_COLOR:Linksklick|r zum anzeigen oder ausblenden des Kampfzeiten-Tracker.\n|cnLINK_FONT_COLOR:Rechtsklick|r zum Öffnen der Einstellungen."
 
 -- Chat
 

@@ -20,7 +20,11 @@ local horatumFrame = CreateFrame("Frame", "Horatum")
 
 local function SlashCommand(msg, editbox)
     if not msg or msg:trim() == "" then
-		Settings.OpenToCategory(HRT.MAIN_CATEGORY_ID)
+		if not InCombatLockdown() then
+			Settings.OpenToCategory(HRT.MAIN_CATEGORY_ID)
+		else
+			Utils:PrintDebug("In combat. The options menu cannot be opened.")
+		end
 	elseif msg:trim() == "show" then
 		CombatTimeTracker:Show()
 	else

@@ -64,7 +64,11 @@ function Utils:InitializeMinimapButton()
 					HRT.CombatTimeTracker:Show()
 				end
 			elseif button == "RightButton" then
-                Settings.OpenToCategory(HRT.MAIN_CATEGORY_ID)
+				if not InCombatLockdown() then
+					Settings.OpenToCategory(HRT.MAIN_CATEGORY_ID)
+				else
+					Utils:PrintDebug("In combat. The options menu cannot be opened.")
+				end
             end
         end,
         OnTooltipShow = function(tooltip)

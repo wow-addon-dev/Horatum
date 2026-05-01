@@ -17,9 +17,9 @@ L["options.general.minimap-button.tooltip"] = "When this is enabled, the minimap
 
 L["options.combat-time-tracker"] = "Combat Time Tracker"
 L["options.combat-time-tracker.scale.name"] = "UI Scale"
-L["options.combat-time-tracker.scale.tooltip"] = "Defines the size scaling of the |cnGOLD_FONT_COLOR:Combat Time Tracker|r."
+L["options.combat-time-tracker.scale.tooltip"] = "Defines the size scaling of the Combat Time Tracker."
 L["options.combat-time-tracker.background-transparency.name"] = "Background Transparency"
-L["options.combat-time-tracker.background-transparency.tooltip"] = "Defines the background transparency of the |cnGOLD_FONT_COLOR:Combat Time Tracker|r."
+L["options.combat-time-tracker.background-transparency.tooltip"] = "Defines the background transparency of the Combat Time Tracker."
 
 L["options.other"] = "Other Options"
 L["options.other.debug-mode.name"] = "Debug Mode"
@@ -37,7 +37,7 @@ L["options.about.button-github.button"] = "GitHub"
 
 -- General
 
-L["minimap-button.tooltip"] = "|cnLINK_FONT_COLOR:Left-click|r to show or hide the |cnGOLD_FONT_COLOR:Combat Time Tracker|r.\n|cnLINK_FONT_COLOR:Right-click|r to open the options."
+L["minimap-button.tooltip"] = "|cnLINK_FONT_COLOR:Left-click|r to show or hide the Combat Time Tracker.\n|cnLINK_FONT_COLOR:Right-click|r to open the options."
 
 -- Chat
 
