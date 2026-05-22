@@ -63,6 +63,8 @@ local function EncounterInfo(difficultyID)
 		return true, 0, L["combat-time-tracker.raid"] .. " - " .. name
 	elseif difficultyID == 220 then			-- Raid Geschichtenmodus
 		return true, 0, L["combat-time-tracker.raid"] .. " - " .. name
+	elseif difficultyID == 233 then			-- Raid Mythisch (flexibel)
+		return true, 0, L["combat-time-tracker.raid"] .. " - " .. name
 	elseif difficultyID == 208  then		-- Tiefe
 		local delveData1, delveData2, delveData3 = C_UIWidgetManager.GetScenarioHeaderDelvesWidgetVisualizationInfo(6183), C_UIWidgetManager.GetScenarioHeaderDelvesWidgetVisualizationInfo(6184), C_UIWidgetManager.GetScenarioHeaderDelvesWidgetVisualizationInfo(6185)
 

@@ -1,4 +1,4 @@
-## Interface: 120005
+## Interface: 120007, 120005
 ## Title: Horatum
 ## Author: Arcane Wizard | created by diomsg
 
