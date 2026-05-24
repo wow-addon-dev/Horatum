@@ -106,26 +106,28 @@ function Options:Initialize()
     -- Game Version
     AWL.Settings:AddInfoText(layout, {
         leftText  = L["options.about.game-version"],
-        rightText = HRT.GAME_VERSION .. " (" .. HRT.GAME_FLAVOR .. ")"
+        rightText = HRT.GAME_VERSION .. " (" .. HRT.GAME_FLAVOR .. ")",
+        height    = "compact"
     })
 
     -- Addon Version
     AWL.Settings:AddInfoText(layout, {
         leftText  = L["options.about.addon-version"],
-        rightText = HRT.ADDON_VERSION .. " (" .. HRT.ADDON_BUILD_DATE .. ")"
+        rightText = HRT.ADDON_VERSION .. " (" .. HRT.ADDON_BUILD_DATE .. ")",
+        height    = "compact"
     })
 
     -- Library Version
     AWL.Settings:AddInfoText(layout, {
         leftText  = L["options.about.lib-version"],
-        rightText = AWL.ADDON_VERSION .. " (" .. AWL.ADDON_BUILD_DATE .. ")"
+        rightText = AWL.ADDON_VERSION .. " (" .. AWL.ADDON_BUILD_DATE .. ")",
+        height    = "compact"
     })
 
     -- Author
     AWL.Settings:AddInfoText(layout, {
         leftText  = L["options.about.author"],
-        rightText = HRT.ADDON_AUTHOR,
-        height    = 30
+        rightText = HRT.ADDON_AUTHOR
     })
 
     -- GitHub Link
