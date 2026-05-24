@@ -1,3 +1,7 @@
+**v2.4 (2026-05-24)**
+- Added: The boss combat encouters in mythic raids (flexible) are now being tracked
+- Added: TOC version for patch 12.0.7 [retail]
+
 **v2.3 (2026-05-10)**
 - Removed: TOC version for patch 12.0.1 [retail]
 
