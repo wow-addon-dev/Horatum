@@ -68,6 +68,7 @@ function HoratumFrame:ENCOUNTER_END(_, encounterID, encounterName, difficultyID,
 
 	if isInCombat then
 		CombatTimeTracker:EncounterEnd(success)
+		isInCombat = false
 
 		Utils:PrintDebug("The encounter has ended.")
 	end

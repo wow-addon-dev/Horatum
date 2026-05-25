@@ -15,9 +15,15 @@ local Options = {}
 
 local minimapButtonProxy = setmetatable({}, {
     __index = function(_, key)
-        return not HRT.settings.general["minimap-button"]["hide"]
+		if key == "hide" then
+			return not HRT.settings.general["minimap-button"]["hide"]
+		end
     end,
     __newindex = function(_, key, value)
+		if key ~= "hide" then
+			return
+		end
+
         HRT.settings.general["minimap-button"]["hide"] = not value
 
         if value then
