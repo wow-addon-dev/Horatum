@@ -32,9 +32,9 @@ local function SlashCommand(msg, editbox)
 	end
 end
 
-----------------------
---- Main Functions ---
-----------------------
+------------------------
+--- Public Functions ---
+------------------------
 
 function HoratumFrame:OnEvent(event, ...)
 	self[event](self, event, ...)

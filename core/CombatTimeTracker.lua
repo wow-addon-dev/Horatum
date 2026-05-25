@@ -221,9 +221,9 @@ local function InitializeFrames()
     end
 end
 
-----------------------
---- Main Functions ---
-----------------------
+------------------------
+--- Public Functions ---
+------------------------
 
 function CombatTimeTracker:Initialize()
     InitializeFrames()

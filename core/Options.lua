@@ -34,9 +34,9 @@ local minimapButtonProxy = setmetatable({}, {
     end,
 })
 
----------------------
---- Main Functions ---
----------------------
+------------------------
+--- Public Functions ---
+------------------------
 
 function Options:Initialize()
     local category, layout = Settings.RegisterVerticalLayoutCategory(addonName)
@@ -105,10 +105,9 @@ function Options:Initialize()
         end
     })
 
-	AWL.Profiles:AddSettingsSection(layout, {
-		useAccountProfile = function()
-			return Utils:IsAccountProfile()
-		end,
+	-- Profiles Section
+	AWL.Settings:AddProfilesSection(layout, {
+		useAccountProfile = Utils:IsAccountProfile(),
 		onSwitchProfile = function()
 			Utils:ToggleProfileMode()
 			ReloadUI()
@@ -119,6 +118,7 @@ function Options:Initialize()
 		end
 	})
 
+	-- About Section
     AWL.Settings:AddAboutSection(layout, {
         gameVersion    = HRT.GAME_VERSION,
         gameFlavor     = HRT.GAME_FLAVOR,

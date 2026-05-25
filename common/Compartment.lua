@@ -4,9 +4,9 @@ local L = HRT.Localization
 
 local Utils = HRT.modules.Utils
 
----------------------
---- Main Functions ---
----------------------
+------------------------
+--- Public Functions ---
+------------------------
 
 function Horatum_CompartmentOnEnter(self, button)
 	GameTooltip:ClearAllPoints()

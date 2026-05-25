@@ -25,12 +25,12 @@ local function CopyTable(source)
 end
 
 local function GetCharKey()
-	return AWL.Profiles:GetCharKey()
+	return AWL.Utils:GetCharKey()
 end
 
-----------------------
---- Main Functions ---
-----------------------
+------------------------
+--- Public Functions ---
+------------------------
 
 function Utils:PrintDebug(msg)
     if HRT.settings.general["debug-mode"] then
