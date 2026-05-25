@@ -23,16 +23,6 @@ L["options.combat-time-tracker.scale.tooltip"] = "Defines the size scaling of th
 L["options.combat-time-tracker.background-transparency.name"] = "Background Transparency"
 L["options.combat-time-tracker.background-transparency.tooltip"] = "Defines the background transparency of the Combat Time Tracker."
 
-L["options.about"] = "About"
-L["options.about.game-version"] = "Game Version"
-L["options.about.addon-version"] = "Addon Version"
-L["options.about.lib-version"] = "Library Version"
-L["options.about.author"] = "Author"
-
-L["options.about.button-github.name"] = "Feedback & Help"
-L["options.about.button-github.tooltip"] = "Opens a popup window with a link to GitHub."
-L["options.about.button-github.button"] = "GitHub"
-
 -- General
 
 L["minimap-button.tooltip"] = "|cnLINK_FONT_COLOR:Left-click|r to show or hide the Combat Time Tracker.\n|cnLINK_FONT_COLOR:Right-click|r to open the options."
@@ -49,9 +39,8 @@ L["chat.another-wipe"] = "You have lost to |cnGOLD_FONT_COLOR:%s|r (%s) before. 
 
 -- Combat Time Tracker
 
-L["combat-time-tracker.unknown"] = "unknown"
-L["combat-time-tracker.button-reset"] = "Reset"
-L["combat-time-tracker.wait-combat"] = "Waiting for combat..."
+L["combat-time-tracker.button-reset"] = "Reset display"
+L["combat-time-tracker.wait-combat"] = "Waiting for combat to begin..."
 L["combat-time-tracker.dungeon"] = "Dungeon"
 L["combat-time-tracker.raid"] = "Raid"
 L["combat-time-tracker.delves-tier"] = "Tier"

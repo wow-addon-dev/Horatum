@@ -34,28 +34,6 @@ local minimapButtonProxy = setmetatable({}, {
     end,
 })
 
-local function ShowProfileSwitchConfirmation()
-	local useAccountProfile = Utils:IsAccountProfile()
-
-	AWL.Dialogs:ShowConfirmDialog(
-		AWL.Profiles:GetSwitchConfirmText(useAccountProfile),
-		function()
-			Utils:ToggleProfileMode()
-			ReloadUI()
-		end
-	)
-end
-
-local function ShowDeleteCharacterProfilesConfirmation()
-	AWL.Dialogs:ShowConfirmDialog(
-		AWL.Profiles:GetText("delete-character-profiles.confirm"),
-		function()
-			Utils:ResetAllCharacterProfiles()
-			ReloadUI()
-		end
-	)
-end
-
 ---------------------
 --- Main Functions ---
 ---------------------
@@ -127,67 +105,27 @@ function Options:Initialize()
         end
     })
 
-	layout:AddInitializer(CreateSettingsListSectionHeaderInitializer(AWL.Profiles:GetText("section-header")))
-
-	-- Active Profile
-	AWL.Settings:AddInfoText(layout, {
-		leftText  = AWL.Profiles:GetText("profile-mode"),
-		rightText = AWL.Profiles:GetModeText(Utils:IsAccountProfile())
-	})
-
-	-- Switch Profile
-	AWL.Settings:AddButton(layout, {
-		name       = AWL.Profiles:GetText("switch.name"),
-		buttonText = AWL.Profiles:GetSwitchButtonText(Utils:IsAccountProfile()),
-		tooltip    = AWL.Profiles:GetText("switch.tooltip"),
-		onClick    = ShowProfileSwitchConfirmation
-	})
-
-	-- Delete Character Profiles
-	AWL.Settings:AddButton(layout, {
-		name       = AWL.Profiles:GetText("delete-character-profiles.name"),
-		buttonText = AWL.Profiles:GetText("delete-character-profiles.button"),
-		tooltip    = AWL.Profiles:GetText("delete-character-profiles.tooltip"),
-		onClick    = ShowDeleteCharacterProfilesConfirmation
-	})
-
-    layout:AddInitializer(CreateSettingsListSectionHeaderInitializer(L["options.about"]))
-
-    -- Game Version
-    AWL.Settings:AddInfoText(layout, {
-        leftText  = L["options.about.game-version"],
-        rightText = HRT.GAME_VERSION .. " (" .. HRT.GAME_FLAVOR .. ")",
-        height    = "compact"
-    })
-
-    -- Addon Version
-    AWL.Settings:AddInfoText(layout, {
-        leftText  = L["options.about.addon-version"],
-        rightText = HRT.ADDON_VERSION .. " (" .. HRT.ADDON_BUILD_DATE .. ")",
-        height    = "compact"
-    })
-
-    -- Library Version
-    AWL.Settings:AddInfoText(layout, {
-        leftText  = L["options.about.lib-version"],
-        rightText = AWL.ADDON_VERSION .. " (" .. AWL.ADDON_BUILD_DATE .. ")",
-        height    = "compact"
-    })
-
-    -- Author
-    AWL.Settings:AddInfoText(layout, {
-        leftText  = L["options.about.author"],
-        rightText = HRT.ADDON_AUTHOR
-    })
-
-    -- GitHub Link
-    AWL.Settings:AddButton(layout, {
-        name       = L["options.about.button-github.name"],
-        buttonText = L["options.about.button-github.button"],
-        tooltip    = L["options.about.button-github.tooltip"],
-        onClick    = function()
-			AWL.Dialogs:ShowLinkDialog(HRT.LINK_GITHUB)
+	AWL.Profiles:AddSettingsSection(layout, {
+		useAccountProfile = function()
+			return Utils:IsAccountProfile()
+		end,
+		onSwitchProfile = function()
+			Utils:ToggleProfileMode()
+			ReloadUI()
+		end,
+		onDeleteCharacterProfiles = function()
+			Utils:ResetAllCharacterProfiles()
+			ReloadUI()
 		end
+	})
+
+    AWL.Settings:AddAboutSection(layout, {
+        gameVersion    = HRT.GAME_VERSION,
+        gameFlavor     = HRT.GAME_FLAVOR,
+        addonVersion   = HRT.ADDON_VERSION,
+        addonBuildDate = HRT.ADDON_BUILD_DATE,
+        addonAuthor    = HRT.ADDON_AUTHOR,
+        githubLink     = HRT.LINK_GITHUB
     })
 
     Settings.RegisterAddOnCategory(category)

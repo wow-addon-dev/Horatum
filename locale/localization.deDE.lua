@@ -20,16 +20,6 @@ L["options.combat-time-tracker.scale.tooltip"] = "Legt die Größenskalierung de
 L["options.combat-time-tracker.background-transparency.name"] = "Hintergrundtransparenz"
 L["options.combat-time-tracker.background-transparency.tooltip"] = "Legt die Hintergrundtransparenz des Kampfzeiten-Trackers fest."
 
-L["options.about"] = "Über"
-L["options.about.game-version"] = "Spielversion"
-L["options.about.addon-version"] = "Addonversion"
-L["options.about.lib-version"] = "Bibliotheksversion"
-L["options.about.author"] = "Autor"
-
-L["options.about.button-github.name"] = "Feedback & Hilfe"
-L["options.about.button-github.tooltip"] = "Öffnet ein Popup-Fenster mit einem Link nach GitHub."
-L["options.about.button-github.button"] = "GitHub"
-
 -- General
 
 L["minimap-button.tooltip"] = "|cnLINK_FONT_COLOR:Linksklick|r zum Anzeigen oder Ausblenden des Kampfzeiten-Trackers.\n|cnLINK_FONT_COLOR:Rechtsklick|r zum Öffnen der Einstellungen."
@@ -46,9 +36,8 @@ L["chat.another-wipe"] = "Du hast gegen |cnGOLD_FONT_COLOR:%s|r (%s) bereits ver
 
 -- Combat Time Tracker
 
-L["combat-time-tracker.unknown"] = "unbekannt"
-L["combat-time-tracker.button-reset"] = "Zurücksetzen"
-L["combat-time-tracker.wait-combat"] = "Warte auf Kampf..."
+L["combat-time-tracker.button-reset"] = "Anzeige zurücksetzen"
+L["combat-time-tracker.wait-combat"] = "Warte auf Kampfbeginn..."
 L["combat-time-tracker.dungeon"] = "Dungeon"
 L["combat-time-tracker.raid"] = "Schlachtzug"
 L["combat-time-tracker.delves-tier"] = "Stufe"

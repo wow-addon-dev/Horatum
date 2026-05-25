@@ -7,7 +7,7 @@ on:
       release-type:
         description: 'Art des Releases'
         required: true
-        default: 'release'
+        default: 'Release'
         type: choice
         options:
           - Release
