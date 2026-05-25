@@ -69,10 +69,8 @@ local function EncounterInfo(difficultyID)
 	elseif difficultyID == 208  then		-- Tiefe
 		local delveData1, delveData2, delveData3 = C_UIWidgetManager.GetScenarioHeaderDelvesWidgetVisualizationInfo(6183), C_UIWidgetManager.GetScenarioHeaderDelvesWidgetVisualizationInfo(6184), C_UIWidgetManager.GetScenarioHeaderDelvesWidgetVisualizationInfo(6185)
 
-		if delveData1 then
-			if delveData1 and delveData1.tierText then
-				return true, tonumber(delveData1.tierText), name .. " - " .. L["combat-time-tracker.delves-tier"] .. " " .. delveData1.tierText
-			end
+		if delveData1 and delveData1.tierText then
+			return true, tonumber(delveData1.tierText), name .. " - " .. L["combat-time-tracker.delves-tier"] .. " " .. delveData1.tierText
 		elseif delveData2 and delveData2.shownState and delveData2.shownState == 1 then
 			return true, 8, name .. " - " .. L["combat-time-tracker.delves-tier"] .. " ?"
 		elseif delveData3 and delveData3.shownState and delveData3.shownState == 1 then
