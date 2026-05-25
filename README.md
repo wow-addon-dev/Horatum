@@ -1,21 +1,22 @@
 # Horatum
 
-[![GitHub Release](https://img.shields.io/github/v/release/wow-addon-dev/Horatum?color=blue&logo=github&cacheSeconds=600)](https://github.com/wow-addon-dev/Horatum/releases) [![GitHub Release Date](https://img.shields.io/github/release-date/wow-addon-dev/Horatum?color=blue&logo=github&cacheSeconds=600)](https://github.com/wow-addon-dev/Horatum/releases) [![Static Badge](https://img.shields.io/badge/buy_me_a_coffe-donate-yellow?logo=buy-me-a-coffee&logoColor=white)](https://buymeacoffee.com/diomsg)
+[![GitHub Release](https://img.shields.io/github/v/release/wow-addon-dev/Horatum?color=blue&logo=github&cacheSeconds=600)](https://github.com/wow-addon-dev/Horatum/releases) [![GitHub Release Date](https://img.shields.io/github/release-date/wow-addon-dev/Horatum?color=blue&logo=github&cacheSeconds=600)](https://github.com/wow-addon-dev/Horatum/releases) [![Static Badge](https://img.shields.io/badge/buy_me_a_coffee-donate-yellow?logo=buy-me-a-coffee&logoColor=white)](https://buymeacoffee.com/diomsg)
 
 _Master the clock. Conquer the combat._
 
-Horatum is a World of Warcraft addon that tracks every boss encounter and saves your fastest victories. It provides real-time feedback during combat and keeps a record of your performance across different difficulties.
+Horatum is a World of Warcraft addon that tracks every boss encounter and saves the fastest victories. It provides real-time feedback during combat and keeps a record of your performance across different difficulties.
 
 **Key Features**
 
-* **Combat Time Tracker** - During a boss combat, a small window will appear displaying the current combat time.
+* **Combat Time Tracker** - During a boss encounter, a small window will appear displaying the current combat time.
 * (Planned) **Combat Overview** - All boss combat times and other information can be displayed in an overview window.
 
 ## Features
 
 * Automatically starts when a dungeon or raid boss is engaged and stops the exact moment the combat ends or the group wipes.
 * Features a clean, semi-transparent frame that displays the ongoing combat time.
-* The number of victories and wipes is saved and can be displayed in the chat after a combat.
+* The number of victories and wipes is saved and can be displayed in the chat after combat.
+* Supports an account profile and character profiles.
 * Customizable UI:
 	* The Combat Time Tracker can be dragged and dropped to any location on the screen.
     * The size of the Combat Time Tracker can be easily adjusted to fit the user interface.

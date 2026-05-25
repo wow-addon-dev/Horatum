@@ -8,19 +8,17 @@ local L = HRT.Localization
 
 L["options.general"] = "Allgemeine Einstellungen"
 L["options.general.notification.name"] = "Chatbenachrichtigung"
-L["options.general.notification.tooltip"] = "Aktiviere oder deaktiviere die Benachrichtung im Chat nach einem Kampf."
-L["options.general.minimap-button.name"] = "Minimap Button"
-L["options.general.minimap-button.tooltip"] = "Bei Aktivierung wird der Minimap Button angezeigt."
+L["options.general.notification.tooltip"] = "Aktiviere oder deaktiviere die Benachrichtigung im Chat nach einem Kampf."
+L["options.general.minimap-button.name"] = "Minimap-Button"
+L["options.general.minimap-button.tooltip"] = "Bei Aktivierung wird der Minimap-Button angezeigt."
+L["options.general.debug-mode.name"] = "Debugmodus"
+L["options.general.debug-mode.tooltip"] = "Die Aktivierung des Debugmodus zeigt zusätzliche Informationen im Chat an."
 
 L["options.combat-time-tracker"] = "Kampfzeiten-Tracker"
 L["options.combat-time-tracker.scale.name"] = "UI-Skalierung"
-L["options.combat-time-tracker.scale.tooltip"] = "Legt die Größenskalierung des Kampfzeiten-Tracker fest."
+L["options.combat-time-tracker.scale.tooltip"] = "Legt die Größenskalierung des Kampfzeiten-Trackers fest."
 L["options.combat-time-tracker.background-transparency.name"] = "Hintergrundtransparenz"
-L["options.combat-time-tracker.background-transparency.tooltip"] = "Legt die Hintergrundtransparenz des Kampfzeiten-Tracker fest."
-
-L["options.other"] = "Sonstige Einstellungen"
-L["options.other.debug-mode.name"] = "Debugmodus"
-L["options.other.debug-mode.tooltip"] = "Die Aktivierung des Debugmodus zeigt zusätzliche Informationen im Chat an."
+L["options.combat-time-tracker.background-transparency.tooltip"] = "Legt die Hintergrundtransparenz des Kampfzeiten-Trackers fest."
 
 L["options.about"] = "Über"
 L["options.about.game-version"] = "Spielversion"
@@ -34,7 +32,7 @@ L["options.about.button-github.button"] = "GitHub"
 
 -- General
 
-L["minimap-button.tooltip"] = "|cnLINK_FONT_COLOR:Linksklick|r zum anzeigen oder ausblenden des Kampfzeiten-Tracker.\n|cnLINK_FONT_COLOR:Rechtsklick|r zum Öffnen der Einstellungen."
+L["minimap-button.tooltip"] = "|cnLINK_FONT_COLOR:Linksklick|r zum Anzeigen oder Ausblenden des Kampfzeiten-Trackers.\n|cnLINK_FONT_COLOR:Rechtsklick|r zum Öffnen der Einstellungen."
 
 -- Chat
 
@@ -49,7 +47,7 @@ L["chat.another-wipe"] = "Du hast gegen |cnGOLD_FONT_COLOR:%s|r (%s) bereits ein
 -- Combat Time Tracker
 
 L["combat-time-tracker.unknown"] = "unbekannt"
-L["combat-time-tracker.button-reset"] = "Zurücksetzten"
+L["combat-time-tracker.button-reset"] = "Zurücksetzen"
 L["combat-time-tracker.wait-combat"] = "Warte auf Kampf..."
 L["combat-time-tracker.dungeon"] = "Dungeon"
 L["combat-time-tracker.raid"] = "Schlachtzug"

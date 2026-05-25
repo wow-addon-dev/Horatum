@@ -1,23 +1,24 @@
 local addonName, HRT = ...
 
 local L = HRT.Localization
-local Utils = HRT.Utils
-local CombatTimeTracker = HRT.CombatTimeTracker
+
+local Utils = HRT.modules.Utils
+local CombatTimeTracker = HRT.modules.CombatTimeTracker
 
 local AWL = ArcaneWizardLibrary
 
 local Options = {}
 
 ----------------------
---- Local Funtions ---
+--- Local Functions ---
 ----------------------
 
 local minimapButtonProxy = setmetatable({}, {
     __index = function(_, key)
-        return not HRT.options.general["minimap-button"]["hide"]
+        return not HRT.settings.general["minimap-button"]["hide"]
     end,
     __newindex = function(_, key, value)
-        HRT.options.general["minimap-button"]["hide"] = not value
+        HRT.settings.general["minimap-button"]["hide"] = not value
 
         if value then
             Utils.minimapButton:Show("Horatum")
@@ -27,8 +28,30 @@ local minimapButtonProxy = setmetatable({}, {
     end,
 })
 
+local function ShowProfileSwitchConfirmation()
+	local useAccountProfile = Utils:IsAccountProfile()
+
+	AWL.Dialogs:ShowConfirmDialog(
+		AWL.Profiles:GetSwitchConfirmText(useAccountProfile),
+		function()
+			Utils:ToggleProfileMode()
+			ReloadUI()
+		end
+	)
+end
+
+local function ShowDeleteCharacterProfilesConfirmation()
+	AWL.Dialogs:ShowConfirmDialog(
+		AWL.Profiles:GetText("delete-character-profiles.confirm"),
+		function()
+			Utils:ResetAllCharacterProfiles()
+			ReloadUI()
+		end
+	)
+end
+
 ---------------------
---- Main Funtions ---
+--- Main Functions ---
 ---------------------
 
 function Options:Initialize()
@@ -38,7 +61,7 @@ function Options:Initialize()
 
     -- Notification
     AWL.Settings:AddCheckbox(category, {
-        variableTable = HRT.options.general,
+        variableTable = HRT.settings.general,
         settingKey    = addonName .. "_notification",
         variableName  = "notification",
         name          = L["options.general.notification.name"],
@@ -56,12 +79,21 @@ function Options:Initialize()
         default       = true
     })
 
+    -- Debug Mode
+    AWL.Settings:AddCheckbox(category, {
+        variableTable = HRT.settings.general,
+        settingKey    = addonName .. "_debug-mode",
+        variableName  = "debug-mode",
+        name          = L["options.general.debug-mode.name"],
+        tooltip       = L["options.general.debug-mode.tooltip"],
+        default       = false
+    })
 
     layout:AddInitializer(CreateSettingsListSectionHeaderInitializer(L["options.combat-time-tracker"]))
 
     -- Scale
     AWL.Settings:AddSlider(category, {
-        variableTable = HRT.options.combatTimeTracker,
+        variableTable = HRT.settings.combatTimeTracker,
         settingKey    = addonName .. "_scale",
         variableName  = "scale",
         name          = L["options.combat-time-tracker.scale.name"],
@@ -76,7 +108,7 @@ function Options:Initialize()
 
     -- Background Transparency
     AWL.Settings:AddSlider(category, {
-        variableTable = HRT.options.combatTimeTracker,
+        variableTable = HRT.settings.combatTimeTracker,
         settingKey    = addonName .. "_background-transparency",
         variableName  = "background-transparency",
         name          = L["options.combat-time-tracker.background-transparency.name"],
@@ -89,17 +121,29 @@ function Options:Initialize()
         end
     })
 
-    layout:AddInitializer(CreateSettingsListSectionHeaderInitializer(L["options.other"]))
+	layout:AddInitializer(CreateSettingsListSectionHeaderInitializer(AWL.Profiles:GetText("section-header")))
 
-    -- Debug Mode
-    AWL.Settings:AddCheckbox(category, {
-        variableTable = HRT.options.other,
-        settingKey    = addonName .. "_debug-mode",
-        variableName  = "debug-mode",
-        name          = L["options.other.debug-mode.name"],
-        tooltip       = L["options.other.debug-mode.tooltip"],
-        default       = false
-    })
+	-- Active Profile
+	AWL.Settings:AddInfoText(layout, {
+		leftText  = AWL.Profiles:GetText("profile-mode"),
+		rightText = AWL.Profiles:GetModeText(Utils:IsAccountProfile())
+	})
+
+	-- Switch Profile
+	AWL.Settings:AddButton(layout, {
+		name       = AWL.Profiles:GetText("switch.name"),
+		buttonText = AWL.Profiles:GetSwitchButtonText(Utils:IsAccountProfile()),
+		tooltip    = AWL.Profiles:GetText("switch.tooltip"),
+		onClick    = ShowProfileSwitchConfirmation
+	})
+
+	-- Delete Character Profiles
+	AWL.Settings:AddButton(layout, {
+		name       = AWL.Profiles:GetText("delete-character-profiles.name"),
+		buttonText = AWL.Profiles:GetText("delete-character-profiles.button"),
+		tooltip    = AWL.Profiles:GetText("delete-character-profiles.tooltip"),
+		onClick    = ShowDeleteCharacterProfilesConfirmation
+	})
 
     layout:AddInitializer(CreateSettingsListSectionHeaderInitializer(L["options.about"]))
 
@@ -145,4 +189,4 @@ function Options:Initialize()
     HRT.MAIN_CATEGORY_ID = category:GetID()
 end
 
-HRT.Options = Options
+HRT.modules.Options = Options

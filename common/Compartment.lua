@@ -2,10 +2,10 @@ local addonName, HRT = ...
 
 local L = HRT.Localization
 
-local Utils = HRT.Utils
+local Utils = HRT.modules.Utils
 
 ---------------------
---- Main Funtions ---
+--- Main Functions ---
 ---------------------
 
 function Horatum_CompartmentOnEnter(self, button)
@@ -26,10 +26,10 @@ end
 
 function Horatum_CompartmentOnClick(_, button)
     if button == "LeftButton" then
-		if HRT.CombatTimeTracker:IsShown() then
-			HRT.CombatTimeTracker:Hide()
+		if HRT.modules.CombatTimeTracker:IsShown() then
+			HRT.modules.CombatTimeTracker:Hide()
 		else
-			HRT.CombatTimeTracker:Show()
+			HRT.modules.CombatTimeTracker:Show()
 		end
     elseif button == "RightButton" then
 		if not InCombatLockdown() then

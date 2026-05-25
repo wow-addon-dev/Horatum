@@ -1,5 +1,5 @@
 **v2.4 (2026-05-24)**
-- Added: The boss combat encouters in mythic raids (flexible) are now being tracked
+- Added: Mythic flex raid boss encounters are now tracked
 - Added: TOC version for patch 12.0.7 [retail]
 
 **v2.3 (2026-05-10)**
@@ -33,15 +33,15 @@
 - Added: Instance type is displayed in the Combat Time Tracker
 
 **v1.20 (2026-04-03)**
-- Added: The boss combat encouters in story mode raids are now being tracked
+- Added: Story mode raid boss encounters are now tracked
 
 **v1.19 (2026-04-02)**
-- Added: The boss combat encouters in 40 player raids are now being tracked
+- Added: 40-player raid boss encounters are now tracked
 - Fixed: Timewalking raids are now tracked correctly
 - Minor code adjustments
 
 **v1.18 (2026-04-01)**
-- Added: The boss combat encouters in old raids and timewalking dungeons / raids are now being tracked
+- Added: Old raid and timewalking dungeon / raid boss encounters are now tracked
 
 **v1.17 (2026-03-31)**
 - Changed: The delve tier is now detected, and combat data is saved for each tier
@@ -58,16 +58,16 @@
 
 **v1.14 (2026-03-15)**
 - Added: TOC version for patch 12.0.5 [retail]
-- Added: The number of victories and wipes is saved and can be displayed in the chat after a combat
+- Added: The number of victories and wipes is saved and can be displayed in the chat after combat
 - Removed: Support for 'Classic'
 - Removed: Support for 'Burning Crusade - Classic Anniversary Edition'
-- Removed: Support for 'Mist of Pandaria - Classic'
+- Removed: Support for 'Mists of Pandaria - Classic'
 
 **v1.13 (2026-03-12)**
 - Minor code adjustments
 
 **v1.12 (2026-03-11)**
-- Fixed: Combat data was not tracked [classic] [burning crusade - classic anniversary edition] [mist of pandaria - classic]
+- Fixed: Combat data was not tracked [classic] [burning crusade - classic anniversary edition] [mists of pandaria - classic]
 
 **v1.11 (2026-03-07)**
 - Added: New chat notifications

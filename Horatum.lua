@@ -2,9 +2,9 @@ local addonName, HRT = ...
 
 local L = HRT.Localization
 
-local Utils = HRT.Utils
-local Options = HRT.Options
-local CombatTimeTracker = HRT.CombatTimeTracker
+local Utils = HRT.modules.Utils
+local Options = HRT.modules.Options
+local CombatTimeTracker = HRT.modules.CombatTimeTracker
 
 local isInCombat = false
 
@@ -12,11 +12,11 @@ local isInCombat = false
 --- Frames ---
 --------------
 
-local horatumFrame = CreateFrame("Frame", "Horatum")
+local HoratumFrame = CreateFrame("Frame", "Horatum")
 
-----------------------
---- Local Funtions ---
-----------------------
+-----------------------
+--- Local Functions ---
+-----------------------
 
 local function SlashCommand(msg, editbox)
     if not msg or msg:trim() == "" then
@@ -32,26 +32,28 @@ local function SlashCommand(msg, editbox)
 	end
 end
 
----------------------
---- Main Funtions ---
----------------------
+----------------------
+--- Main Functions ---
+----------------------
 
-function horatumFrame:OnEvent(event, ...)
+function HoratumFrame:OnEvent(event, ...)
 	self[event](self, event, ...)
 end
 
-function horatumFrame:ADDON_LOADED(_, addOnName)
+function HoratumFrame:ADDON_LOADED(_, addOnName)
     if addOnName == addonName then
         Utils:InitializeDatabase()
 		Utils:InitializeMinimapButton()
 		Options:Initialize()
 		CombatTimeTracker:Initialize()
 
+		Utils:OpenSettingsOnLoading()
+
         Utils:PrintDebug("Addon fully loaded.")
     end
 end
 
-function horatumFrame:ENCOUNTER_START(_, encounterID, encounterName, difficultyID, groupSize)
+function HoratumFrame:ENCOUNTER_START(_, encounterID, encounterName, difficultyID, groupSize)
 	Utils:PrintDebug("Event 'ENCOUNTER_START' fired. Payload: encounterID=" .. tostring(encounterID) .. ", encounterName=" .. tostring(encounterName) .. ", difficultyID=" .. tostring(difficultyID) .. ", groupSize=" .. tostring(groupSize))
 
 	isInCombat = CombatTimeTracker:EncounterStart(encounterID, encounterName, difficultyID)
@@ -61,7 +63,7 @@ function horatumFrame:ENCOUNTER_START(_, encounterID, encounterName, difficultyI
 	end
 end
 
-function horatumFrame:ENCOUNTER_END(_, encounterID, encounterName, difficultyID, groupSize, success)
+function HoratumFrame:ENCOUNTER_END(_, encounterID, encounterName, difficultyID, groupSize, success)
 	Utils:PrintDebug("Event 'ENCOUNTER_END' fired. Payload: encounterID=" .. tostring(encounterID) .. ", encounterName=" .. tostring(encounterName) .. ", difficultyID=" .. tostring(difficultyID) .. ", groupSize=" .. tostring(groupSize) .. ", success=" .. tostring(success))
 
 	if isInCombat then
@@ -71,10 +73,10 @@ function horatumFrame:ENCOUNTER_END(_, encounterID, encounterName, difficultyID,
 	end
 end
 
-horatumFrame:RegisterEvent("ADDON_LOADED")
-horatumFrame:RegisterEvent("ENCOUNTER_START")
-horatumFrame:RegisterEvent("ENCOUNTER_END")
-horatumFrame:SetScript("OnEvent", horatumFrame.OnEvent)
+HoratumFrame:RegisterEvent("ADDON_LOADED")
+HoratumFrame:RegisterEvent("ENCOUNTER_START")
+HoratumFrame:RegisterEvent("ENCOUNTER_END")
+HoratumFrame:SetScript("OnEvent", HoratumFrame.OnEvent)
 
 SLASH_Horatum1, SLASH_Horatum2 = '/hrt', '/horatum'
 

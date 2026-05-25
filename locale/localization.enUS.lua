@@ -11,19 +11,17 @@ local L = HRT.Localization
 
 L["options.general"] = "General Options"
 L["options.general.notification.name"] = "Chat Notification"
-L["options.general.notification.tooltip"] = "Activate or deactivate the notification in the chat after a combat."
+L["options.general.notification.tooltip"] = "Activate or deactivate the notification in the chat after combat."
 L["options.general.minimap-button.name"] = "Minimap Button"
 L["options.general.minimap-button.tooltip"] = "When this is enabled, the minimap button is displayed."
+L["options.general.debug-mode.name"] = "Debug Mode"
+L["options.general.debug-mode.tooltip"] = "Enabling the debug mode displays additional information in the chat."
 
 L["options.combat-time-tracker"] = "Combat Time Tracker"
 L["options.combat-time-tracker.scale.name"] = "UI Scale"
 L["options.combat-time-tracker.scale.tooltip"] = "Defines the size scaling of the Combat Time Tracker."
 L["options.combat-time-tracker.background-transparency.name"] = "Background Transparency"
 L["options.combat-time-tracker.background-transparency.tooltip"] = "Defines the background transparency of the Combat Time Tracker."
-
-L["options.other"] = "Other Options"
-L["options.other.debug-mode.name"] = "Debug Mode"
-L["options.other.debug-mode.tooltip"] = "Enabling the debug mode displays additional information in the chat."
 
 L["options.about"] = "About"
 L["options.about.game-version"] = "Game Version"
