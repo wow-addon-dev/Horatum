@@ -8,7 +8,7 @@ local L = HRT.Localization
 
 L["options.general"] = "Allgemeine Einstellungen"
 L["options.general.notification.name"] = "Chatbenachrichtigung"
-L["options.general.notification.tooltip"] = "Aktiviere oder deaktiviere die Benachrichtigung im Chat nach einem Kampf."
+L["options.general.notification.tooltip"] = "Zeigt nach dem Kampf eine Chatbenachrichtigung an."
 L["options.general.minimap-button.name"] = "Minimap-Button"
 L["options.general.minimap-button.tooltip"] = "Bei Aktivierung wird der Minimap-Button angezeigt."
 L["options.general.debug-mode.name"] = "Debugmodus"

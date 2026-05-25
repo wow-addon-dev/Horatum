@@ -1,10 +1,8 @@
 local addonName, HRT = ...
 
-local L = HRT.Localization
-
-local Utils = HRT.modules.Utils
-local Options = HRT.modules.Options
 local CombatTimeTracker = HRT.modules.CombatTimeTracker
+local Options = HRT.modules.Options
+local Utils = HRT.modules.Utils
 
 local isInCombat = false
 
