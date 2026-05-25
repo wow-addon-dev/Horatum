@@ -122,7 +122,7 @@ end
 
 local function InitializeFrames()
 	CombatTimeTrackerFrame = CreateFrame("Frame", nil, UIParent)
-	CombatTimeTrackerFrame:SetWidth(160)
+	CombatTimeTrackerFrame:SetWidth(180)
 	CombatTimeTrackerFrame:SetScale(HRT.settings.combatTimeTracker["scale"] / 100)
 
 	CombatTimeTrackerFrame:SetMovable(true)
@@ -144,11 +144,11 @@ local function InitializeFrames()
 	CombatTimeTrackerFrame.background:SetColorTexture(0, 0, 0, HRT.settings.combatTimeTracker["background-transparency"] / 100)
 
 	CombatTimeTrackerFrame.timer = CombatTimeTrackerFrame:CreateFontString(nil, "OVERLAY", "GameFontHighlightHuge")
-	CombatTimeTrackerFrame.timer:SetPoint("TOP", CombatTimeTrackerFrame, "TOP", 0, -10)
+	CombatTimeTrackerFrame.timer:SetPoint("TOP", CombatTimeTrackerFrame, "TOP", 0, -15)
 	CombatTimeTrackerFrame.timer:SetText("00:00.000")
 
 	CombatTimeTrackerFrame.timeBar = CreateFrame("StatusBar", nil, CombatTimeTrackerFrame)
-	CombatTimeTrackerFrame.timeBar:SetSize(140, 10)
+	CombatTimeTrackerFrame.timeBar:SetSize(160, 10)
 	CombatTimeTrackerFrame.timeBar:SetPoint("TOP", CombatTimeTrackerFrame.timer, "BOTTOM", 0, -8)
 	CombatTimeTrackerFrame.timeBar:SetStatusBarTexture("Interface\\TargetingFrame\\UI-StatusBar")
 	CombatTimeTrackerFrame.timeBar:SetMinMaxValues(0, 1)
@@ -169,13 +169,13 @@ local function InitializeFrames()
 
 	CombatTimeTrackerFrame.name = CombatTimeTrackerFrame:CreateFontString(nil, "OVERLAY", "GameFontNormalSmall")
 	CombatTimeTrackerFrame.name:SetPoint("TOP", CombatTimeTrackerFrame.timeBar, "BOTTOM", 0, -8)
-	CombatTimeTrackerFrame.name:SetWidth(140)
+	CombatTimeTrackerFrame.name:SetWidth(160)
 	CombatTimeTrackerFrame.name:SetWordWrap(false)
 	CombatTimeTrackerFrame.name:SetText(L["combat-time-tracker.wait-combat"])
 
 	CombatTimeTrackerFrame.difficulty = CombatTimeTrackerFrame:CreateFontString(nil, "OVERLAY", "GameFontDisableSmall")
 	CombatTimeTrackerFrame.difficulty:SetPoint("TOP", CombatTimeTrackerFrame.name, "BOTTOM", 0, -3)
-	CombatTimeTrackerFrame.difficulty:SetWidth(120)
+	CombatTimeTrackerFrame.difficulty:SetWidth(140)
 	CombatTimeTrackerFrame.difficulty:SetWordWrap(false)
 	CombatTimeTrackerFrame.difficulty:SetText("-")
 
@@ -216,12 +216,12 @@ local function InitializeFrames()
 		CombatTimeTrackerFrame.difficulty:SetText("-")
 	end)
 
-	local height = 10
+	local height = 15
 	height = height + CombatTimeTrackerFrame.timer:GetStringHeight()
 	height = height + 7 + CombatTimeTrackerFrame.timeBar:GetHeight()
 	height = height + 7 + CombatTimeTrackerFrame.name:GetStringHeight()
 	height = height + 3 + CombatTimeTrackerFrame.difficulty:GetStringHeight()
-	height = height + 10
+	height = height + 15
 
 	CombatTimeTrackerFrame:SetHeight(height)
 
@@ -310,7 +310,10 @@ function CombatTimeTracker:EncounterEnd(success)
 
 	local finalTime = GetTime() - startTime
 
-	Utils:PrintDebug("Unrounded time: " .. tostring(finalTime))
+	Utils:PrintDebug(string.format(
+		"Unrounded time: finalTime=%s",
+		tostring(finalTime)
+	))
 
 	if finalTime < THRESHOLD then
 		finalTime = 0.001
@@ -318,7 +321,10 @@ function CombatTimeTracker:EncounterEnd(success)
 		finalTime = math.floor(finalTime * 1000 + 0.5) / 1000
 	end
 
-	Utils:PrintDebug("Rounded time: " .. tostring(finalTime))
+	Utils:PrintDebug(string.format(
+		"Rounded time: finalTime=%s",
+		tostring(finalTime)
+	))
 
 	local minutes = math.floor(finalTime / 60)
 	local seconds = math.floor(finalTime % 60)

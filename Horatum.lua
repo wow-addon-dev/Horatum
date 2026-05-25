@@ -52,7 +52,10 @@ function HoratumFrame:ADDON_LOADED(_, addOnName)
 end
 
 function HoratumFrame:ENCOUNTER_START(_, encounterID, encounterName, difficultyID, groupSize)
-	Utils:PrintDebug("Event 'ENCOUNTER_START' fired. Payload: encounterID=" .. tostring(encounterID) .. ", encounterName=" .. tostring(encounterName) .. ", difficultyID=" .. tostring(difficultyID) .. ", groupSize=" .. tostring(groupSize))
+	Utils:PrintDebug(string.format(
+		"Event 'ENCOUNTER_START' fired. Payload: encounterID=%s, encounterName=%s, difficultyID=%s, groupSize=%s",
+		tostring(encounterID), tostring(encounterName), tostring(difficultyID), tostring(groupSize)
+	))
 
 	isInCombat = CombatTimeTracker:EncounterStart(encounterID, encounterName, difficultyID)
 
@@ -62,7 +65,10 @@ function HoratumFrame:ENCOUNTER_START(_, encounterID, encounterName, difficultyI
 end
 
 function HoratumFrame:ENCOUNTER_END(_, encounterID, encounterName, difficultyID, groupSize, success)
-	Utils:PrintDebug("Event 'ENCOUNTER_END' fired. Payload: encounterID=" .. tostring(encounterID) .. ", encounterName=" .. tostring(encounterName) .. ", difficultyID=" .. tostring(difficultyID) .. ", groupSize=" .. tostring(groupSize) .. ", success=" .. tostring(success))
+	Utils:PrintDebug(string.format(
+		"Event 'ENCOUNTER_END' fired. Payload: encounterID=%s, encounterName=%s, difficultyID=%s, groupSize=%s, success=%s",
+		tostring(encounterID), tostring(encounterName), tostring(difficultyID), tostring(groupSize), tostring(success)
+	))
 
 	if isInCombat then
 		CombatTimeTracker:EncounterEnd(success)

@@ -24,8 +24,8 @@ local function CopyTable(source)
 	return target
 end
 
-local function GetCharKey()
-	return AWL.Utils:GetCharKey()
+local function GetCharacterRealmKey()
+	return AWL.Utils:GetCharacterRealmKey()
 end
 
 ------------------------
@@ -43,43 +43,43 @@ function Utils:PrintMessage(msg)
 end
 
 function Utils:IsAccountProfile()
-	local charKey = GetCharKey()
+	local characterRealmKey = GetCharacterRealmKey()
 
-	return Horatum_Options_v2.profileKeys[charKey]["use-account"]
+	return Horatum_Options_v2.profileKeys[characterRealmKey]["use-account"]
 end
 
 function Utils:OpenSettingsOnLoading()
-	local charKey = GetCharKey()
+	local characterRealmKey = GetCharacterRealmKey()
 
-	if Horatum_Options_v2.profileKeys[charKey]["open-settings"] then
+	if Horatum_Options_v2.profileKeys[characterRealmKey]["open-settings"] then
 		Settings.OpenToCategory(HRT.MAIN_CATEGORY_ID)
 
-		Horatum_Options_v2.profileKeys[charKey]["open-settings"] = false
+		Horatum_Options_v2.profileKeys[characterRealmKey]["open-settings"] = false
 	end
 end
 
 function Utils:ToggleProfileMode()
-	local charKey = GetCharKey()
+	local characterRealmKey = GetCharacterRealmKey()
 	local useAccountProfile = self:IsAccountProfile()
 
-	Horatum_Options_v2.profileKeys[charKey]["use-account"] = not useAccountProfile
-	Horatum_Options_v2.profileKeys[charKey]["open-settings"] = true
+	Horatum_Options_v2.profileKeys[characterRealmKey]["use-account"] = not useAccountProfile
+	Horatum_Options_v2.profileKeys[characterRealmKey]["open-settings"] = true
 end
 
 function Utils:ResetAllCharacterProfiles()
-	local charKey = GetCharKey()
+	local characterRealmKey = GetCharacterRealmKey()
 
 	Horatum_Options_v2.profiles = {}
 	Horatum_Options_v2.profileKeys = {}
 
-	Horatum_Options_v2.profileKeys[charKey] = {
+	Horatum_Options_v2.profileKeys[characterRealmKey] = {
 		["use-account"] = true,
 		["open-settings"] = true
 	}
 end
 
 function Utils:InitializeDatabase()
-	local charKey = GetCharKey()
+	local characterRealmKey = GetCharacterRealmKey()
 
 	local defaults = {
 		["general"] = {
@@ -107,25 +107,25 @@ function Utils:InitializeDatabase()
 		}
 	end
 
-	if not Horatum_Options_v2.profiles[charKey] then
-		Horatum_Options_v2.profiles[charKey] = CopyTable(defaults)
+	if not Horatum_Options_v2.profiles[characterRealmKey] then
+		Horatum_Options_v2.profiles[characterRealmKey] = CopyTable(defaults)
 	end
 
-	if not Horatum_Options_v2.profileKeys[charKey] then
-		Horatum_Options_v2.profileKeys[charKey] = {
+	if not Horatum_Options_v2.profileKeys[characterRealmKey] then
+		Horatum_Options_v2.profileKeys[characterRealmKey] = {
 			["use-account"] = true,
 			["open-settings"] = false
 		}
 	end
 
-	if Horatum_Options_v2.profileKeys[charKey]["use-account"] then
+	if Horatum_Options_v2.profileKeys[characterRealmKey]["use-account"] then
 		HRT.settings.general = Horatum_Options_v2.account["general"]
 		HRT.settings.combatTimeTracker = Horatum_Options_v2.account["combat-time-tracker"]
 		HRT.settings.combatOverview = Horatum_Options_v2.account["combat-overview"]
 	else
-		HRT.settings.general = Horatum_Options_v2.profiles[charKey]["general"]
-		HRT.settings.combatTimeTracker = Horatum_Options_v2.profiles[charKey]["combat-time-tracker"]
-		HRT.settings.combatOverview = Horatum_Options_v2.profiles[charKey]["combat-overview"]
+		HRT.settings.general = Horatum_Options_v2.profiles[characterRealmKey]["general"]
+		HRT.settings.combatTimeTracker = Horatum_Options_v2.profiles[characterRealmKey]["combat-time-tracker"]
+		HRT.settings.combatOverview = Horatum_Options_v2.profiles[characterRealmKey]["combat-overview"]
 	end
 
 	if not Horatum_CombatEncounterData_v2 then
