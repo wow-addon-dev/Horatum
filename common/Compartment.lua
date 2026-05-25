@@ -21,21 +21,21 @@ function Horatum_CompartmentOnEnter(self, button)
 end
 
 function Horatum_CompartmentOnLeave()
-    GameTooltip:Hide()
+	GameTooltip:Hide()
 end
 
 function Horatum_CompartmentOnClick(_, button)
-    if button == "LeftButton" then
+	if button == "LeftButton" then
 		if HRT.modules.CombatTimeTracker:IsShown() then
 			HRT.modules.CombatTimeTracker:Hide()
 		else
 			HRT.modules.CombatTimeTracker:Show()
 		end
-    elseif button == "RightButton" then
+	elseif button == "RightButton" then
 		if not InCombatLockdown() then
 			Settings.OpenToCategory(HRT.MAIN_CATEGORY_ID)
 		else
 			Utils:PrintDebug("In combat. The options menu cannot be opened.")
 		end
-    end
+	end
 end

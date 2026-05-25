@@ -19,16 +19,16 @@ local HoratumFrame = CreateFrame("Frame", "Horatum")
 -----------------------
 
 local function SlashCommand(msg, editbox)
-    if not msg or msg:trim() == "" then
+	if not msg or strtrim(msg) == "" then
 		if not InCombatLockdown() then
 			Settings.OpenToCategory(HRT.MAIN_CATEGORY_ID)
 		else
 			Utils:PrintDebug("In combat. The options menu cannot be opened.")
 		end
-	elseif msg:trim() == "show" then
+	elseif strtrim(msg) == "show" then
 		CombatTimeTracker:Show()
 	else
-        Utils:PrintDebug("These arguments are not accepted.")
+		Utils:PrintDebug("These arguments are not accepted.")
 	end
 end
 
@@ -41,16 +41,16 @@ function HoratumFrame:OnEvent(event, ...)
 end
 
 function HoratumFrame:ADDON_LOADED(_, addOnName)
-    if addOnName == addonName then
-        Utils:InitializeDatabase()
+	if addOnName == addonName then
+		Utils:InitializeDatabase()
 		Utils:InitializeMinimapButton()
 		Options:Initialize()
 		CombatTimeTracker:Initialize()
 
 		Utils:OpenSettingsOnLoading()
 
-        Utils:PrintDebug("Addon fully loaded.")
-    end
+		Utils:PrintDebug("Addon fully loaded.")
+	end
 end
 
 function HoratumFrame:ENCOUNTER_START(_, encounterID, encounterName, difficultyID, groupSize)

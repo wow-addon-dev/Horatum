@@ -19,7 +19,7 @@ Horatum is a World of Warcraft addon that tracks every boss encounter and saves 
 * Supports an account profile and character profiles.
 * Customizable UI:
 	* The Combat Time Tracker can be dragged and dropped to any location on the screen.
-    * The size of the Combat Time Tracker can be easily adjusted to fit the user interface.
+	* The size of the Combat Time Tracker can be easily adjusted to fit the user interface.
 
 ## Supported Languages & Flavors
 

@@ -26,6 +26,14 @@ local CombatTimeTrackerFrame
 --- Local Functions ---
 -----------------------
 
+local function ParseDelveTier(tierText)
+	if type(tierText) ~= "string" then
+		return nil
+	end
+
+	return tonumber(tierText:match("%d+"))
+end
+
 local function EncounterInfo(difficultyID)
 	local name, instanceType, isHeroic, isChallengeMode, displayHeroic, displayMythic, toggleDifficultyID, isLFR, minPlayers, maxPlayers, isUserSelectable = GetDifficultyInfo(difficultyID)
 
@@ -70,7 +78,13 @@ local function EncounterInfo(difficultyID)
 		local delveData1, delveData2, delveData3 = C_UIWidgetManager.GetScenarioHeaderDelvesWidgetVisualizationInfo(6183), C_UIWidgetManager.GetScenarioHeaderDelvesWidgetVisualizationInfo(6184), C_UIWidgetManager.GetScenarioHeaderDelvesWidgetVisualizationInfo(6185)
 
 		if delveData1 and delveData1.tierText then
-			return true, tonumber(delveData1.tierText), name .. " - " .. L["combat-time-tracker.delves-tier"] .. " " .. delveData1.tierText
+			local delveTier = ParseDelveTier(delveData1.tierText)
+
+			if delveTier then
+				return true, delveTier, name .. " - " .. L["combat-time-tracker.delves-tier"] .. " " .. delveTier
+			end
+
+			return false, 0, nil
 		elseif delveData2 and delveData2.shownState and delveData2.shownState == 1 then
 			return true, 8, name .. " - " .. L["combat-time-tracker.delves-tier"] .. " ?"
 		elseif delveData3 and delveData3.shownState and delveData3.shownState == 1 then
@@ -82,24 +96,24 @@ local function EncounterInfo(difficultyID)
 end
 
 local function UpdateTimerFrame(self, elapsed)
-    local currentTime = GetTime() - startTime
+	local currentTime = GetTime() - startTime
 
-    local minutes = math.floor(currentTime / 60)
-    local seconds = math.floor(currentTime % 60)
-    local milliseconds = math.floor((currentTime * 1000) % 1000)
-    CombatTimeTrackerFrame.timer:SetText(string.format("%02d:%02d.%03d", minutes, seconds, milliseconds))
+	local minutes = math.floor(currentTime / 60)
+	local seconds = math.floor(currentTime % 60)
+	local milliseconds = math.floor((currentTime * 1000) % 1000)
+	CombatTimeTrackerFrame.timer:SetText(string.format("%02d:%02d.%03d", minutes, seconds, milliseconds))
 
-    if currentBestVictory >= THRESHOLD then
-        local remainingTime = currentBestVictory - currentTime
+	if currentBestVictory >= THRESHOLD then
+		local remainingTime = currentBestVictory - currentTime
 
-        if remainingTime > 0 then
-            CombatTimeTrackerFrame.timeBar:SetValue(remainingTime)
-            CombatTimeTrackerFrame.timeBar:SetStatusBarColor(0, 1, 0)
-        else
-            CombatTimeTrackerFrame.timeBar:SetValue(currentBestVictory)
-            CombatTimeTrackerFrame.timeBar:SetStatusBarColor(1, 0, 0)
-        end
-    end
+		if remainingTime > 0 then
+			CombatTimeTrackerFrame.timeBar:SetValue(remainingTime)
+			CombatTimeTrackerFrame.timeBar:SetStatusBarColor(0, 1, 0)
+		else
+			CombatTimeTrackerFrame.timeBar:SetValue(currentBestVictory)
+			CombatTimeTrackerFrame.timeBar:SetStatusBarColor(1, 0, 0)
+		end
+	end
 end
 
 -----------------------
@@ -138,8 +152,8 @@ local function InitializeFrames()
 	CombatTimeTrackerFrame.timeBar:SetPoint("TOP", CombatTimeTrackerFrame.timer, "BOTTOM", 0, -8)
 	CombatTimeTrackerFrame.timeBar:SetStatusBarTexture("Interface\\TargetingFrame\\UI-StatusBar")
 	CombatTimeTrackerFrame.timeBar:SetMinMaxValues(0, 1)
-    CombatTimeTrackerFrame.timeBar:SetValue(1)
-    CombatTimeTrackerFrame.timeBar:SetStatusBarColor(0.5, 0.5, 0.5)
+	CombatTimeTrackerFrame.timeBar:SetValue(1)
+	CombatTimeTrackerFrame.timeBar:SetStatusBarColor(0.5, 0.5, 0.5)
 
 	local timeBarBackground = CombatTimeTrackerFrame.timeBar:CreateTexture(nil, "BACKGROUND")
 	timeBarBackground:SetAllPoints(CombatTimeTrackerFrame.timeBar, true)
@@ -203,22 +217,22 @@ local function InitializeFrames()
 	end)
 
 	local height = 10
-    height = height + CombatTimeTrackerFrame.timer:GetStringHeight()
-    height = height + 7 + CombatTimeTrackerFrame.timeBar:GetHeight()
-    height = height + 7 + CombatTimeTrackerFrame.name:GetStringHeight()
-    height = height + 3 + CombatTimeTrackerFrame.difficulty:GetStringHeight()
-    height = height + 10
+	height = height + CombatTimeTrackerFrame.timer:GetStringHeight()
+	height = height + 7 + CombatTimeTrackerFrame.timeBar:GetHeight()
+	height = height + 7 + CombatTimeTrackerFrame.name:GetStringHeight()
+	height = height + 3 + CombatTimeTrackerFrame.difficulty:GetStringHeight()
+	height = height + 10
 
-    CombatTimeTrackerFrame:SetHeight(height)
+	CombatTimeTrackerFrame:SetHeight(height)
 
 	CombatTimeTrackerFrame:ClearAllPoints()
-    CombatTimeTrackerFrame:SetPoint(HRT.settings.combatTimeTracker["point"], UIParent, HRT.settings.combatTimeTracker["relative-point"], HRT.settings.combatTimeTracker["offset-x"], HRT.settings.combatTimeTracker["offset-y"])
+	CombatTimeTrackerFrame:SetPoint(HRT.settings.combatTimeTracker["point"], UIParent, HRT.settings.combatTimeTracker["relative-point"], HRT.settings.combatTimeTracker["offset-x"], HRT.settings.combatTimeTracker["offset-y"])
 
 	if HRT.settings.combatTimeTracker["is-visible"] then
-        CombatTimeTrackerFrame:Show()
-    else
-        CombatTimeTrackerFrame:Hide()
-    end
+		CombatTimeTrackerFrame:Show()
+	else
+		CombatTimeTrackerFrame:Hide()
+	end
 end
 
 ------------------------
@@ -226,7 +240,7 @@ end
 ------------------------
 
 function CombatTimeTracker:Initialize()
-    InitializeFrames()
+	InitializeFrames()
 end
 
 function CombatTimeTracker:EncounterStart(encounterID, encounterName, difficultyID)
@@ -248,53 +262,53 @@ function CombatTimeTracker:EncounterStart(encounterID, encounterName, difficulty
 	currentOptionalID = optionalID
 	currentDifficultyText = difficulty
 
-    CombatTimeTrackerFrame.resetButton:Hide()
-    CombatTimeTrackerFrame:Show()
+	CombatTimeTrackerFrame.resetButton:Hide()
+	CombatTimeTrackerFrame:Show()
 
-    HRT.settings.combatTimeTracker["is-visible"] = true
+	HRT.settings.combatTimeTracker["is-visible"] = true
 
 	CombatTimeTrackerFrame.name:SetText(encounterName)
 	CombatTimeTrackerFrame.difficulty:SetText(currentDifficultyText)
 
 	if not HRT.data.combatEncounter[tostring(currentEncounterID)] then
-         HRT.data.combatEncounter[tostring(currentEncounterID)] = {}
-    end
+			HRT.data.combatEncounter[tostring(currentEncounterID)] = {}
+	end
 
-    if not HRT.data.combatEncounter[tostring(currentEncounterID)][tostring(currentDifficultyID)] then
-        HRT.data.combatEncounter[tostring(currentEncounterID)][tostring(currentDifficultyID)] = {}
-    end
+	if not HRT.data.combatEncounter[tostring(currentEncounterID)][tostring(currentDifficultyID)] then
+		HRT.data.combatEncounter[tostring(currentEncounterID)][tostring(currentDifficultyID)] = {}
+	end
 
-    if not HRT.data.combatEncounter[tostring(currentEncounterID)][tostring(currentDifficultyID)][tostring(currentOptionalID)] then
-        HRT.data.combatEncounter[tostring(currentEncounterID)][tostring(currentDifficultyID)][tostring(currentOptionalID)] = {
+	if not HRT.data.combatEncounter[tostring(currentEncounterID)][tostring(currentDifficultyID)][tostring(currentOptionalID)] then
+		HRT.data.combatEncounter[tostring(currentEncounterID)][tostring(currentDifficultyID)][tostring(currentOptionalID)] = {
 			bestVictory = -1,
-            victories = 0,
-            wipes = 0
-        }
-    end
+			victories = 0,
+			wipes = 0
+		}
+	end
 
 	local currentDataSet = HRT.data.combatEncounter[tostring(currentEncounterID)][tostring(currentDifficultyID)][tostring(currentOptionalID)]
 	currentBestVictory = currentDataSet.bestVictory
 
-    if currentBestVictory >= THRESHOLD then
-        CombatTimeTrackerFrame.timeBar:SetMinMaxValues(0, currentBestVictory)
-        CombatTimeTrackerFrame.timeBar:SetValue(currentBestVictory)
-        CombatTimeTrackerFrame.timeBar:SetStatusBarColor(0, 1, 0)
-    else
-        CombatTimeTrackerFrame.timeBar:SetMinMaxValues(0, 1)
-        CombatTimeTrackerFrame.timeBar:SetValue(1)
-        CombatTimeTrackerFrame.timeBar:SetStatusBarColor(0, 0.5, 1)
-    end
+	if currentBestVictory >= THRESHOLD then
+		CombatTimeTrackerFrame.timeBar:SetMinMaxValues(0, currentBestVictory)
+		CombatTimeTrackerFrame.timeBar:SetValue(currentBestVictory)
+		CombatTimeTrackerFrame.timeBar:SetStatusBarColor(0, 1, 0)
+	else
+		CombatTimeTrackerFrame.timeBar:SetMinMaxValues(0, 1)
+		CombatTimeTrackerFrame.timeBar:SetValue(1)
+		CombatTimeTrackerFrame.timeBar:SetStatusBarColor(0, 0.5, 1)
+	end
 
-    CombatTimeTrackerFrame:SetScript("OnUpdate", UpdateTimerFrame)
+	CombatTimeTrackerFrame:SetScript("OnUpdate", UpdateTimerFrame)
 
 	return true
 end
 
 function CombatTimeTracker:EncounterEnd(success)
-    CombatTimeTrackerFrame.resetButton:Show()
+	CombatTimeTrackerFrame.resetButton:Show()
 	CombatTimeTrackerFrame:SetScript("OnUpdate", nil)
 
-    local finalTime = GetTime() - startTime
+	local finalTime = GetTime() - startTime
 
 	Utils:PrintDebug("Unrounded time: " .. tostring(finalTime))
 
@@ -309,14 +323,14 @@ function CombatTimeTracker:EncounterEnd(success)
 	local minutes = math.floor(finalTime / 60)
 	local seconds = math.floor(finalTime % 60)
 	local milliseconds = math.floor((finalTime * 1000) % 1000)
-    CombatTimeTrackerFrame.timer:SetText(string.format("%02d:%02d.%03d", minutes, seconds, milliseconds))
+	CombatTimeTrackerFrame.timer:SetText(string.format("%02d:%02d.%03d", minutes, seconds, milliseconds))
 
 	local currentDataSet = HRT.data.combatEncounter[tostring(currentEncounterID)][tostring(currentDifficultyID)][tostring(currentOptionalID)]
 	local bestVictory = currentDataSet.bestVictory
 	local victories = currentDataSet.victories
 	local wipes = currentDataSet.wipes
 
-    if success == 1 then
+	if success == 1 then
 		victories = victories + 1
 		currentDataSet.victories = victories
 
@@ -360,7 +374,7 @@ function CombatTimeTracker:EncounterEnd(success)
 				Utils:PrintMessage(L["chat.another-wipe"]:format(currentEncounterName, currentDifficultyText, victories, wipes))
 			end
 		end
-    end
+	end
 
 	startTime = 0
 	currentBestVictory = -1
