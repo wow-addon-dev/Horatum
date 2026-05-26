@@ -1,3 +1,8 @@
+**v2.5 (2026-05-26)**
+- Added: Profile settings with account profile and character profile selection
+- Updated: deDE, enUS localization
+- Minor code adjustments
+
 **v2.4 (2026-05-24)**
 - Added: Mythic flex raid boss encounters are now tracked
 - Added: TOC version for patch 12.0.7 [retail]
