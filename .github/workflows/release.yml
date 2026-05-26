@@ -26,6 +26,8 @@ on:
         default: true
         type: boolean
 
+permissions: {}
+
 jobs:
   call-blueprint:
     uses: wow-addon-dev/.github/.github/workflows/release_blueprint.yml@main
