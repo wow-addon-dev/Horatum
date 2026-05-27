@@ -1,0 +1,3 @@
+local _, HRT = ...
+
+HRT.COMBAT_TIME_TRACKER_THRESHOLD = 0.001

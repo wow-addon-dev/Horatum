@@ -2,4 +2,5 @@
 ..\FrameXML\UI.xsd">
 	<Script file="NamespaceData.lua" />
 	<Script file="AddonData.lua" />
+	<Script file="CombatTimeTrackerData.lua" />
 </Ui>

@@ -6,7 +6,7 @@ local Utils = HRT.modules.Utils
 
 local CombatTimeTracker = {}
 
-local THRESHOLD = 0.001
+local THRESHOLD = HRT.COMBAT_TIME_TRACKER_THRESHOLD
 
 local startTime = 0
 local currentBestVictory = 0
