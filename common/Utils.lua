@@ -33,9 +33,7 @@ end
 ------------------------
 
 function Utils:PrintDebug(msg)
-	local debugMode = HRT.settings
-		and HRT.settings.general
-		and HRT.settings.general["debug-mode"]
+	local debugMode = HRT.settings and HRT.settings.general and HRT.settings.general["debug-mode"]
 
 	if debugMode ~= false then
 		DEFAULT_CHAT_FRAME:AddMessage(ORANGE_FONT_COLOR:WrapTextInColorCode(addonName .. " (Debug): ")  .. msg)
@@ -84,6 +82,7 @@ end
 
 function Utils:InitializeDatabase()
 	local characterRealmKey = GetCharacterRealmKey()
+
 	local hadDb = Horatum_Options_v2 ~= nil
 	local createdDb = false
 	local createdProfile = false
@@ -149,12 +148,7 @@ function Utils:InitializeDatabase()
 
 	self:PrintDebug(string.format(
 		"InitializeDatabase: key=%s, hadDb=%s, createdDb=%s, createdProfile=%s, createdProfileKey=%s, activeProfile=%s",
-		characterRealmKey,
-		tostring(hadDb),
-		tostring(createdDb),
-		tostring(createdProfile),
-		tostring(createdProfileKey),
-		useAccountProfile and "account" or "character"
+		characterRealmKey, tostring(hadDb), tostring(createdDb), tostring(createdProfile), tostring(createdProfileKey), useAccountProfile and "account" or "character"
 	))
 end
 
