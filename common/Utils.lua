@@ -33,7 +33,11 @@ end
 ------------------------
 
 function Utils:PrintDebug(msg)
-	if HRT.settings.general["debug-mode"] then
+	local debugMode = HRT.settings
+		and HRT.settings.general
+		and HRT.settings.general["debug-mode"]
+
+	if debugMode ~= false then
 		DEFAULT_CHAT_FRAME:AddMessage(ORANGE_FONT_COLOR:WrapTextInColorCode(addonName .. " (Debug): ")  .. msg)
 	end
 end
@@ -80,6 +84,10 @@ end
 
 function Utils:InitializeDatabase()
 	local characterRealmKey = GetCharacterRealmKey()
+	local hadDb = Horatum_Options_v2 ~= nil
+	local createdDb = false
+	local createdProfile = false
+	local createdProfileKey = false
 
 	local defaults = {
 		["general"] = {
@@ -105,10 +113,12 @@ function Utils:InitializeDatabase()
 			["profiles"] = {},
 			["profileKeys"] = {}
 		}
+		createdDb = true
 	end
 
 	if not Horatum_Options_v2.profiles[characterRealmKey] then
 		Horatum_Options_v2.profiles[characterRealmKey] = CopyTable(defaults)
+		createdProfile = true
 	end
 
 	if not Horatum_Options_v2.profileKeys[characterRealmKey] then
@@ -116,9 +126,12 @@ function Utils:InitializeDatabase()
 			["use-account"] = true,
 			["open-settings"] = false
 		}
+		createdProfileKey = true
 	end
 
-	if Horatum_Options_v2.profileKeys[characterRealmKey]["use-account"] then
+	local useAccountProfile = Horatum_Options_v2.profileKeys[characterRealmKey]["use-account"]
+
+	if useAccountProfile then
 		HRT.settings.general = Horatum_Options_v2.account["general"]
 		HRT.settings.combatTimeTracker = Horatum_Options_v2.account["combat-time-tracker"]
 		HRT.settings.combatOverview = Horatum_Options_v2.account["combat-overview"]
@@ -133,6 +146,16 @@ function Utils:InitializeDatabase()
 	end
 
 	HRT.data.combatEncounter = Horatum_CombatEncounterData_v2
+
+	self:PrintDebug(string.format(
+		"InitializeDatabase: key=%s, hadDb=%s, createdDb=%s, createdProfile=%s, createdProfileKey=%s, activeProfile=%s",
+		characterRealmKey,
+		tostring(hadDb),
+		tostring(createdDb),
+		tostring(createdProfile),
+		tostring(createdProfileKey),
+		useAccountProfile and "account" or "character"
+	))
 end
 
 function Utils:InitializeMinimapButton()

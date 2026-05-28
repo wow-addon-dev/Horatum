@@ -15,7 +15,7 @@ Horatum is a World of Warcraft addon that tracks every boss encounter and saves 
 
 * Automatically starts when a dungeon or raid boss is engaged and stops the exact moment the combat ends or the group wipes.
 * Features a clean, semi-transparent frame that displays the ongoing combat time.
-* The number of victories and wipes is saved and can be displayed in the chat after combat.
+* The number of victories and wipes is saved and can be displayed in the chat after combat (optional).
 * Supports an account profile and character profiles.
 * Customizable UI:
 	* The Combat Time Tracker can be dragged and dropped to any location on the screen.
