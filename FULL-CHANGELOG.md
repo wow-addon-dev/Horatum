@@ -1,3 +1,6 @@
+**v2.6 (2026-05-30)**
+- Minor code adjustments
+
 **v2.5 (2026-05-26)**
 - Added: Profile settings with account profile and character profile selection
 - Updated: deDE, enUS localization
