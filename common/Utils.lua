@@ -11,17 +11,7 @@ local Utils = {}
 -----------------------
 
 local function CopyTable(source)
-	local target = {}
-
-	for key, value in pairs(source) do
-		if type(value) == "table" then
-			target[key] = CopyTable(value)
-		else
-			target[key] = value
-		end
-	end
-
-	return target
+	return AWL.Utils:CopyTable(source)
 end
 
 local function GetCharacterRealmKey()
