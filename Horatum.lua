@@ -1,5 +1,8 @@
 local addonName, HRT = ...
 
+local AWL = ArcaneWizardLibrary
+local Addon = AWL:GetAddon(addonName)
+
 local CombatTimeTracker = HRT.modules.CombatTimeTracker
 local Options = HRT.modules.Options
 local Utils = HRT.modules.Utils
@@ -18,11 +21,7 @@ local HoratumFrame = CreateFrame("Frame", "Horatum")
 
 local function SlashCommand(msg, editbox)
 	if not msg or strtrim(msg) == "" then
-		if not InCombatLockdown() then
-			Settings.OpenToCategory(HRT.MAIN_CATEGORY_ID)
-		else
-			Utils:PrintDebug("In combat. The options menu cannot be opened.")
-		end
+		Addon:OpenCategory()
 	elseif strtrim(msg) == "show" then
 		CombatTimeTracker:Show()
 	else

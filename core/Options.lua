@@ -2,10 +2,11 @@ local addonName, HRT = ...
 
 local L = HRT.Localization
 
+local AWL = ArcaneWizardLibrary
+local Addon = AWL:GetAddon(addonName)
+
 local Utils = HRT.modules.Utils
 local CombatTimeTracker = HRT.modules.CombatTimeTracker
-
-local AWL = ArcaneWizardLibrary
 
 local Options = {}
 
@@ -119,17 +120,11 @@ function Options:Initialize()
 	})
 
 	-- About Section
-	AWL.Settings:AddAboutSection(layout, {
-		addonVersion   = HRT.ADDON_VERSION,
-		addonBuildDate = HRT.ADDON_BUILD_DATE,
-		addonAuthor    = HRT.ADDON_AUTHOR,
-		curseforgeLink = HRT.LINK_CURSEFORGE,
-		githubLink     = HRT.LINK_GITHUB
-	})
+	AWL.Settings:AddAboutSection(layout, addonName)
 
 	Settings.RegisterAddOnCategory(category)
 
-	HRT.MAIN_CATEGORY_ID = category:GetID()
+	Addon:SetMainCategoryId(category:GetID())
 end
 
 HRT.modules.Options = Options
