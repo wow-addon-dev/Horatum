@@ -1,7 +1,4 @@
 {
 	"files.encoding": "utf8",
-	"Lua.workspace.ignoreDir": ["lib"],
-	"Lua.diagnostics.globals": [
-		"ArcaneWizardLibrary"
-	]
+	"Lua.workspace.ignoreDir": ["lib"]
 }
