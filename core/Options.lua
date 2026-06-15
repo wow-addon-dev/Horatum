@@ -1,12 +1,11 @@
 local addonName, HRT = ...
 
-local L = HRT.Localization
-
 local AWL = ArcaneWizardLibrary
 local Addon = AWL:GetAddon(addonName)
 
-local Utils = HRT.modules.Utils
+local L = HRT.Localization
 local CombatTimeTracker = HRT.modules.CombatTimeTracker
+local Utils = HRT.modules.Utils
 
 local Options = {}
 

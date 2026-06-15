@@ -1,10 +1,9 @@
 local addonName, HRT = ...
 
-local L = HRT.Localization
-
 local AWL = ArcaneWizardLibrary
 local Addon = AWL:GetAddon(addonName)
 
+local L = HRT.Localization
 local Utils = HRT.modules.Utils
 
 local compartmentHandlers = Addon:CreateCompartmentHandlers({
