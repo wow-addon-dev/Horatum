@@ -4,8 +4,8 @@ local AWL = ArcaneWizardLibrary
 local Addon = AWL:GetAddon(addonName)
 
 local L = HRT.Localization
-local CombatTimeTracker = HRT.modules.CombatTimeTracker
-local Utils = HRT.modules.Utils
+local CombatTimeTracker = HRT.Modules.CombatTimeTracker
+local Utils = HRT.Modules.Utils
 
 local Options = {}
 
@@ -16,7 +16,7 @@ local Options = {}
 local minimapButtonProxy = setmetatable({}, {
 	__index = function(_, key)
 		if key == "hide" then
-			return not HRT.settings.general["minimap-button"]["hide"]
+			return not HRT.Settings.general["minimap-button"]["hide"]
 		end
 	end,
 	__newindex = function(_, key, value)
@@ -24,7 +24,7 @@ local minimapButtonProxy = setmetatable({}, {
 			return
 		end
 
-		HRT.settings.general["minimap-button"]["hide"] = not value
+		HRT.Settings.general["minimap-button"]["hide"] = not value
 
 		if value then
 			Utils.minimapButton:Show("Horatum")
@@ -45,7 +45,7 @@ function Options:Initialize()
 
 	-- Notification
 	AWL.Settings:AddCheckbox(category, {
-		variableTable = HRT.settings.general,
+		variableTable = HRT.Settings.general,
 		settingKey    = addonName .. "_notification",
 		variableName  = "notification",
 		name          = L["options.general.notification.name"],
@@ -65,7 +65,7 @@ function Options:Initialize()
 
 	-- Debug Mode
 	AWL.Settings:AddCheckbox(category, {
-		variableTable = HRT.settings.general,
+		variableTable = HRT.Settings.general,
 		settingKey    = addonName .. "_debug-mode",
 		variableName  = "debug-mode",
 		name          = L["options.general.debug-mode.name"],
@@ -77,7 +77,7 @@ function Options:Initialize()
 
 	-- Scale
 	AWL.Settings:AddSlider(category, {
-		variableTable = HRT.settings.combatTimeTracker,
+		variableTable = HRT.Settings.combatTimeTracker,
 		settingKey    = addonName .. "_scale",
 		variableName  = "scale",
 		name          = L["options.combat-time-tracker.scale.name"],
@@ -92,7 +92,7 @@ function Options:Initialize()
 
 	-- Background Transparency
 	AWL.Settings:AddSlider(category, {
-		variableTable = HRT.settings.combatTimeTracker,
+		variableTable = HRT.Settings.combatTimeTracker,
 		settingKey    = addonName .. "_background-transparency",
 		variableName  = "background-transparency",
 		name          = L["options.combat-time-tracker.background-transparency.name"],
@@ -126,4 +126,4 @@ function Options:Initialize()
 	Addon:SetMainCategoryId(category:GetID())
 end
 
-HRT.modules.Options = Options
+HRT.Modules.Options = Options

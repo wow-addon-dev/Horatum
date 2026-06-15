@@ -48,10 +48,10 @@ function Utils:OpenSettingsOnLoading()
 end
 
 function Utils:ToggleCombatTimeTracker()
-	if HRT.modules.CombatTimeTracker:IsShown() then
-		HRT.modules.CombatTimeTracker:Hide()
+	if HRT.Modules.CombatTimeTracker:IsShown() then
+		HRT.Modules.CombatTimeTracker:Hide()
 	else
-		HRT.modules.CombatTimeTracker:Show()
+		HRT.Modules.CombatTimeTracker:Show()
 	end
 end
 
@@ -123,20 +123,20 @@ function Utils:InitializeDatabase()
 	local useAccountProfile = Horatum_Options_v2.profileKeys[characterRealmKey]["use-account"]
 
 	if useAccountProfile then
-		HRT.settings.general = Horatum_Options_v2.account["general"]
-		HRT.settings.combatTimeTracker = Horatum_Options_v2.account["combat-time-tracker"]
-		HRT.settings.combatOverview = Horatum_Options_v2.account["combat-overview"]
+		HRT.Settings.general = Horatum_Options_v2.account["general"]
+		HRT.Settings.combatTimeTracker = Horatum_Options_v2.account["combat-time-tracker"]
+		HRT.Settings.combatOverview = Horatum_Options_v2.account["combat-overview"]
 	else
-		HRT.settings.general = Horatum_Options_v2.profiles[characterRealmKey]["general"]
-		HRT.settings.combatTimeTracker = Horatum_Options_v2.profiles[characterRealmKey]["combat-time-tracker"]
-		HRT.settings.combatOverview = Horatum_Options_v2.profiles[characterRealmKey]["combat-overview"]
+		HRT.Settings.general = Horatum_Options_v2.profiles[characterRealmKey]["general"]
+		HRT.Settings.combatTimeTracker = Horatum_Options_v2.profiles[characterRealmKey]["combat-time-tracker"]
+		HRT.Settings.combatOverview = Horatum_Options_v2.profiles[characterRealmKey]["combat-overview"]
 	end
 
 	if not Horatum_CombatEncounterData_v2 then
 		Horatum_CombatEncounterData_v2 = {}
 	end
 
-	HRT.data.combatEncounter = Horatum_CombatEncounterData_v2
+	HRT.Data.combatEncounter = Horatum_CombatEncounterData_v2
 
 	return {
 		characterRealmKey = characterRealmKey,
@@ -148,7 +148,7 @@ end
 
 function Utils:InitializeMinimapButton()
 	self.minimapButton = Addon:RegisterMinimapButton({
-		db = HRT.settings.general["minimap-button"],
+		db = HRT.Settings.general["minimap-button"],
 		tooltip = L["minimap-button.tooltip"],
 		onLeftClick = function()
 			Utils:ToggleCombatTimeTracker()
@@ -156,4 +156,4 @@ function Utils:InitializeMinimapButton()
 	})
 end
 
-HRT.modules.Utils = Utils
+HRT.Modules.Utils = Utils

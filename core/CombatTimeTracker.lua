@@ -2,7 +2,7 @@ local _, HRT = ...
 
 local L = HRT.Localization
 
-local Utils = HRT.modules.Utils
+local Utils = HRT.Modules.Utils
 
 local CombatTimeTracker = {}
 
@@ -123,7 +123,7 @@ end
 local function InitializeFrames()
 	CombatTimeTrackerFrame = CreateFrame("Frame", nil, UIParent)
 	CombatTimeTrackerFrame:SetWidth(180)
-	CombatTimeTrackerFrame:SetScale(HRT.settings.combatTimeTracker["scale"] / 100)
+	CombatTimeTrackerFrame:SetScale(HRT.Settings.combatTimeTracker["scale"] / 100)
 
 	CombatTimeTrackerFrame:SetMovable(true)
 	CombatTimeTrackerFrame:EnableMouse(true)
@@ -133,15 +133,15 @@ local function InitializeFrames()
 		self:StopMovingOrSizing()
 
 		local point, _, relativePoint, xOfs, yOfs = self:GetPoint()
-		HRT.settings.combatTimeTracker["point"] = point
-		HRT.settings.combatTimeTracker["relative-point"] = relativePoint
-		HRT.settings.combatTimeTracker["offset-x"] = xOfs
-		HRT.settings.combatTimeTracker["offset-y"] = yOfs
+		HRT.Settings.combatTimeTracker["point"] = point
+		HRT.Settings.combatTimeTracker["relative-point"] = relativePoint
+		HRT.Settings.combatTimeTracker["offset-x"] = xOfs
+		HRT.Settings.combatTimeTracker["offset-y"] = yOfs
 	end)
 
 	CombatTimeTrackerFrame.background = CombatTimeTrackerFrame:CreateTexture(nil, "BACKGROUND")
 	CombatTimeTrackerFrame.background:SetAllPoints(CombatTimeTrackerFrame,true)
-	CombatTimeTrackerFrame.background:SetColorTexture(0, 0, 0, HRT.settings.combatTimeTracker["background-transparency"] / 100)
+	CombatTimeTrackerFrame.background:SetColorTexture(0, 0, 0, HRT.Settings.combatTimeTracker["background-transparency"] / 100)
 
 	CombatTimeTrackerFrame.timer = CombatTimeTrackerFrame:CreateFontString(nil, "OVERLAY", "GameFontHighlightHuge")
 	CombatTimeTrackerFrame.timer:SetPoint("TOP", CombatTimeTrackerFrame, "TOP", 0, -15)
@@ -184,7 +184,7 @@ local function InitializeFrames()
 	CombatTimeTrackerFrame.closeButton:SetPoint("TOPRIGHT", CombatTimeTrackerFrame, "TOPRIGHT", 4, 4)
 	CombatTimeTrackerFrame.closeButton:SetScript("OnClick", function()
 		CombatTimeTrackerFrame:Hide()
-		HRT.settings.combatTimeTracker["is-visible"] = false
+		HRT.Settings.combatTimeTracker["is-visible"] = false
 	end)
 
 	CombatTimeTrackerFrame.resetButton = CreateFrame("Button", nil, CombatTimeTrackerFrame)
@@ -226,9 +226,9 @@ local function InitializeFrames()
 	CombatTimeTrackerFrame:SetHeight(height)
 
 	CombatTimeTrackerFrame:ClearAllPoints()
-	CombatTimeTrackerFrame:SetPoint(HRT.settings.combatTimeTracker["point"], UIParent, HRT.settings.combatTimeTracker["relative-point"], HRT.settings.combatTimeTracker["offset-x"], HRT.settings.combatTimeTracker["offset-y"])
+	CombatTimeTrackerFrame:SetPoint(HRT.Settings.combatTimeTracker["point"], UIParent, HRT.Settings.combatTimeTracker["relative-point"], HRT.Settings.combatTimeTracker["offset-x"], HRT.Settings.combatTimeTracker["offset-y"])
 
-	if HRT.settings.combatTimeTracker["is-visible"] then
+	if HRT.Settings.combatTimeTracker["is-visible"] then
 		CombatTimeTrackerFrame:Show()
 	else
 		CombatTimeTrackerFrame:Hide()
@@ -265,28 +265,28 @@ function CombatTimeTracker:EncounterStart(encounterID, encounterName, difficulty
 	CombatTimeTrackerFrame.resetButton:Hide()
 	CombatTimeTrackerFrame:Show()
 
-	HRT.settings.combatTimeTracker["is-visible"] = true
+	HRT.Settings.combatTimeTracker["is-visible"] = true
 
 	CombatTimeTrackerFrame.name:SetText(encounterName)
 	CombatTimeTrackerFrame.difficulty:SetText(currentDifficultyText)
 
-	if not HRT.data.combatEncounter[tostring(currentEncounterID)] then
-			HRT.data.combatEncounter[tostring(currentEncounterID)] = {}
+	if not HRT.Data.combatEncounter[tostring(currentEncounterID)] then
+			HRT.Data.combatEncounter[tostring(currentEncounterID)] = {}
 	end
 
-	if not HRT.data.combatEncounter[tostring(currentEncounterID)][tostring(currentDifficultyID)] then
-		HRT.data.combatEncounter[tostring(currentEncounterID)][tostring(currentDifficultyID)] = {}
+	if not HRT.Data.combatEncounter[tostring(currentEncounterID)][tostring(currentDifficultyID)] then
+		HRT.Data.combatEncounter[tostring(currentEncounterID)][tostring(currentDifficultyID)] = {}
 	end
 
-	if not HRT.data.combatEncounter[tostring(currentEncounterID)][tostring(currentDifficultyID)][tostring(currentOptionalID)] then
-		HRT.data.combatEncounter[tostring(currentEncounterID)][tostring(currentDifficultyID)][tostring(currentOptionalID)] = {
+	if not HRT.Data.combatEncounter[tostring(currentEncounterID)][tostring(currentDifficultyID)][tostring(currentOptionalID)] then
+		HRT.Data.combatEncounter[tostring(currentEncounterID)][tostring(currentDifficultyID)][tostring(currentOptionalID)] = {
 			bestVictory = -1,
 			victories = 0,
 			wipes = 0
 		}
 	end
 
-	local currentDataSet = HRT.data.combatEncounter[tostring(currentEncounterID)][tostring(currentDifficultyID)][tostring(currentOptionalID)]
+	local currentDataSet = HRT.Data.combatEncounter[tostring(currentEncounterID)][tostring(currentDifficultyID)][tostring(currentOptionalID)]
 	currentBestVictory = currentDataSet.bestVictory
 
 	if currentBestVictory >= THRESHOLD then
@@ -331,7 +331,7 @@ function CombatTimeTracker:EncounterEnd(success)
 	local milliseconds = math.floor((finalTime * 1000) % 1000)
 	CombatTimeTrackerFrame.timer:SetText(string.format("%02d:%02d.%03d", minutes, seconds, milliseconds))
 
-	local currentDataSet = HRT.data.combatEncounter[tostring(currentEncounterID)][tostring(currentDifficultyID)][tostring(currentOptionalID)]
+	local currentDataSet = HRT.Data.combatEncounter[tostring(currentEncounterID)][tostring(currentDifficultyID)][tostring(currentOptionalID)]
 	local bestVictory = currentDataSet.bestVictory
 	local victories = currentDataSet.victories
 	local wipes = currentDataSet.wipes
@@ -344,7 +344,7 @@ function CombatTimeTracker:EncounterEnd(success)
 			currentDataSet.bestVictory = finalTime
 		end
 
-		if HRT.settings.general["notification"] then
+		if HRT.Settings.general["notification"] then
 			if bestVictory < THRESHOLD or finalTime < bestVictory then
 				Utils:PrintMessage(L["chat.new-record"]:format(currentEncounterName, currentDifficultyText, string.format("%02d:%02d.%03d", minutes, seconds, milliseconds)))
 			else
@@ -365,7 +365,7 @@ function CombatTimeTracker:EncounterEnd(success)
 		wipes = wipes + 1
 		currentDataSet.wipes = wipes
 
-		if HRT.settings.general["notification"] then
+		if HRT.Settings.general["notification"] then
 			if bestVictory >= THRESHOLD then
 				local bestVictoryMinutes = math.floor(bestVictory / 60)
 				local bestVictorySeconds = math.floor(bestVictory % 60)
@@ -397,20 +397,20 @@ end
 
 function CombatTimeTracker:Show()
 	CombatTimeTrackerFrame:Show()
-	HRT.settings.combatTimeTracker["is-visible"] = true
+	HRT.Settings.combatTimeTracker["is-visible"] = true
 end
 
 function CombatTimeTracker:Hide()
 	CombatTimeTrackerFrame:Hide()
-	HRT.settings.combatTimeTracker["is-visible"] = false
+	HRT.Settings.combatTimeTracker["is-visible"] = false
 end
 
 function CombatTimeTracker:SetScale()
-	CombatTimeTrackerFrame:SetScale(HRT.settings.combatTimeTracker["scale"] / 100)
+	CombatTimeTrackerFrame:SetScale(HRT.Settings.combatTimeTracker["scale"] / 100)
 end
 
 function CombatTimeTracker:SetBackgroundTransparency()
-	CombatTimeTrackerFrame.background:SetColorTexture(0, 0, 0, HRT.settings.combatTimeTracker["background-transparency"] / 100)
+	CombatTimeTrackerFrame.background:SetColorTexture(0, 0, 0, HRT.Settings.combatTimeTracker["background-transparency"] / 100)
 end
 
-HRT.modules.CombatTimeTracker = CombatTimeTracker
+HRT.Modules.CombatTimeTracker = CombatTimeTracker

@@ -1,14 +1,14 @@
 local addonName, HRT = ...
 
-HRT.settings = HRT.settings or {}
-HRT.data = HRT.data or {}
-HRT.state = HRT.state or {}
-HRT.modules = HRT.modules or {}
+HRT.Settings = HRT.Settings or {}
+HRT.Data = HRT.Data or {}
+HRT.State = HRT.State or {}
+HRT.Modules = HRT.Modules or {}
 
 local AWL = ArcaneWizardLibrary
 
 AWL:NewAddon(addonName, {
 	debugEnabled = function()
-		return HRT.settings.general and HRT.settings.general["debug-mode"]
+		return HRT.Settings.general and HRT.Settings.general["debug-mode"]
 	end
 })

@@ -4,7 +4,7 @@ local AWL = ArcaneWizardLibrary
 local Addon = AWL:GetAddon(addonName)
 
 local L = HRT.Localization
-local Utils = HRT.modules.Utils
+local Utils = HRT.Modules.Utils
 
 local compartmentHandlers = Addon:CreateCompartmentHandlers({
 	tooltip = L["minimap-button.tooltip"],
