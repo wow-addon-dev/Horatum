@@ -7,38 +7,22 @@ local L = HRT.Localization
 
 local Utils = {}
 
------------------------
---- Local Functions ---
------------------------
-
-local function CopyTable(source)
-	return AWL.Utils:CopyTable(source)
-end
-
-local function GetCharacterRealmKey()
-	return AWL.Utils:GetCharacterRealmKey()
-end
-
 ------------------------
 --- Public Functions ---
 ------------------------
-
-function Utils:PrintDebug(msg)
-	Addon:PrintDebug(msg)
-end
 
 function Utils:PrintMessage(msg)
 	Addon:PrintMessage(msg)
 end
 
 function Utils:IsAccountProfile()
-	local characterRealmKey = GetCharacterRealmKey()
+	local characterRealmKey = AWL.Utils:GetCharacterRealmKey()
 
 	return Horatum_Options_v2.profileKeys[characterRealmKey]["use-account"]
 end
 
 function Utils:OpenSettingsOnLoading()
-	local characterRealmKey = GetCharacterRealmKey()
+	local characterRealmKey = AWL.Utils:GetCharacterRealmKey()
 
 	if Horatum_Options_v2.profileKeys[characterRealmKey]["open-settings"] then
 		Addon:OpenCategory()
@@ -56,7 +40,7 @@ function Utils:ToggleCombatTimeTracker()
 end
 
 function Utils:ToggleProfileMode()
-	local characterRealmKey = GetCharacterRealmKey()
+	local characterRealmKey = AWL.Utils:GetCharacterRealmKey()
 	local useAccountProfile = self:IsAccountProfile()
 
 	Horatum_Options_v2.profileKeys[characterRealmKey]["use-account"] = not useAccountProfile
@@ -64,7 +48,7 @@ function Utils:ToggleProfileMode()
 end
 
 function Utils:ResetAllCharacterProfiles()
-	local characterRealmKey = GetCharacterRealmKey()
+	local characterRealmKey = AWL.Utils:GetCharacterRealmKey()
 
 	Horatum_Options_v2.profiles = {}
 	Horatum_Options_v2.profileKeys = {}
@@ -76,7 +60,7 @@ function Utils:ResetAllCharacterProfiles()
 end
 
 function Utils:InitializeDatabase()
-	local characterRealmKey = GetCharacterRealmKey()
+	local characterRealmKey = AWL.Utils:GetCharacterRealmKey()
 
 	local createdProfile = false
 	local createdProfileKey = false
@@ -101,14 +85,14 @@ function Utils:InitializeDatabase()
 
 	if not Horatum_Options_v2 then
 		Horatum_Options_v2 = {
-			["account"] = CopyTable(defaults),
+			["account"] = AWL.Utils:CopyTable(defaults),
 			["profiles"] = {},
 			["profileKeys"] = {}
 		}
 	end
 
 	if not Horatum_Options_v2.profiles[characterRealmKey] then
-		Horatum_Options_v2.profiles[characterRealmKey] = CopyTable(defaults)
+		Horatum_Options_v2.profiles[characterRealmKey] = AWL.Utils:CopyTable(defaults)
 		createdProfile = true
 	end
 

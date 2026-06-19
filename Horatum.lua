@@ -25,7 +25,7 @@ local function SlashCommand(msg, editbox)
 	elseif strtrim(msg) == "show" then
 		CombatTimeTracker:Show()
 	else
-		Utils:PrintDebug("These arguments are not accepted.")
+		Addon:PrintDebug("These arguments are not accepted.")
 	end
 end
 
@@ -46,16 +46,16 @@ function HoratumFrame:ADDON_LOADED(_, addOnName)
 
 		Utils:OpenSettingsOnLoading()
 
-		Utils:PrintDebug(string.format(
+		Addon:PrintDebug(string.format(
 			"InitializeDatabase: key=%s, createdProfile=%s, createdProfileKey=%s, activeProfile=%s",
 			tostring(dbInit.characterRealmKey), tostring(dbInit.createdProfile), tostring(dbInit.createdProfileKey), tostring(dbInit.activeProfile)
 		))
-		Utils:PrintDebug("Addon fully loaded.")
+		Addon:PrintDebug("Addon fully loaded.")
 	end
 end
 
 function HoratumFrame:ENCOUNTER_START(_, encounterID, encounterName, difficultyID, groupSize)
-	Utils:PrintDebug(string.format(
+	Addon:PrintDebug(string.format(
 		"Event 'ENCOUNTER_START' fired. Payload: encounterID=%s, encounterName=%s, difficultyID=%s, groupSize=%s",
 		tostring(encounterID), tostring(encounterName), tostring(difficultyID), tostring(groupSize)
 	))
@@ -63,12 +63,12 @@ function HoratumFrame:ENCOUNTER_START(_, encounterID, encounterName, difficultyI
 	isInCombat = CombatTimeTracker:EncounterStart(encounterID, encounterName, difficultyID)
 
 	if isInCombat then
-		Utils:PrintDebug("The encounter has started.")
+		Addon:PrintDebug("The encounter has started.")
 	end
 end
 
 function HoratumFrame:ENCOUNTER_END(_, encounterID, encounterName, difficultyID, groupSize, success)
-	Utils:PrintDebug(string.format(
+	Addon:PrintDebug(string.format(
 		"Event 'ENCOUNTER_END' fired. Payload: encounterID=%s, encounterName=%s, difficultyID=%s, groupSize=%s, success=%s",
 		tostring(encounterID), tostring(encounterName), tostring(difficultyID), tostring(groupSize), tostring(success)
 	))
@@ -77,7 +77,7 @@ function HoratumFrame:ENCOUNTER_END(_, encounterID, encounterName, difficultyID,
 		CombatTimeTracker:EncounterEnd(success)
 		isInCombat = false
 
-		Utils:PrintDebug("The encounter has ended.")
+		Addon:PrintDebug("The encounter has ended.")
 	end
 end
 

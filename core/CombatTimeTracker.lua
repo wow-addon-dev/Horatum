@@ -1,7 +1,9 @@
-local _, HRT = ...
+local addonName, HRT = ...
+
+local AWL = ArcaneWizardLibrary
+local Addon = AWL:GetAddon(addonName)
 
 local L = HRT.Localization
-
 local Utils = HRT.Modules.Utils
 
 local CombatTimeTracker = {}
@@ -37,7 +39,7 @@ end
 local function EncounterInfo(difficultyID)
 	local name, instanceType, isHeroic, isChallengeMode, displayHeroic, displayMythic, toggleDifficultyID, isLFR, minPlayers, maxPlayers, isUserSelectable = GetDifficultyInfo(difficultyID)
 
-	Utils:PrintDebug(string.format(
+	Addon:PrintDebug(string.format(
 		"Result from GetDifficultyInfo(): name=%s, instanceType=%s, isHeroic=%s, isChallengeMode=%s, displayHeroic=%s, displayMythic=%s, toggleDifficultyID=%s, isLFR=%s, minPlayers=%s, maxPlayers=%s, isUserSelectable=%s",
 		tostring(name),	tostring(instanceType),	tostring(isHeroic),	tostring(isChallengeMode), tostring(displayHeroic), tostring(displayMythic), tostring(toggleDifficultyID), tostring(isLFR), tostring(minPlayers), tostring(maxPlayers), tostring(isUserSelectable)
 	))
@@ -250,7 +252,7 @@ function CombatTimeTracker:EncounterStart(encounterID, encounterName, difficulty
 
 	local isValidEncounter, optionalID, difficulty = EncounterInfo(difficultyID)
 
-	Utils:PrintDebug(string.format(
+	Addon:PrintDebug(string.format(
 		"Result from EncounterInfo(): isValidEncounter=%s, optionalID=%s, difficulty=%s",
 		tostring(isValidEncounter),	tostring(optionalID), tostring(difficulty)
 	))
@@ -310,7 +312,7 @@ function CombatTimeTracker:EncounterEnd(success)
 
 	local finalTime = GetTime() - startTime
 
-	Utils:PrintDebug(string.format(
+	Addon:PrintDebug(string.format(
 		"Unrounded time: finalTime=%s",
 		tostring(finalTime)
 	))
@@ -321,7 +323,7 @@ function CombatTimeTracker:EncounterEnd(success)
 		finalTime = math.floor(finalTime * 1000 + 0.5) / 1000
 	end
 
-	Utils:PrintDebug(string.format(
+	Addon:PrintDebug(string.format(
 		"Rounded time: finalTime=%s",
 		tostring(finalTime)
 	))
