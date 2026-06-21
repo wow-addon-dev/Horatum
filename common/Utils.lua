@@ -1,14 +1,17 @@
 local addonName, HRT = ...
 
+-- Library
 local AWL = ArcaneWizardLibrary
 local Addon = AWL:GetAddon(addonName)
 
+-- Localization
 local L = HRT.Localization
 
-local Utils = {}
+-- Current module
+local Utils = HRT.Modules.Utils
 
 ------------------------
---- Public Functions ---
+--- Module Functions ---
 ------------------------
 
 function Utils:PrintMessage(msg)
@@ -139,5 +142,3 @@ function Utils:InitializeMinimapButton()
 		end
 	})
 end
-
-HRT.Modules.Utils = Utils

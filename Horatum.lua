@@ -1,12 +1,15 @@
 local addonName, HRT = ...
 
+-- Library
 local AWL = ArcaneWizardLibrary
 local Addon = AWL:GetAddon(addonName)
 
+-- Module imports
 local CombatTimeTracker = HRT.Modules.CombatTimeTracker
 local Options = HRT.Modules.Options
 local Utils = HRT.Modules.Utils
 
+-- Variables
 local isInCombat = false
 
 --------------

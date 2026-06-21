@@ -1,15 +1,19 @@
 local addonName, HRT = ...
 
+-- Library
 local AWL = ArcaneWizardLibrary
 local Addon = AWL:GetAddon(addonName)
 
+-- Localization
 local L = HRT.Localization
+
+-- Current module
+local CombatTimeTracker = HRT.Modules.CombatTimeTracker
+
+-- Module imports
 local Utils = HRT.Modules.Utils
 
-local CombatTimeTracker = {}
-
-local THRESHOLD = HRT.COMBAT_TIME_TRACKER_THRESHOLD
-
+-- Variables
 local startTime = 0
 local currentBestVictory = 0
 local currentEncounterID = 0
@@ -105,7 +109,7 @@ local function UpdateTimerFrame(self, elapsed)
 	local milliseconds = math.floor((currentTime * 1000) % 1000)
 	CombatTimeTrackerFrame.timer:SetText(string.format("%02d:%02d.%03d", minutes, seconds, milliseconds))
 
-	if currentBestVictory >= THRESHOLD then
+	if currentBestVictory >= HRT.COMBAT_TIME_TRACKER_THRESHOLD then
 		local remainingTime = currentBestVictory - currentTime
 
 		if remainingTime > 0 then
@@ -238,7 +242,7 @@ local function InitializeFrames()
 end
 
 ------------------------
---- Public Functions ---
+--- Module Functions ---
 ------------------------
 
 function CombatTimeTracker:Initialize()
@@ -291,7 +295,7 @@ function CombatTimeTracker:EncounterStart(encounterID, encounterName, difficulty
 	local currentDataSet = HRT.Data.combatEncounter[tostring(currentEncounterID)][tostring(currentDifficultyID)][tostring(currentOptionalID)]
 	currentBestVictory = currentDataSet.bestVictory
 
-	if currentBestVictory >= THRESHOLD then
+	if currentBestVictory >= HRT.COMBAT_TIME_TRACKER_THRESHOLD then
 		CombatTimeTrackerFrame.timeBar:SetMinMaxValues(0, currentBestVictory)
 		CombatTimeTrackerFrame.timeBar:SetValue(currentBestVictory)
 		CombatTimeTrackerFrame.timeBar:SetStatusBarColor(0, 1, 0)
@@ -317,7 +321,7 @@ function CombatTimeTracker:EncounterEnd(success)
 		tostring(finalTime)
 	))
 
-	if finalTime < THRESHOLD then
+	if finalTime < HRT.COMBAT_TIME_TRACKER_THRESHOLD then
 		finalTime = 0.001
 	else
 		finalTime = math.floor(finalTime * 1000 + 0.5) / 1000
@@ -342,12 +346,12 @@ function CombatTimeTracker:EncounterEnd(success)
 		victories = victories + 1
 		currentDataSet.victories = victories
 
-		if bestVictory < THRESHOLD or finalTime < bestVictory then
+		if bestVictory < HRT.COMBAT_TIME_TRACKER_THRESHOLD or finalTime < bestVictory then
 			currentDataSet.bestVictory = finalTime
 		end
 
 		if HRT.Settings.general["notification"] then
-			if bestVictory < THRESHOLD or finalTime < bestVictory then
+			if bestVictory < HRT.COMBAT_TIME_TRACKER_THRESHOLD or finalTime < bestVictory then
 				Utils:PrintMessage(L["chat.new-record"]:format(currentEncounterName, currentDifficultyText, string.format("%02d:%02d.%03d", minutes, seconds, milliseconds)))
 			else
 				local bestVictoryMinutes = math.floor(bestVictory / 60)
@@ -368,7 +372,7 @@ function CombatTimeTracker:EncounterEnd(success)
 		currentDataSet.wipes = wipes
 
 		if HRT.Settings.general["notification"] then
-			if bestVictory >= THRESHOLD then
+			if bestVictory >= HRT.COMBAT_TIME_TRACKER_THRESHOLD then
 				local bestVictoryMinutes = math.floor(bestVictory / 60)
 				local bestVictorySeconds = math.floor(bestVictory % 60)
 				local bestVictoryMilliseconds = math.floor((bestVictory * 1000) % 1000)
@@ -414,5 +418,3 @@ end
 function CombatTimeTracker:SetBackgroundTransparency()
 	CombatTimeTrackerFrame.background:SetColorTexture(0, 0, 0, HRT.Settings.combatTimeTracker["background-transparency"] / 100)
 end
-
-HRT.Modules.CombatTimeTracker = CombatTimeTracker

@@ -1,18 +1,20 @@
 local addonName, HRT = ...
 
+-- Library
 local AWL = ArcaneWizardLibrary
 local Addon = AWL:GetAddon(addonName)
 
+-- Localization
 local L = HRT.Localization
+
+-- Current module
+local Options = HRT.Modules.Options
+
+-- Module imports
 local CombatTimeTracker = HRT.Modules.CombatTimeTracker
 local Utils = HRT.Modules.Utils
 
-local Options = {}
-
-----------------------
---- Local Functions ---
-----------------------
-
+-- Variables
 local minimapButtonProxy = setmetatable({}, {
 	__index = function(_, key)
 		if key == "hide" then
@@ -35,7 +37,7 @@ local minimapButtonProxy = setmetatable({}, {
 })
 
 ------------------------
---- Public Functions ---
+--- Module Functions ---
 ------------------------
 
 function Options:Initialize()
@@ -125,5 +127,3 @@ function Options:Initialize()
 
 	Addon:SetMainCategoryId(category:GetID())
 end
-
-HRT.Modules.Options = Options
