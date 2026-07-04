@@ -47,46 +47,46 @@ function Options:Initialize()
 
 	-- Notification
 	AWL.Settings:AddCheckbox(category, {
-		variableTable = HRT.Settings.general,
-		settingKey    = addonName .. "_notification",
-		variableName  = "notification",
-		name          = L["options.general.notification.name"],
-		tooltip       = L["options.general.notification.tooltip"],
-		default       = true
+		variableTable	= HRT.Settings.general,
+		settingKey		= addonName .. "_notification",
+		variableName	= "notification",
+		name			= L["options.general.notification.name"],
+		tooltip			= L["options.general.notification.tooltip"],
+		default			= true
 	})
 
 	-- Minimap Button
 	AWL.Settings:AddCheckbox(category, {
-		variableTable = minimapButtonProxy,
-		settingKey    = addonName .. "_hide",
-		variableName  = "hide",
-		name          = L["options.general.minimap-button.name"],
-		tooltip       = L["options.general.minimap-button.tooltip"],
-		default       = true
+		variableTable	= minimapButtonProxy,
+		settingKey		= addonName .. "_hide",
+		variableName	= "hide",
+		name			= L["options.general.minimap-button.name"],
+		tooltip			= L["options.general.minimap-button.tooltip"],
+		default			= true
 	})
 
 	-- Debug Mode
 	AWL.Settings:AddCheckbox(category, {
-		variableTable = HRT.Settings.general,
-		settingKey    = addonName .. "_debug-mode",
-		variableName  = "debug-mode",
-		name          = L["options.general.debug-mode.name"],
-		tooltip       = L["options.general.debug-mode.tooltip"],
-		default       = false
+		variableTable	= HRT.Settings.general,
+		settingKey		= addonName .. "_debug-mode",
+		variableName	= "debug-mode",
+		name			= L["options.general.debug-mode.name"],
+		tooltip			= L["options.general.debug-mode.tooltip"],
+		default			= false
 	})
 
 	layout:AddInitializer(CreateSettingsListSectionHeaderInitializer(L["options.combat-time-tracker"]))
 
 	-- Scale
 	AWL.Settings:AddSlider(category, {
-		variableTable = HRT.Settings.combatTimeTracker,
-		settingKey    = addonName .. "_scale",
-		variableName  = "scale",
-		name          = L["options.combat-time-tracker.scale.name"],
-		tooltip       = L["options.combat-time-tracker.scale.tooltip"],
-		default       = 100, minValue = 50, maxValue = 150, step = 1,
-		formatter     = function(value) return value .. " %" end,
-		onClick       = function()
+		variableTable	= HRT.Settings.combatTimeTracker,
+		settingKey		= addonName .. "_scale",
+		variableName	= "scale",
+		name			= L["options.combat-time-tracker.scale.name"],
+		tooltip			= L["options.combat-time-tracker.scale.tooltip"],
+		default			= 100, minValue = 50, maxValue = 150, step = 1,
+		formatter		= function(value) return value .. " %" end,
+		onClick			= function()
 			CombatTimeTracker:Show()
 			CombatTimeTracker:SetScale()
 		end
@@ -94,14 +94,14 @@ function Options:Initialize()
 
 	-- Background Transparency
 	AWL.Settings:AddSlider(category, {
-		variableTable = HRT.Settings.combatTimeTracker,
-		settingKey    = addonName .. "_background-transparency",
-		variableName  = "background-transparency",
-		name          = L["options.combat-time-tracker.background-transparency.name"],
-		tooltip       = L["options.combat-time-tracker.background-transparency.tooltip"],
-		default       = 60, minValue = 0, maxValue = 100, step = 1,
-		formatter     = function(value) return value .. " %" end,
-		onClick       = function()
+		variableTable	= HRT.Settings.combatTimeTracker,
+		settingKey		= addonName .. "_background-transparency",
+		variableName	= "background-transparency",
+		name			= L["options.combat-time-tracker.background-transparency.name"],
+		tooltip			= L["options.combat-time-tracker.background-transparency.tooltip"],
+		default			= 60, minValue = 0, maxValue = 100, step = 1,
+		formatter		= function(value) return value .. " %" end,
+		onClick			= function()
 			CombatTimeTracker:Show()
 			CombatTimeTracker:SetBackgroundTransparency()
 		end
@@ -109,12 +109,12 @@ function Options:Initialize()
 
 	-- Profiles Section
 	AWL.Settings:AddProfilesSection(layout, {
-		useAccountProfile = Utils:IsAccountProfile(),
-		onSwitchProfile = function()
+		useAccountProfile			= Utils:IsAccountProfile(),
+		onSwitchProfile				= function()
 			Utils:ToggleProfileMode()
 			ReloadUI()
 		end,
-		onDeleteCharacterProfiles = function()
+		onDeleteCharacterProfiles	= function()
 			Utils:ResetAllCharacterProfiles()
 			ReloadUI()
 		end
