@@ -1,8 +1,4 @@
-local addonName, HRT = ...
-
--- Library
-local AWL = ArcaneWizardLibrary
-local Addon = AWL:GetAddon(addonName)
+local _, HRT = ...
 
 -- Localization
 local L = HRT.Localization
@@ -43,7 +39,7 @@ end
 local function EncounterInfo(difficultyID)
 	local name, instanceType, isHeroic, isChallengeMode, displayHeroic, displayMythic, toggleDifficultyID, isLFR, minPlayers, maxPlayers, isUserSelectable = GetDifficultyInfo(difficultyID)
 
-	Addon:PrintDebug(string.format(
+	Utils:PrintDebug(string.format(
 		"Result from GetDifficultyInfo(): name=%s, instanceType=%s, isHeroic=%s, isChallengeMode=%s, displayHeroic=%s, displayMythic=%s, toggleDifficultyID=%s, isLFR=%s, minPlayers=%s, maxPlayers=%s, isUserSelectable=%s",
 		tostring(name),	tostring(instanceType),	tostring(isHeroic),	tostring(isChallengeMode), tostring(displayHeroic), tostring(displayMythic), tostring(toggleDifficultyID), tostring(isLFR), tostring(minPlayers), tostring(maxPlayers), tostring(isUserSelectable)
 	))
@@ -83,7 +79,11 @@ local function EncounterInfo(difficultyID)
 	elseif difficultyID == 208  then		-- Tiefe
 		local delveData1, delveData2, delveData3 = C_UIWidgetManager.GetScenarioHeaderDelvesWidgetVisualizationInfo(6183), C_UIWidgetManager.GetScenarioHeaderDelvesWidgetVisualizationInfo(6184), C_UIWidgetManager.GetScenarioHeaderDelvesWidgetVisualizationInfo(6185)
 
-		if delveData1 and delveData1.tierText then
+		if delveData2 and delveData2.shownState and delveData2.shownState == 1 then
+			return true, 8, name .. " - " .. L["combat-time-tracker.delves-tier"] .. " ?"
+		elseif delveData3 and delveData3.shownState and delveData3.shownState == 1 then
+			return true, 11, name .. " - " .. L["combat-time-tracker.delves-tier"] .. " ??"
+		elseif delveData1 and delveData1.tierText then
 			local delveTier = ParseDelveTier(delveData1.tierText)
 
 			if delveTier then
@@ -91,10 +91,7 @@ local function EncounterInfo(difficultyID)
 			end
 
 			return false, 0, nil
-		elseif delveData2 and delveData2.shownState and delveData2.shownState == 1 then
-			return true, 8, name .. " - " .. L["combat-time-tracker.delves-tier"] .. " ?"
-		elseif delveData3 and delveData3.shownState and delveData3.shownState == 1 then
-			return true, 11, name .. " - " .. L["combat-time-tracker.delves-tier"] .. " ??"
+		else
 		end
 	end
 
@@ -256,7 +253,7 @@ function CombatTimeTracker:EncounterStart(encounterID, encounterName, difficulty
 
 	local isValidEncounter, optionalID, difficulty = EncounterInfo(difficultyID)
 
-	Addon:PrintDebug(string.format(
+	Utils:PrintDebug(string.format(
 		"Result from EncounterInfo(): isValidEncounter=%s, optionalID=%s, difficulty=%s",
 		tostring(isValidEncounter),	tostring(optionalID), tostring(difficulty)
 	))
@@ -316,7 +313,7 @@ function CombatTimeTracker:EncounterEnd(success)
 
 	local finalTime = GetTime() - startTime
 
-	Addon:PrintDebug(string.format(
+	Utils:PrintDebug(string.format(
 		"Unrounded time: finalTime=%s",
 		tostring(finalTime)
 	))
@@ -327,7 +324,7 @@ function CombatTimeTracker:EncounterEnd(success)
 		finalTime = math.floor(finalTime * 1000 + 0.5) / 1000
 	end
 
-	Addon:PrintDebug(string.format(
+	Utils:PrintDebug(string.format(
 		"Rounded time: finalTime=%s",
 		tostring(finalTime)
 	))

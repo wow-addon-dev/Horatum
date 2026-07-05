@@ -24,11 +24,13 @@ local HoratumFrame = CreateFrame("Frame", "Horatum")
 
 local function SlashCommand(msg, editbox)
 	if not msg or strtrim(msg) == "" then
-		Addon:OpenCategory()
+		if not Addon:OpenCategory() then
+			Utils:PrintDebug("In combat. The options menu cannot be opened.")
+		end
 	elseif strtrim(msg) == "show" then
 		CombatTimeTracker:Show()
 	else
-		Addon:PrintDebug("These arguments are not accepted.")
+		Utils:PrintDebug("These arguments are not accepted.")
 	end
 end
 
@@ -49,16 +51,16 @@ function HoratumFrame:ADDON_LOADED(_, addOnName)
 
 		Utils:OpenSettingsOnLoading()
 
-		Addon:PrintDebug(string.format(
+		Utils:PrintDebug(string.format(
 			"InitializeDatabase: key=%s, createdProfile=%s, createdProfileKey=%s, activeProfile=%s",
 			tostring(dbInit.characterRealmKey), tostring(dbInit.createdProfile), tostring(dbInit.createdProfileKey), tostring(dbInit.activeProfile)
 		))
-		Addon:PrintDebug("Addon fully loaded.")
+		Utils:PrintDebug("Addon fully loaded.")
 	end
 end
 
 function HoratumFrame:ENCOUNTER_START(_, encounterID, encounterName, difficultyID, groupSize)
-	Addon:PrintDebug(string.format(
+	Utils:PrintDebug(string.format(
 		"Event 'ENCOUNTER_START' fired. Payload: encounterID=%s, encounterName=%s, difficultyID=%s, groupSize=%s",
 		tostring(encounterID), tostring(encounterName), tostring(difficultyID), tostring(groupSize)
 	))
@@ -66,12 +68,12 @@ function HoratumFrame:ENCOUNTER_START(_, encounterID, encounterName, difficultyI
 	isInCombat = CombatTimeTracker:EncounterStart(encounterID, encounterName, difficultyID)
 
 	if isInCombat then
-		Addon:PrintDebug("The encounter has started.")
+		Utils:PrintDebug("The encounter has started.")
 	end
 end
 
 function HoratumFrame:ENCOUNTER_END(_, encounterID, encounterName, difficultyID, groupSize, success)
-	Addon:PrintDebug(string.format(
+	Utils:PrintDebug(string.format(
 		"Event 'ENCOUNTER_END' fired. Payload: encounterID=%s, encounterName=%s, difficultyID=%s, groupSize=%s, success=%s",
 		tostring(encounterID), tostring(encounterName), tostring(difficultyID), tostring(groupSize), tostring(success)
 	))
@@ -80,7 +82,7 @@ function HoratumFrame:ENCOUNTER_END(_, encounterID, encounterName, difficultyID,
 		CombatTimeTracker:EncounterEnd(success)
 		isInCombat = false
 
-		Addon:PrintDebug("The encounter has ended.")
+		Utils:PrintDebug("The encounter has ended.")
 	end
 end
 

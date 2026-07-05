@@ -11,8 +11,4 @@ HRT.Modules.Utils = HRT.Modules.Utils or {}
 
 local AWL = ArcaneWizardLibrary
 
-AWL:NewAddon(addonName, {
-	debugEnabled = function()
-		return HRT.Settings.general and HRT.Settings.general["debug-mode"]
-	end
-})
+AWL:NewAddon(addonName)
