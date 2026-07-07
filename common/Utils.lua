@@ -32,6 +32,15 @@ function Utils:PrintDebug(msg)
 	end
 end
 
+function Utils:OpenSettings()
+	if not Addon:OpenCategory() then
+		self:PrintDebug("In combat. The options menu cannot be opened.")
+		return false
+	end
+
+	return true
+end
+
 function Utils:IsAccountProfile()
 	local characterRealmKey = AWL.Utils:GetCharacterRealmKey()
 
@@ -42,8 +51,8 @@ function Utils:OpenSettingsOnLoading()
 	local characterRealmKey = AWL.Utils:GetCharacterRealmKey()
 
 	if Horatum_Options_v2.profileKeys[characterRealmKey]["open-settings"] then
-		if not Addon:OpenCategory() then
-			self:PrintDebug("In combat. The options menu cannot be opened.")
+		if not self:OpenSettings() then
+			return
 		end
 
 		Horatum_Options_v2.profileKeys[characterRealmKey]["open-settings"] = false

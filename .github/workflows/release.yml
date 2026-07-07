@@ -37,4 +37,5 @@ jobs:
       build: ${{ inputs.build }}
       full-changelog: ${{ inputs.full-changelog }}
       cf-project-id: ${{ vars.CF_PROJECT_ID }}
+      wago-project-id: ${{ vars.WAGO_PROJECT_ID }}
     secrets: inherit
