@@ -23,6 +23,7 @@
 ## X-E-Mail: feedback@wow-addon.dev
 ## X-Github: https://github.com/wow-addon-dev/Horatum
 ## X-Curseforge: https://www.curseforge.com/wow/addons/horatum
+## X-Wago: https://addons.wago.io/addons/horatum
 
 Horatum.xml
 Horatum.lua

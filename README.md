@@ -11,6 +11,14 @@ Horatum is a World of Warcraft addon that tracks every boss encounter and saves 
 * **Combat Time Tracker** - During a boss encounter, a small window will appear displaying the current combat time.
 * (Planned) **Combat Overview** - All boss combat times and other information can be displayed in an overview window.
 
+## Installation & Quick Start
+
+> ⚠️ **Required Dependency:** This addon requires the **Arcane Wizard: Library**. If you install Horatum via the CurseForge client, the library will be downloaded automatically. If you install it manually, please ensure the library is also downloaded and enabled.
+
+To manage the addon, use the following commands in your chat and press enter:
+* Type `/hrt` or `/horatum` to access the addon options menu.
+* Type `/hrt show` or `/horatum show` to manually display the Combat Time Tracker.
+
 ## Features
 
 * Automatically starts when a dungeon or raid boss is engaged and stops the exact moment the combat ends or the group wipes.
@@ -25,14 +33,6 @@ Horatum is a World of Warcraft addon that tracks every boss encounter and saves 
 
 * Languages: English, German
 * Flavors: Retail
-
-## Installation & Quick Start
-
-> ⚠️ **Required Dependency:** This addon requires the **Arcane Wizard: Library**. If you install Horatum via the CurseForge client, the library will be downloaded automatically. If you install it manually, please ensure the library is also downloaded and enabled.
-
-To manage the addon, use the following commands in your chat and press enter:
-* Type `/hrt` or `/horatum` to access the addon options menu.
-* Type `/hrt show` or `/horatum show` to manually display the Combat Time Tracker.
 
 ## Bugs & Feedback
 
