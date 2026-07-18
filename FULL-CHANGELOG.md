@@ -1,3 +1,7 @@
+**v2.17 (2026-07-18)**
+- Added: Follower dungeon boss encounters are now tracked
+- Minor code adjustments
+
 **v2.16 (2026-07-12)**
 - Added: Wago project page button
 
