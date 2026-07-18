@@ -52,6 +52,8 @@ local function EncounterInfo(difficultyID)
 		return true, 0, L["combat-time-tracker.dungeon"] .. " - " .. name
 	elseif difficultyID == 24 then			-- Dungeon Zeitenwanderung
 		return true, 0, L["combat-time-tracker.dungeon"] .. " - " .. name
+	elseif difficultyID == 205 then			-- Dungeon Anhänger
+		return true, 0, L["combat-time-tracker.dungeon"] .. " - " .. name
 	elseif difficultyID == 3 then			-- Raid 10er Normal (legacy)
 		return true, 0, L["combat-time-tracker.raid"] .. " - " .. name
 	elseif difficultyID == 4 then			-- Raid 25er Normal (legacy)
