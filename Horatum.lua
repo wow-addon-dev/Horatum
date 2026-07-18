@@ -18,10 +18,12 @@ local HoratumFrame = CreateFrame("Frame", "Horatum")
 --- Local Functions ---
 -----------------------
 
-local function SlashCommand(msg, editbox)
-	if not msg or strtrim(msg) == "" then
+local function SlashCommand(msg)
+	local command = strtrim(msg or "")
+
+	if command == "" then
 		Utils:OpenSettings()
-	elseif strtrim(msg) == "show" then
+	elseif command == "show" then
 		CombatTimeTracker:Show()
 	else
 		Utils:PrintDebug("These arguments are not accepted.")

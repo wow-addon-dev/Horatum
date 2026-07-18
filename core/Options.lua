@@ -29,9 +29,9 @@ local minimapButtonProxy = setmetatable({}, {
 		HRT.Settings.general["minimap-button"]["hide"] = not value
 
 		if value then
-			Utils.minimapButton:Show("Horatum")
+			Utils.minimapButton:Show(addonName)
 		else
-			Utils.minimapButton:Hide("Horatum")
+			Utils.minimapButton:Hide(addonName)
 		end
 	end,
 })
