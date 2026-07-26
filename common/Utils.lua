@@ -150,12 +150,31 @@ function Utils:InitializeDatabase()
 
 	HRT.Data.combatEncounter = Horatum_CombatEncounterData_v2
 
+	if not Horatum_Options_v2["update-notice"] then
+		Horatum_Options_v2["update-notice"] = {}
+	end
+
+	HRT.Data.updateNotice = Horatum_Options_v2["update-notice"]
+
 	return {
 		characterRealmKey = characterRealmKey,
 		createdProfile = createdProfile,
 		createdProfileKey = createdProfileKey,
 		activeProfile = useAccountProfile and "account" or "character"
 	}
+end
+
+function Utils:InitializeUpdateNotice()
+	local data = HRT.Data.updateNotice
+
+	if data.lastVersion ~= Addon.version then
+		data.lastVersion = Addon.version
+		data.show = HRT.SHOW_UPDATE_NOTICE
+	end
+
+	if Addon:ShowUpdateNotice(data.show == true) then
+		data.show = false
+	end
 end
 
 function Utils:InitializeMinimapButton()

@@ -41,6 +41,7 @@ end
 function HoratumFrame:ADDON_LOADED(_, addOnName)
 	if addOnName == addonName then
 		local dbInit = Utils:InitializeDatabase()
+		Utils:InitializeUpdateNotice()
 		Utils:InitializeMinimapButton()
 		Options:Initialize()
 		CombatTimeTracker:Initialize()
