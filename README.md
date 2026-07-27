@@ -6,18 +6,12 @@ _Master the clock. Conquer the combat._
 
 Horatum is a World of Warcraft addon that tracks every boss encounter and saves the fastest victories. It provides real-time feedback during combat and keeps a record of your performance across different difficulties.
 
+> ⚠️ **Important!** This addon requires **Arcane Wizard: Library**. See [Installation & Quick Start](#installation--quick-start) for installation details.
+
 **Key Features**
 
 * **Combat Time Tracker** - During a boss encounter, a small window will appear displaying the current combat time.
 * (Planned) **Combat Overview** - All boss combat times and other information can be displayed in an overview window.
-
-## Installation & Quick Start
-
-> ⚠️ **Required Dependency:** This addon requires the **Arcane Wizard: Library**. If you install Horatum via the CurseForge client, the library will be downloaded automatically. If you install the addon manually, via Wago, or through another third-party updater that does not resolve dependencies, you must download and enable the library separately.
-
-To manage the addon, use the following commands in your chat and press enter:
-* Type `/hrt` or `/horatum` to access the addon options menu.
-* Type `/hrt show` or `/horatum show` to manually display the Combat Time Tracker.
 
 ## Features
 
@@ -33,6 +27,14 @@ To manage the addon, use the following commands in your chat and press enter:
 
 * Languages: English, German
 * Flavors: Retail
+
+## Installation & Quick Start
+
+> **Required Dependency:** This addon requires the **Arcane Wizard: Library**. If you install Horatum via the CurseForge client, the library will be downloaded automatically. If you install the addon manually, via Wago, or through another third-party updater that does not resolve dependencies, you must download and enable the library separately.
+
+To manage the addon, use the following commands in your chat and press enter:
+* Type `/hrt` or `/horatum` to access the addon options menu.
+* Type `/hrt show` or `/horatum show` to manually display the Combat Time Tracker.
 
 ## Bugs & Feedback
 
