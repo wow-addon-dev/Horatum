@@ -6,7 +6,7 @@ _Master the clock. Conquer the combat._
 
 Horatum is a World of Warcraft addon that tracks every boss encounter and saves the fastest victories. It provides real-time feedback during combat and keeps a record of your performance across different difficulties.
 
-> ⚠️ **Important!** This addon requires **Arcane Wizard: Library**. See [Installation & Quick Start](#installation--quick-start) for installation details.
+> ⚠️ **Important!** This addon requires **Arcane Wizard: Library**. See Installation & Quick Start for installation details.
 
 **Key Features**
 
