@@ -1,3 +1,6 @@
+**v2.18 (2026-07-28)**
+- Adapted to the latest version of Arcane Wizard: Library to ensure full compatibility
+
 **v2.17 (2026-07-18)**
 - Added: Follower dungeon boss encounters are now tracked
 - Minor code adjustments
