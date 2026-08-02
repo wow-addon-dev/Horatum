@@ -1,6 +1,6 @@
 # Horatum
 
-[![GitHub Release](https://img.shields.io/github/v/release/wow-addon-dev/Horatum?color=blue&logo=github&cacheSeconds=600)](https://github.com/wow-addon-dev/Horatum/releases) [![GitHub Release Date](https://img.shields.io/github/release-date/wow-addon-dev/Horatum?color=blue&logo=github&cacheSeconds=600)](https://github.com/wow-addon-dev/Horatum/releases) [![Static Badge](https://img.shields.io/badge/buy_me_a_coffee-donate-yellow?logo=buy-me-a-coffee&logoColor=white)](https://buymeacoffee.com/diomsg)
+[![GitHub Release](https://img.shields.io/github/v/release/wow-addon-dev/Horatum?color=blue&logo=github&cacheSeconds=600)](https://github.com/wow-addon-dev/Horatum/releases) [![GitHub Release Date](https://img.shields.io/github/release-date/wow-addon-dev/Horatum?color=blue&logo=github&cacheSeconds=600)](https://github.com/wow-addon-dev/Horatum/releases)
 
 _Master the clock. Conquer the combat._
 
