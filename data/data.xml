@@ -2,6 +2,6 @@
 ..\FrameXML\UI.xsd">
 	<Script file="NamespaceData.lua" />
 
-	<Script file="CommonData.lua" />
+	<Script file="ChangelogData.lua" />
 	<Script file="CombatTimeTrackerData.lua" />
 </Ui>
