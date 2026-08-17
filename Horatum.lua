@@ -1,5 +1,8 @@
 local addonName, HRT = ...
 
+-- Library
+local AWL = ArcaneWizardLibrary
+
 -- Module imports
 local CombatTimeTracker = HRT.Modules.CombatTimeTracker
 local Options = HRT.Modules.Options
@@ -23,6 +26,8 @@ local function SlashCommand(msg)
 
 	if command == "" then
 		Utils:OpenSettings()
+	elseif command == "changelog" then
+		AWL.Frames:OpenChangelog(addonName, HRT.CHANGELOG)
 	elseif command == "show" then
 		CombatTimeTracker:Show()
 	else

@@ -34,6 +34,7 @@ Horatum is a World of Warcraft addon that tracks every boss encounter and saves 
 
 To manage the addon, use the following commands in your chat and press enter:
 * Type `/hrt` or `/horatum` to access the addon options menu.
+* Type `/hrt changelog` or `/horatum changelog` to open the changelog.
 * Type `/hrt show` or `/horatum show` to manually display the Combat Time Tracker.
 
 ## Bugs & Feedback
