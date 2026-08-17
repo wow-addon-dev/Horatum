@@ -42,7 +42,7 @@ local minimapButtonProxy = setmetatable({}, {
 
 function Options:Initialize()
 	local category, layout = Settings.RegisterVerticalLayoutCategory(addonName)
-	Addon:SetChangelog(HRT.CHANGELOG_TEXT)
+	Addon:SetChangelog(HRT.CHANGELOG)
 
 	layout:AddInitializer(CreateSettingsListSectionHeaderInitializer(L["options.general"]))
 
