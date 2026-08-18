@@ -1,3 +1,10 @@
+**v2.21 (2026-08-18)**
+- Added: Changelog window available from the options menu
+- Added: Changelog window available through the 'changelog' slash command
+- Removed: Version notice chat messages
+- Minor code adjustments
+- Adapted to the latest version of Arcane Wizard: Library to ensure full compatibility
+
 **v2.20 (2026-08-14)**
 - Added: World raid boss encounters are now tracked
 - Removed: TOC version for patch 12.0.7 [retail]
