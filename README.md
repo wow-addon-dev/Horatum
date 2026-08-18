@@ -43,4 +43,4 @@ If you find a bug or have a suggestion, please use the GitHub Issues or the Curs
 
 ## Translation Support
 
-If you would like to localize this addon into other languages, your contribution would be very welcome. You can submit your translations directly via GitHub or use the [CurseForge Localization Tool](https://legacy.curseforge.com/wow/addons/horatum/localization).
+If you would like to localize this addon into other languages, your contribution would be very welcome. Please submit your translations directly via GitHub.
