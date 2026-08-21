@@ -1,3 +1,7 @@
+**v2.22 (2026-08-21)**
+- Changed: The number of decimal places displayed for combat times can now be configured from 0 to 3
+- Changed: Combat Time Tracker window has been adapted to the Arcane Wizard: Library design
+
 **v2.21 (2026-08-18)**
 - Added: Changelog window available from the options menu
 - Added: Changelog window available through the 'changelog' slash command
