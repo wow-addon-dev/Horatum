@@ -2,8 +2,5 @@
 ### [@project-version@](https://github.com/wow-addon-dev/Horatum/tree/@project-version@) (@build-date@)
 [Full Changelog](@full-changelog@) - [Previous Releases](https://github.com/wow-addon-dev/Horatum/releases)
 
-- Added: Changelog window available from the options menu
-- Added: Changelog window available through the 'changelog' slash command
-- Removed: Version notice chat messages
-- Minor code adjustments
-- Adapted to the latest version of Arcane Wizard: Library to ensure full compatibility
+- Changed: The number of decimal places displayed for combat times can now be configured from 0 to 3
+- Changed: Combat Time Tracker window has been adapted to the Arcane Wizard: Library design

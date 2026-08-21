@@ -107,6 +107,20 @@ function Options:Initialize()
 		end
 	})
 
+	-- Decimal Places
+	AWL.Settings:AddSlider(category, {
+		variableTable	= HRT.Settings.combatTimeTracker,
+		settingKey		= addonName .. "_decimal-places",
+		variableName	= "decimal-places",
+		name			= L["options.combat-time-tracker.decimal-places.name"],
+		tooltip			= L["options.combat-time-tracker.decimal-places.tooltip"],
+		default			= 3, minValue = 0, maxValue = 3, step = 1,
+		formatter		= function(value) return tostring(value) end,
+		onClick			= function()
+			CombatTimeTracker:SetDecimalPlaces()
+		end
+	})
+
 	-- Profiles Section
 	AWL.Settings:AddProfilesSection(layout, {
 		useAccountProfile			= Utils:IsAccountProfile(),

@@ -106,6 +106,7 @@ function Utils:InitializeDatabase()
 			["offset-y"] = 150,
 			["scale"] = 100,
 			["background-transparency"] = 60,
+			["decimal-places"] = 3,
 			["is-visible"] = true
 		},
 		["combat-overview"] = {}

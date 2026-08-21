@@ -19,6 +19,8 @@ L["options.combat-time-tracker.scale.name"] = "UI-Skalierung"
 L["options.combat-time-tracker.scale.tooltip"] = "Legt die Größenskalierung des Kampfzeiten-Trackers fest."
 L["options.combat-time-tracker.background-transparency.name"] = "Hintergrundtransparenz"
 L["options.combat-time-tracker.background-transparency.tooltip"] = "Legt die Hintergrundtransparenz des Kampfzeiten-Trackers fest."
+L["options.combat-time-tracker.decimal-places.name"] = "Nachkommastellen"
+L["options.combat-time-tracker.decimal-places.tooltip"] = "Legt fest, wie viele Nachkommastellen bei Kampfzeiten angezeigt werden."
 
 -- General
 

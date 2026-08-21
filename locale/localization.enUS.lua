@@ -22,6 +22,8 @@ L["options.combat-time-tracker.scale.name"] = "UI Scale"
 L["options.combat-time-tracker.scale.tooltip"] = "Defines the size scaling of the Combat Time Tracker."
 L["options.combat-time-tracker.background-transparency.name"] = "Background Transparency"
 L["options.combat-time-tracker.background-transparency.tooltip"] = "Defines the background transparency of the Combat Time Tracker."
+L["options.combat-time-tracker.decimal-places.name"] = "Decimal Places"
+L["options.combat-time-tracker.decimal-places.tooltip"] = "Defines how many decimal places are displayed for combat times."
 
 -- General
 
