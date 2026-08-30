@@ -8,6 +8,13 @@ HRT.CHANGELOG = {
 		version = version,
 		date = buildDate ~= "" and buildDate or nil,
 		entries = {
+			"Minor code adjustments"
+		}
+	},
+	{
+		version = "v2.22",
+		date = "2026-08-21",
+		entries = {
 			"Changed: The number of decimal places displayed for combat times can now be configured from 0 to 3",
 			"Changed: Combat Time Tracker window has been adapted to the Arcane Wizard: Library design"
 		}
@@ -72,15 +79,6 @@ HRT.CHANGELOG = {
 		date = "2026-07-06",
 		entries = {
 			"Adapted to the latest version of Arcane Wizard: Library to ensure full compatibility"
-		}
-	},
-	{
-		version = "v2.13",
-		date = "2026-07-04",
-		entries = {
-			"Added: TOC version for patch 12.1.0 [retail]",
-			"Removed: TOC version for patch 12.0.5 [retail]",
-			"Minor code adjustments"
 		}
 	}
 }
