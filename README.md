@@ -10,18 +10,23 @@ Horatum is a World of Warcraft addon that tracks every boss encounter and saves 
 
 **Key Features**
 
-* **Combat Time Tracker** - During a boss encounter, a small window will appear displaying the current combat time.
-* (Planned) **Combat Overview** - All boss combat times and other information can be displayed in an overview window.
+**Combat Time Tracker** - During a boss encounter, a small window will appear displaying the current combat time.
+**Combat Overview** (Planned) - All boss combat times and other information can be displayed in an overview window.
 
 ## Features
+
+Individual features and display options can be configured in the addon settings. Horatum supports an account profile and character profiles.
+
+### Combat Tracking
 
 * Automatically starts when a dungeon or raid boss is engaged and stops the exact moment the combat ends or the group wipes.
 * Features a clean, semi-transparent frame that displays the ongoing combat time.
 * The number of victories and wipes is saved and can be displayed in the chat after combat.
-* Supports an account profile and character profiles.
-* Customizable UI:
-	* The Combat Time Tracker can be dragged and dropped to any location on the screen.
-	* The size of the Combat Time Tracker can be easily adjusted to fit the user interface.
+
+### Display Customization
+
+* The Combat Time Tracker can be dragged and dropped to any location on the screen.
+* The size of the Combat Time Tracker can be easily adjusted to fit the user interface.
 
 ## Supported Languages & Flavors
 
@@ -33,6 +38,7 @@ Horatum is a World of Warcraft addon that tracks every boss encounter and saves 
 > **Required Dependency:** This addon requires the **Arcane Wizard: Library**. If you install Horatum via the CurseForge client, the library will be downloaded automatically. If you install the addon manually, via Wago, or through another third-party updater that does not resolve dependencies, you must download and enable the library separately.
 
 To manage the addon, use the following commands in your chat and press enter:
+
 * Type `/hrt` or `/horatum` to access the addon options menu.
 * Type `/hrt changelog` or `/horatum changelog` to open the changelog.
 * Type `/hrt show` or `/horatum show` to manually display the Combat Time Tracker.
